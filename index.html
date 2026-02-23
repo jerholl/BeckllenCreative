@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beckllen Creative</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Bebas+Neue&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
     <style>
         /* ── Light/Dark via system preference ── */
         :root {
             --bg:       #f5f4f2;
             --bg2:      #eceae6;
             --border:   #d8d5d0;
-            --silver:   #8a8a8a;
+            --silver:   #c5a059; /* Marketing Gold */
             --silver2:  #b0b0b0;
             --text:     #111;
             --muted:    #888;
             --invert:   #fff;
+            --accent:   #c5a059;
         }
 
         @media (prefers-color-scheme: dark) {
@@ -23,11 +24,12 @@
                 --bg:      #080808;
                 --bg2:     #0f0f0f;
                 --border:  #1e1e1e;
-                --silver:  #a0a0a0;
+                --silver:  #c5a059; /* Marketing Gold */
                 --silver2: #c8c8c8;
                 --text:    #ede9e3;
                 --muted:   #666;
                 --invert:  #080808;
+                --accent:  #c5a059;
             }
         }
 
@@ -37,7 +39,7 @@
         body {
             background-color: var(--bg);
             color: var(--text);
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-weight: 300;
             line-height: 1.6;
             overflow-x: hidden;
@@ -60,27 +62,33 @@
 
         .nav-left {
             display: flex;
-            flex-direction: column;
-            gap: 3px;
+            flex-direction: row;
+            align-items: center;
+            gap: 20px;
         }
 
         .nav-logo {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.2rem;
-            letter-spacing: 6px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
             color: var(--text);
             text-decoration: none;
             line-height: 1;
+            white-space: nowrap;
         }
 
-        .nav-logo span { color: var(--silver); }
+        .nav-logo span { color: var(--accent); }
 
         .nav-tagline {
-            font-size: 0.5rem;
-            letter-spacing: 4px;
+            font-size: 0.6rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
             color: var(--muted);
             line-height: 1;
+            border-left: 1px solid var(--border);
+            padding-left: 20px;
+            white-space: nowrap;
         }
 
         .nav-links {
@@ -98,7 +106,7 @@
             transition: color 0.3s;
         }
 
-        .nav-links a:hover { color: var(--text); }
+        .nav-links a:hover { color: var(--accent); }
 
         /* ── Hamburger ── */
         .hamburger { display: none; flex-direction: column; gap: 6px; background: none; border: none; cursor: pointer; padding: 4px; }
@@ -121,12 +129,13 @@
         .mobile-menu a {
             text-decoration: none;
             color: var(--muted);
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2.2rem;
-            letter-spacing: 6px;
+            font-weight: 600;
+            font-size: 1.8rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
             transition: color 0.3s;
         }
-        .mobile-menu a:hover { color: var(--text); }
+        .mobile-menu a:hover { color: var(--accent); }
 
         /* ── Film Still Hero ── */
         .film-still {
@@ -180,7 +189,7 @@
             transition: border-color 0.3s;
         }
 
-        .reel-wrap:hover { border-color: var(--silver); }
+        .reel-wrap:hover { border-color: var(--accent); }
 
         .play-btn {
             width: 70px; height: 70px;
@@ -193,7 +202,7 @@
             background: transparent;
         }
 
-        .reel-wrap:hover .play-btn { border-color: var(--silver); transform: scale(1.06); }
+        .reel-wrap:hover .play-btn { border-color: var(--accent); transform: scale(1.06); }
         .play-btn svg { margin-left: 3px; }
 
         .reel-label {
@@ -215,23 +224,26 @@
             font-size: 0.55rem;
             letter-spacing: 5px;
             text-transform: uppercase;
-            color: var(--silver);
+            color: var(--accent);
             margin-bottom: 20px;
         }
 
         .section-title {
-            font-family: 'Bebas Neue', sans-serif;
+            font-weight: 600;
             font-size: clamp(2rem, 4vw, 3.5rem);
-            letter-spacing: 4px;
+            letter-spacing: -1px;
             color: var(--text);
             margin-bottom: 24px;
+            text-transform: uppercase;
         }
 
         .section-title em {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-weight: 300;
-            color: var(--silver);
+            font-weight: 400;
+            color: var(--accent);
+            text-transform: none;
+            letter-spacing: 0;
         }
 
         .section-body {
@@ -263,20 +275,21 @@
         .service-item:hover { background: var(--bg); }
 
         .service-num {
-            font-family: 'Bebas Neue', sans-serif;
+            font-weight: 600;
             font-size: 0.7rem;
             letter-spacing: 3px;
-            color: var(--silver);
+            color: var(--accent);
             opacity: 0.5;
             margin-bottom: 20px;
         }
 
         .service-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1rem;
-            letter-spacing: 3px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
             color: var(--text);
             margin-bottom: 12px;
+            text-transform: uppercase;
         }
 
         .service-desc {
@@ -321,7 +334,7 @@
         }
 
         .about-quote {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Playfair Display', serif;
             font-style: italic;
             font-size: clamp(1.3rem, 2.2vw, 1.8rem);
             line-height: 1.6;
@@ -334,7 +347,7 @@
             align-items: center;
             gap: 12px;
             text-decoration: none;
-            color: var(--silver);
+            color: var(--accent);
             font-size: 0.6rem;
             letter-spacing: 4px;
             text-transform: uppercase;
@@ -394,15 +407,16 @@
             font-size: 0.55rem;
             letter-spacing: 4px;
             text-transform: uppercase;
-            color: var(--silver2);
+            color: var(--accent);
             margin-bottom: 4px;
         }
 
         .work-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.2rem;
-            letter-spacing: 3px;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 2px;
             color: #fff;
+            text-transform: uppercase;
         }
 
         .work-placeholder {
@@ -430,7 +444,7 @@
             transition: color 0.3s, gap 0.3s;
         }
 
-        .work-cta:hover { color: var(--text); gap: 18px; }
+        .work-cta:hover { color: var(--accent); gap: 18px; }
         .work-cta-line { display: block; width: 30px; height: 1px; background: currentColor; }
 
         /* ── Contact ── */
@@ -442,17 +456,17 @@
 
         .contact-email {
             display: block;
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Playfair Display', serif;
             font-style: italic;
             font-size: clamp(1.6rem, 3.5vw, 3rem);
             color: var(--text);
             text-decoration: none;
             margin: 36px 0 48px;
             transition: color 0.3s;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
 
-        .contact-email:hover { color: var(--silver); }
+        .contact-email:hover { color: var(--accent); }
 
         .btn-outline {
             display: inline-flex;
@@ -468,7 +482,7 @@
             transition: all 0.3s;
         }
 
-        .btn-outline:hover { border-color: var(--silver); color: var(--text); }
+        .btn-outline:hover { border-color: var(--accent); color: var(--text); }
 
         /* ── Footer ── */
         footer {
@@ -480,13 +494,14 @@
         }
 
         .footer-logo {
-            font-family: 'Bebas Neue', sans-serif;
-            letter-spacing: 5px;
-            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            font-size: 0.9rem;
             color: var(--muted);
+            text-transform: uppercase;
         }
 
-        .footer-logo span { color: var(--silver); }
+        .footer-logo span { color: var(--accent); }
 
         .footer-copy {
             font-size: 0.6rem;
@@ -498,7 +513,7 @@
         /* ── Mobile ── */
         @media (max-width: 900px) {
             nav { padding: 0 30px; }
-            .nav-links { display: none; }
+            .nav-links, .nav-tagline { display: none; } /* Tagline hidden on mobile */
             .hamburger { display: flex; }
             .film-still { aspect-ratio: 16/9; }
             .divider { margin: 0 30px; }
@@ -518,7 +533,6 @@
 </head>
 <body>
 
-    <!-- Nav -->
     <nav>
         <div class="nav-left">
             <a href="/" class="nav-logo">BECKLLEN <span>CREATIVE</span></a>
@@ -544,9 +558,7 @@
         <a href="/contact">Contact</a>
     </div>
 
-    <!-- Film Still -->
     <div class="film-still">
-        <!-- Replace with: <img src="your-still.jpg" alt="Film Still"> -->
         <div class="film-still-placeholder">
             <svg width="40" height="28" viewBox="0 0 40 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="1" y="1" width="38" height="26" rx="1" stroke="currentColor" stroke-width="1.5"/>
@@ -562,7 +574,6 @@
         </div>
     </div>
 
-    <!-- Showreel -->
     <div class="reel-section">
         <div class="reel-wrap" onclick="alert('Connect your showreel here')">
             <div class="play-btn">
@@ -576,7 +587,6 @@
 
     <div class="divider"></div>
 
-    <!-- Services -->
     <section class="section services-section">
         <p class="section-label">What We Do</p>
         <h2 class="section-title">Our <em>Craft</em></h2>
@@ -599,18 +609,17 @@
             <div class="service-item">
                 <div class="service-num">04</div>
                 <div class="service-title">Corporate Video</div>
-                <p class="service-desc">Internal comms and executive profiles — produced with craft most clients never expect.</p>
+                <p class="service-desc">Internal comms and executive profiles produced with craft most clients never expect.</p>
             </div>
         </div>
     </section>
 
     <div class="divider"></div>
 
-    <!-- About -->
     <section class="about-section">
         <div class="about-photos">
-            <div class="about-photo"><span>Your Photo</span></div>
-            <div class="about-photo"><span>Your Photo</span></div>
+            <div class="about-photo"><span>Partner One</span></div>
+            <div class="about-photo"><span>Partner Two</span></div>
         </div>
         <div>
             <p class="section-label">Who We Are</p>
@@ -625,10 +634,9 @@
 
     <div class="divider"></div>
 
-    <!-- Work -->
     <section class="section">
         <p class="section-label">Selected Work</p>
-        <h2 class="section-title">The <em>Reel</em></h2>
+        <h2 class="section-title">The <em>Portfolio</em></h2>
         <div class="work-grid">
             <div class="work-item">
                 <div class="work-placeholder"><span>Project Image</span></div>
@@ -663,7 +671,6 @@
 
     <div class="divider"></div>
 
-    <!-- Contact -->
     <section class="contact-section">
         <p class="section-label">Get In Touch</p>
         <h2 class="section-title">Let's Make <em>Something</em></h2>
@@ -672,7 +679,6 @@
         <a href="/contact" class="btn-outline">Start a Project</a>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-logo">BECKLLEN <span>CREATIVE</span></div>
         <div class="footer-copy">&copy; 2026 Beckllen Creative. All Rights Reserved.</div>
