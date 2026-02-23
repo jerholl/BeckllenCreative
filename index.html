@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beckllen Creative</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Bebas+Neue&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* ── Light/Dark via system preference ── */
+        :root {
+            --bg:       #f5f4f2;
+            --bg2:      #eceae6;
+            --border:   #d8d5d0;
+            --silver:   #8a8a8a;
+            --silver2:  #b0b0b0;
+            --text:     #111;
+            --muted:    #888;
+            --invert:   #fff;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg:      #080808;
+                --bg2:     #0f0f0f;
+                --border:  #1e1e1e;
+                --silver:  #a0a0a0;
+                --silver2: #c8c8c8;
+                --text:    #ede9e3;
+                --muted:   #666;
+                --invert:  #080808;
+            }
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* ── Nav ── */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0 60px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-left {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .nav-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 6px;
+            color: var(--text);
+            text-decoration: none;
+            line-height: 1;
+        }
+
+        .nav-logo span { color: var(--silver); }
+
+        .nav-tagline {
+            font-size: 0.5rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--muted);
+            line-height: 1;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--muted);
+            font-size: 0.6rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+
+        /* ── Hamburger ── */
+        .hamburger { display: none; flex-direction: column; gap: 6px; background: none; border: none; cursor: pointer; padding: 4px; }
+        .hamburger span { display: block; width: 22px; height: 1px; background: var(--text); transition: all 0.3s; }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .mobile-menu {
+            display: flex; flex-direction: column;
+            position: fixed; inset: 0;
+            background: var(--bg);
+            z-index: 999;
+            align-items: center; justify-content: center;
+            gap: 44px;
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        .mobile-menu.open { max-height: 100vh; }
+        .mobile-menu a {
+            text-decoration: none;
+            color: var(--muted);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.2rem;
+            letter-spacing: 6px;
+            transition: color 0.3s;
+        }
+        .mobile-menu a:hover { color: var(--text); }
+
+        /* ── Film Still Hero ── */
+        .film-still {
+            width: 100%;
+            aspect-ratio: 21/9;
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .film-still img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .film-still-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .film-still-placeholder span {
+            font-size: 0.55rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--border);
+        }
+
+        .film-still-placeholder svg { opacity: 0.2; }
+
+        /* ── Reel Section ── */
+        .reel-section { padding: 80px 60px; }
+
+        .reel-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        .reel-wrap:hover { border-color: var(--silver); }
+
+        .play-btn {
+            width: 70px; height: 70px;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            background: transparent;
+        }
+
+        .reel-wrap:hover .play-btn { border-color: var(--silver); transform: scale(1.06); }
+        .play-btn svg { margin-left: 3px; }
+
+        .reel-label {
+            position: absolute;
+            bottom: 20px; right: 24px;
+            font-size: 0.55rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        /* ── Divider ── */
+        .divider { height: 1px; background: var(--border); margin: 0 60px; }
+
+        /* ── Section ── */
+        .section { padding: 100px 60px; }
+
+        .section-label {
+            font-size: 0.55rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--silver);
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            letter-spacing: 4px;
+            color: var(--text);
+            margin-bottom: 24px;
+        }
+
+        .section-title em {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-weight: 300;
+            color: var(--silver);
+        }
+
+        .section-body {
+            font-size: 0.85rem;
+            color: var(--muted);
+            line-height: 2;
+            max-width: 500px;
+            letter-spacing: 0.3px;
+        }
+
+        /* ── Services ── */
+        .services-section { background: var(--bg2); }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            margin-top: 60px;
+            border-top: 1px solid var(--border);
+            border-left: 1px solid var(--border);
+        }
+
+        .service-item {
+            padding: 40px 32px;
+            border-right: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            transition: background 0.3s;
+        }
+
+        .service-item:hover { background: var(--bg); }
+
+        .service-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            color: var(--silver);
+            opacity: 0.5;
+            margin-bottom: 20px;
+        }
+
+        .service-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 3px;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        .service-desc {
+            font-size: 0.78rem;
+            color: var(--muted);
+            line-height: 1.9;
+        }
+
+        /* ── About ── */
+        .about-section {
+            padding: 100px 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-photos {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .about-photo {
+            aspect-ratio: 3/4;
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .about-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        .about-photo span {
+            font-size: 0.5rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--border);
+        }
+
+        .about-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+            line-height: 1.6;
+            color: var(--text);
+            margin-bottom: 28px;
+        }
+
+        .about-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--silver);
+            font-size: 0.6rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            transition: gap 0.3s, color 0.3s;
+            margin-top: 32px;
+        }
+
+        .about-link:hover { gap: 20px; color: var(--text); }
+
+        .about-link-line {
+            display: block; width: 30px; height: 1px;
+            background: currentColor;
+            transition: width 0.3s;
+        }
+
+        .about-link:hover .about-link-line { width: 50px; }
+
+        /* ── Work ── */
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            margin-top: 60px;
+        }
+
+        .work-item {
+            position: relative;
+            aspect-ratio: 4/3;
+            background: var(--bg2);
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .work-item:first-child { grid-column: span 2; aspect-ratio: unset; }
+
+        .work-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .work-item:hover .work-overlay { opacity: 1; }
+
+        .work-info {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 24px;
+            transform: translateY(6px);
+            transition: transform 0.3s, opacity 0.3s;
+            opacity: 0;
+        }
+
+        .work-item:hover .work-info { opacity: 1; transform: translateY(0); }
+
+        .work-tag {
+            font-size: 0.55rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--silver2);
+            margin-bottom: 4px;
+        }
+
+        .work-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            color: #fff;
+        }
+
+        .work-placeholder {
+            position: absolute; inset: 0;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .work-placeholder span {
+            font-size: 0.55rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--border);
+        }
+
+        .work-cta {
+            margin-top: 40px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--muted);
+            font-size: 0.6rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            transition: color 0.3s, gap 0.3s;
+        }
+
+        .work-cta:hover { color: var(--text); gap: 18px; }
+        .work-cta-line { display: block; width: 30px; height: 1px; background: currentColor; }
+
+        /* ── Contact ── */
+        .contact-section {
+            padding: 120px 60px;
+            text-align: center;
+            background: var(--bg2);
+        }
+
+        .contact-email {
+            display: block;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: clamp(1.6rem, 3.5vw, 3rem);
+            color: var(--text);
+            text-decoration: none;
+            margin: 36px 0 48px;
+            transition: color 0.3s;
+            letter-spacing: 2px;
+        }
+
+        .contact-email:hover { color: var(--silver); }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--muted);
+            font-size: 0.6rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            border: 1px solid var(--border);
+            padding: 16px 32px;
+            transition: all 0.3s;
+        }
+
+        .btn-outline:hover { border-color: var(--silver); color: var(--text); }
+
+        /* ── Footer ── */
+        footer {
+            padding: 32px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 5px;
+            font-size: 1rem;
+            color: var(--muted);
+        }
+
+        .footer-logo span { color: var(--silver); }
+
+        .footer-copy {
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            color: var(--muted);
+            text-transform: uppercase;
+        }
+
+        /* ── Mobile ── */
+        @media (max-width: 900px) {
+            nav { padding: 0 30px; }
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .film-still { aspect-ratio: 16/9; }
+            .divider { margin: 0 30px; }
+            .reel-section, .section { padding: 60px 30px; }
+            .services-grid { grid-template-columns: 1fr 1fr; }
+            .about-section { grid-template-columns: 1fr; padding: 60px 30px; gap: 40px; }
+            .work-grid { grid-template-columns: 1fr; }
+            .work-item:first-child { grid-column: span 1; aspect-ratio: 4/3; }
+            .contact-section { padding: 80px 30px; }
+            footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 30px; }
+        }
+
+        @media (max-width: 600px) {
+            .services-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nav -->
+    <nav>
+        <div class="nav-left">
+            <a href="/" class="nav-logo">BECKLLEN <span>CREATIVE</span></a>
+            <span class="nav-tagline">Film &nbsp;·&nbsp; Documentary &nbsp;·&nbsp; Creative Marketing</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/work">Work</a></li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="/">Home</a>
+        <a href="/work">Work</a>
+        <a href="/services">Services</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+    </div>
+
+    <!-- Film Still -->
+    <div class="film-still">
+        <!-- Replace with: <img src="your-still.jpg" alt="Film Still"> -->
+        <div class="film-still-placeholder">
+            <svg width="40" height="28" viewBox="0 0 40 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="1" y="1" width="38" height="26" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                <circle cx="20" cy="14" r="5" stroke="currentColor" stroke-width="1.5"/>
+                <rect x="1" y="4" width="4" height="4" fill="currentColor" opacity="0.4"/>
+                <rect x="1" y="11" width="4" height="4" fill="currentColor" opacity="0.4"/>
+                <rect x="1" y="18" width="4" height="4" fill="currentColor" opacity="0.4"/>
+                <rect x="35" y="4" width="4" height="4" fill="currentColor" opacity="0.4"/>
+                <rect x="35" y="11" width="4" height="4" fill="currentColor" opacity="0.4"/>
+                <rect x="35" y="18" width="4" height="4" fill="currentColor" opacity="0.4"/>
+            </svg>
+            <span>Add a film still here</span>
+        </div>
+    </div>
+
+    <!-- Showreel -->
+    <div class="reel-section">
+        <div class="reel-wrap" onclick="alert('Connect your showreel here')">
+            <div class="play-btn">
+                <svg width="14" height="18" viewBox="0 0 14 18" fill="none">
+                    <path d="M1 1.5L13 9L1 16.5V1.5Z" fill="currentColor" stroke="currentColor" stroke-width="0.5" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <span class="reel-label">2024 Showreel</span>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Services -->
+    <section class="section services-section">
+        <p class="section-label">What We Do</p>
+        <h2 class="section-title">Our <em>Craft</em></h2>
+        <div class="services-grid">
+            <div class="service-item">
+                <div class="service-num">01</div>
+                <div class="service-title">Film & Narrative</div>
+                <p class="service-desc">Cinematic stories told with intention. From short films to features.</p>
+            </div>
+            <div class="service-item">
+                <div class="service-num">02</div>
+                <div class="service-title">Documentary</div>
+                <p class="service-desc">Truth as a medium. We find the human thread and pull it into something lasting.</p>
+            </div>
+            <div class="service-item">
+                <div class="service-num">03</div>
+                <div class="service-title">Commercial & Marketing</div>
+                <p class="service-desc">Brand stories told with the same depth as our narrative work.</p>
+            </div>
+            <div class="service-item">
+                <div class="service-num">04</div>
+                <div class="service-title">Corporate Video</div>
+                <p class="service-desc">Internal comms and executive profiles — produced with craft most clients never expect.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- About -->
+    <section class="about-section">
+        <div class="about-photos">
+            <div class="about-photo"><span>Your Photo</span></div>
+            <div class="about-photo"><span>Your Photo</span></div>
+        </div>
+        <div>
+            <p class="section-label">Who We Are</p>
+            <p class="about-quote">"Two directors. One vision. An obsession with the frame."</p>
+            <p class="section-body">Beckllen Creative is a production partnership built on the belief that every project deserves the full weight of cinematic intention — whether it runs 90 seconds or 90 minutes.</p>
+            <a href="/about" class="about-link">
+                <span class="about-link-line"></span>
+                Meet the Team
+            </a>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Work -->
+    <section class="section">
+        <p class="section-label">Selected Work</p>
+        <h2 class="section-title">The <em>Reel</em></h2>
+        <div class="work-grid">
+            <div class="work-item">
+                <div class="work-placeholder"><span>Project Image</span></div>
+                <div class="work-overlay"></div>
+                <div class="work-info">
+                    <div class="work-tag">Documentary</div>
+                    <div class="work-title">Project Title Here</div>
+                </div>
+            </div>
+            <div class="work-item">
+                <div class="work-placeholder"><span>Project Image</span></div>
+                <div class="work-overlay"></div>
+                <div class="work-info">
+                    <div class="work-tag">Narrative Film</div>
+                    <div class="work-title">Project Title Here</div>
+                </div>
+            </div>
+            <div class="work-item">
+                <div class="work-placeholder"><span>Project Image</span></div>
+                <div class="work-overlay"></div>
+                <div class="work-info">
+                    <div class="work-tag">Commercial</div>
+                    <div class="work-title">Project Title Here</div>
+                </div>
+            </div>
+        </div>
+        <a href="/work" class="work-cta">
+            <span class="work-cta-line"></span>
+            View All Projects
+        </a>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Contact -->
+    <section class="contact-section">
+        <p class="section-label">Get In Touch</p>
+        <h2 class="section-title">Let's Make <em>Something</em></h2>
+        <p class="section-body" style="margin: 0 auto; text-align: center;">Whether you have a script, a brief, or just an idea — we want to hear it.</p>
+        <a href="mailto:hello@beckllencreative.com" class="contact-email">hello@beckllencreative.com</a>
+        <a href="/contact" class="btn-outline">Start a Project</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">BECKLLEN <span>CREATIVE</span></div>
+        <div class="footer-copy">&copy; 2026 Beckllen Creative. All Rights Reserved.</div>
+    </footer>
+
+    <script>
+        const btn = document.getElementById('hamburger');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => { btn.classList.toggle('open'); menu.classList.toggle('open'); });
+        menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { btn.classList.remove('open'); menu.classList.remove('open'); }));
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.style.opacity = '1';
+                    e.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.service-item, .work-item, .about-photo').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(16px)';
+            el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+</html>
