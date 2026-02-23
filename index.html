@@ -98,19 +98,39 @@
 
         .nav-links a:hover { color: var(--accent); }
 
-        /* ── Hero ── */
+        /* ── Hero Slider (Updated Section) ── */
         .film-still {
+            position: relative;
             width: 100%;
             aspect-ratio: 21/9;
             background: var(--bg2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            overflow: hidden;
             border-bottom: 1px solid var(--border);
+            display: block; /* Overriding previous flex center */
         }
 
-        .film-still-placeholder { text-align: center; color: var(--border); }
-        .film-still-placeholder span { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 4px; display: block; margin-top: 10px; }
+        .hero-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            z-index: 1;
+        }
+
+        .hero-img.active {
+            opacity: 1;
+        }
+
+        .film-still-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(10,10,12,0.4) 0%, transparent 40%, rgba(10,10,12,0.4) 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
 
         /* ── Reel ── */
         .reel-section { padding: 80px 40px; }
@@ -186,10 +206,12 @@
     </nav>
 
     <div class="film-still">
-        <div class="film-still-placeholder">
-            <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-            <span>Feature Image</span>
-        </div>
+        <img src="cu.png" class="hero-img active" alt="Cinematic Portrait">
+        <img src="carl.png" class="hero-img" alt="Animation Still">
+        <img src="walking.png" class="hero-img" alt="Moody Atmosphere">
+        <img src="dragon.png" class="hero-img" alt="Action Animation">
+        <img src="stab.png" class="hero-img" alt="Horror Narrative">
+        <div class="film-still-overlay"></div>
     </div>
 
     <div class="reel-section">
@@ -227,22 +249,54 @@
         </div>
     </section>
 
-    <section class="section" style="background: var(--bg2);">
-        <p class="section-label">Portfolio</p>
-        <h2 class="section-title">Selected <span>Works</span></h2>
+    <section class="section">
+        <p class="section-label">Selected Work</p>
+        <h2 class="section-title">A glimpse into our <span>reel.</span></h2>
         <div class="work-grid">
-            <div class="work-item"><div class="work-overlay"><strong>FILM</strong></div></div>
-            <div class="work-item"><div class="work-overlay"><strong>DOC</strong></div></div>
-            <div class="work-item"><div class="work-overlay"><strong>ADS</strong></div></div>
+            <div class="work-item">
+                <img src="cu.png" alt="Project 1" style="width:100%; height:100%; object-fit:cover;">
+                <div class="work-overlay">
+                    <h3>Project Title</h3>
+                    <p>Short description of the project.</p>
+                </div>
+            </div>
+            <div class="work-item">
+                <img src="carl.png" alt="Project 2" style="width:100%; height:100%; object-fit:cover;">
+                <div class="work-overlay">
+                    <h3>Project Title</h3>
+                    <p>Short description of the project.</p>
+                </div>
+            </div>
+            <div class="work-item">
+                <img src="walking.png" alt="Project 3" style="width:100%; height:100%; object-fit:cover;">
+                <div class="work-overlay">
+                    <h3>Project Title</h3>
+                    <p>Short description of the project.</p>
+                </div>
+            </div>
+            <!-- Add more work items as needed -->
         </div>
     </section>
-
+    
     <footer>
         <div class="footer-logo">Beckllen <span>Creative</span></div>
         <a href="mailto:hello@beckllen.com" class="btn-contact">Start a Project</a>
     </footer>
 
     <script>
+        // Hero Slider Logic
+        const slides = document.querySelectorAll('.hero-img');
+        let currentSlide = 0;
+
+        function nextSlide() {
+            if(slides.length > 0) {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }
+        }
+        setInterval(nextSlide, 5000);
+
         // Typewriter Animation Logic
         const words = ["Film", "Animation", "Documentary", "Creative Marketing"];
         let i = 0;
@@ -265,13 +319,12 @@
                 j++;
                 if (j == currentWord.length) {
                     isDeleting = true;
-                    setTimeout(type, 2000); // Pause at end of word
+                    setTimeout(type, 2000);
                     return;
                 }
             }
             setTimeout(type, isDeleting ? 50 : 100);
         }
-
         type();
 
         // Scroll Reveal
