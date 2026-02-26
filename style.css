@@ -30,11 +30,20 @@ nav {
     font-weight: 900;
     font-size: 1.5rem;
     letter-spacing: 2px;
-    color: #fff;
-    /* This creates the cool animation without the 'box' error */
+    color: #fff; /* This ensures the text is white and visible */
+    background: none; /* This kills that blue box */
     animation: revealFromLeft 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
 }
-.nav-links a { color: var(--text); text-decoration: none; margin-left: 30px; font-size: 0.85rem; font-weight: 700; transition: 0.3s; }
+
+.nav-links a { 
+    color: var(--text); 
+    text-decoration: none; 
+    margin-left: 30px; 
+    font-size: 0.85rem; 
+    font-weight: 700; 
+    transition: 0.3s; 
+}
+
 .nav-links a:hover { color: var(--accent); }
 
 /* Section Layouts */
