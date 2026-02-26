@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beckllen Creative | Hospitality Brand Storytelling</title>
     
-    <!-- Link to your CSS file -->
     <link rel="stylesheet" href="style.css">
     
-    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -65,23 +63,7 @@
         <span class="eyebrow">The Briefs</span>
         <h2 style="font-size: 2.5rem; margin-bottom: 50px; text-align: center;">Hospitality Intelligence</h2>
         
-        <div class="services-grid">
-            <div class="service-card glass-card">
-                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80" style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin-bottom: 20px;">
-                <div style="color: var(--accent); font-size: 0.8rem; margin-bottom: 10px;">STRATEGY • 5 MIN READ</div>
-                <h3>The Direct Booking Renaissance</h3>
-                <p style="color: var(--muted); margin-top: 10px;">Why luxury properties are moving away from OTAs and back to cinematic storytelling.</p>
-                <a href="#" style="color: var(--accent); text-decoration: none; font-size: 0.8rem; display: block; margin-top: 20px; font-weight: 700;">READ BRIEF →</a>
-            </div>
-
-            <div class="service-card glass-card">
-                <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80" style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin-bottom: 20px;">
-                <div style="color: var(--accent); font-size: 0.8rem; margin-bottom: 10px;">PRODUCTION • 4 MIN READ</div>
-                <h3>High-Bitrate Emotions</h3>
-                <p style="color: var(--muted); margin-top: 10px;">How technical video specs translate into guest desire and premium ADR.</p>
-                <a href="#" style="color: var(--accent); text-decoration: none; font-size: 0.8rem; display: block; margin-top: 20px; font-weight: 700;">READ BRIEF →</a>
-            </div>
-        </div>
+        <div class="services-grid"></div>
     </section>
 
     <footer id="contact">
@@ -93,50 +75,64 @@
             <a href="#">The Virtual Queue</a>
         </div>
     </footer>
-<script src="https://cdn.jsdelivr.net/npm/@sanity/client@6.15.2/dist/index.browser.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@sanity/client@6.15.2/dist/index.browser.js"></script>
+    
     <script>
-    // 1. The Connection (Keep this)
-    const client = window._sanityClient.createClient({
-        projectId: 'your_id_here', 
-        dataset: 'production',
-        useCdn: true,
-        apiVersion: '2024-01-01',
-    });
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
 
-    // 2. PASTE THE NEW FUNCTION HERE (Replacing the old one)
-    async function fetchBriefs() {
-        try {
-            const query = `*[_type == "post"] | order(publishedAt desc)[0...2] {
-                title,
-                "imageUrl": mainImage.asset->url,
-                readTime
-            }`;
-            
-            const briefs = await client.fetch(query);
-            console.log("Briefs found:", briefs);
+        // Initial observe for static cards
+        document.querySelectorAll('.service-card').forEach(card => observer.observe(card));
+    </script>
 
-            const container = document.querySelector('#blog .services-grid');
-            
-            if (briefs && briefs.length > 0) {
-                container.innerHTML = briefs.map(post => `
-                    <div class="service-card glass-card reveal">
-                        <img src="${post.imageUrl}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin-bottom: 20px;">
-                        <div style="color: var(--accent); font-size: 0.8rem; margin-bottom: 10px;">${post.readTime || '5 MIN READ'}</div>
-                        <h3>${post.title}</h3>
-                        <a href="#" style="color: var(--accent); text-decoration: none; font-size: 0.8rem; display: block; margin-top: 20px; font-weight: 700;">READ BRIEF →</a>
-                    </div>
-                `).join('');
+    <script>
+        const client = window._sanityClient.createClient({
+            projectId: 'your_id_here', // <-- REPLACE THIS WITH YOUR ACTUAL ID
+            dataset: 'production',
+            useCdn: true,
+            apiVersion: '2024-01-01',
+        });
 
-                // This line re-triggers the animations for the new cards
-                document.querySelectorAll('.service-card').forEach(card => observer.observe(card));
+        async function fetchBriefs() {
+            try {
+                const query = `*[_type == "post"] | order(publishedAt desc)[0...2] {
+                    title,
+                    "imageUrl": mainImage.asset->url,
+                    readTime
+                }`;
+                
+                const briefs = await client.fetch(query);
+                console.log("Briefs found:", briefs);
+
+                const container = document.querySelector('#blog .services-grid');
+                
+                if (briefs && briefs.length > 0) {
+                    container.innerHTML = briefs.map(post => `
+                        <div class="service-card glass-card">
+                            <img src="${post.imageUrl}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin-bottom: 20px;">
+                            <div style="color: var(--accent); font-size: 0.8rem; margin-bottom: 10px;">${post.readTime || '5 MIN READ'}</div>
+                            <h3>${post.title}</h3>
+                            <a href="#" style="color: var(--accent); text-decoration: none; font-size: 0.8rem; display: block; margin-top: 20px; font-weight: 700;">READ BRIEF →</a>
+                        </div>
+                    `).join('');
+
+                    // Trigger animations for the new dynamic cards
+                    document.querySelectorAll('#blog .service-card').forEach(card => observer.observe(card));
+                }
+            } catch (error) {
+                console.error("Sanity Error:", error);
             }
-        } catch (error) {
-            console.error("Sanity Error:", error);
         }
-    }
 
-    // 3. The Trigger (Keep this)
-    fetchBriefs();
-</script>
+        fetchBriefs();
+    </script>
 </body>
 </html>
