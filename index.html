@@ -95,34 +95,47 @@
     </footer>
 <script src="https://cdn.jsdelivr.net/npm/@sanity/client@6.15.2/dist/index.browser.js"></script>
     <script>
+    // 1. The Connection (Keep this)
     const client = window._sanityClient.createClient({
-        projectId: 'PASTE_YOUR_ID_HERE', // Put your real ID here!
+        projectId: 'your_id_here', 
         dataset: 'production',
         useCdn: true,
         apiVersion: '2024-01-01',
     });
 
+    // 2. PASTE THE NEW FUNCTION HERE (Replacing the old one)
     async function fetchBriefs() {
-        const query = `*[_type == "post"] | order(publishedAt desc)[0...2] {
-            title,
-            "imageUrl": mainImage.asset->url,
-            readTime
-        }`;
-        
-        const briefs = await client.fetch(query);
-        const container = document.querySelector('#blog .services-grid');
-        
-        if (briefs.length > 0) {
-            container.innerHTML = briefs.map(post => `
-                <div class="service-card glass-card reveal">
-                    <img src="${post.imageUrl}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin-bottom: 20px;">
-                    <div style="color: var(--accent); font-size: 0.8rem; margin-bottom: 10px;">${post.readTime || '5 MIN READ'}</div>
-                    <h3>${post.title}</h3>
-                    <a href="#" style="color: var(--accent); text-decoration: none; font-size: 0.8rem; display: block; margin-top: 20px; font-weight: 700;">READ BRIEF →</a>
-                </div>
-            `).join('');
+        try {
+            const query = `*[_type == "post"] | order(publishedAt desc)[0...2] {
+                title,
+                "imageUrl": mainImage.asset->url,
+                readTime
+            }`;
+            
+            const briefs = await client.fetch(query);
+            console.log("Briefs found:", briefs);
+
+            const container = document.querySelector('#blog .services-grid');
+            
+            if (briefs && briefs.length > 0) {
+                container.innerHTML = briefs.map(post => `
+                    <div class="service-card glass-card reveal">
+                        <img src="${post.imageUrl}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin-bottom: 20px;">
+                        <div style="color: var(--accent); font-size: 0.8rem; margin-bottom: 10px;">${post.readTime || '5 MIN READ'}</div>
+                        <h3>${post.title}</h3>
+                        <a href="#" style="color: var(--accent); text-decoration: none; font-size: 0.8rem; display: block; margin-top: 20px; font-weight: 700;">READ BRIEF →</a>
+                    </div>
+                `).join('');
+
+                // This line re-triggers the animations for the new cards
+                document.querySelectorAll('.service-card').forEach(card => observer.observe(card));
+            }
+        } catch (error) {
+            console.error("Sanity Error:", error);
         }
     }
+
+    // 3. The Trigger (Keep this)
     fetchBriefs();
 </script>
 </body>

@@ -18,28 +18,21 @@ h1, h2, h3 { font-weight: 900; letter-spacing: -1px; }
 .eyebrow { color: var(--accent); text-transform: uppercase; letter-spacing: 3px; font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem; display: block; }
 
 /* Navigation */
+/* Navigation */
 nav {
     position: fixed; top: 0; width: 100%; padding: 25px 5%;
     display: flex; justify-content: space-between; align-items: center;
     z-index: 1000; background: linear-gradient(to bottom, rgba(5,5,5,0.8), transparent);
     backdrop-filter: blur(5px);
 }
-.logo { 
-    font-weight: 900; 
-    font-size: 1.2rem; 
-    letter-spacing: 1px;
-    position: relative;
-    display: inline-block;
-    background: linear-gradient(to right, #fff 20%, var(--accent) 40%, var(--accent) 60%, #fff 80%);
-    background-size: 200% auto;
-    .your-class-name {
-    background-image: linear-gradient(to right, var(--accent), #fff);
-    -webkit-background-clip: text; /* Keep the yellow line! */
-    background-clip: text;         /* Add this "official" line */
-    color: transparent;
-}
-    -webkit-text-fill-color: transparent;
-    animation: revealFromLeft 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards, shimmerToRight 4s linear infinite;
+
+.logo {
+    font-weight: 900;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    color: #fff;
+    /* This creates the cool animation without the 'box' error */
+    animation: revealFromLeft 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
 }
 .nav-links a { color: var(--text); text-decoration: none; margin-left: 30px; font-size: 0.85rem; font-weight: 700; transition: 0.3s; }
 .nav-links a:hover { color: var(--accent); }
