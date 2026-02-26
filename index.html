@@ -3,346 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beckllen Creative</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600&family=Archivo+Black&display=swap" rel="stylesheet">
+    <title>Beckllen Creative | Hospitality Brand Storytelling</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg:       #0a0a0c;
-            --bg2:      #121215;
-            --border:   #1f1f23;
-            --accent:   #2E5BFF; /* Electric Cobalt */
-            --text:     #ffffff;
-            --muted:    #8e8e93;
+            --bg: #050505;
+            --surface: #111111;
+            --accent: #00d4ff;
+            --text: #ffffff;
+            --muted: #a1a1a6;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
         }
 
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        /* Base Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text); line-height: 1.6; }
 
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: 'Lexend', sans-serif;
-            font-weight: 300;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+        /* Typography */
+        h1, h2, h3 { font-weight: 900; letter-spacing: -1px; }
+        .eyebrow { color: var(--accent); text-transform: uppercase; letter-spacing: 3px; font-size: 0.75rem; font-weight: 700; margin-bottom: 1rem; display: block; }
 
-        /* ── Nav ── */
+        /* Navigation */
         nav {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            padding: 0 40px;
-            height: 80px;
-            background: rgba(10, 10, 12, 0.95);
-            backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border);
+            position: fixed; top: 0; width: 100%; padding: 25px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; background: linear-gradient(to bottom, rgba(5,5,5,0.8), transparent);
+            backdrop-filter: blur(5px);
         }
-
-        .nav-left {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-        }
-
-        .nav-logo {
-            font-family: 'Archivo Black', sans-serif;
-            font-size: 1.2rem;
-            letter-spacing: -0.5px;
-            color: var(--text);
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .nav-logo span { color: var(--accent); }
-
-        .nav-tagline {
-            font-size: 0.7rem;
-            font-weight: 400;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--muted);
-            border-left: 2px solid var(--accent);
-            padding-left: 20px;
-            min-width: 200px;
-        }
-
-        /* Typewriter Animation Cursor */
-        #typewriter::after {
-            content: "|";
-            animation: blink 0.7s infinite;
-            color: var(--accent);
-            margin-left: 2px;
-        }
-
-        @keyframes blink { 50% { opacity: 0; } }
-
-        .nav-links {
-            display: flex;
-            gap: 32px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text);
-            font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: color 0.3s;
-        }
-
+        .logo { font-weight: 900; font-size: 1.2rem; letter-spacing: 1px; }
+        .nav-links a { color: var(--text); text-decoration: none; margin-left: 30px; font-size: 0.85rem; font-weight: 700; transition: 0.3s; }
         .nav-links a:hover { color: var(--accent); }
 
-        /* ── Hero Slider (Updated Section) ── */
-        .film-still {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 21/9;
-            background: var(--bg2);
-            overflow: hidden;
-            border-bottom: 1px solid var(--border);
-            display: block; /* Overriding previous flex center */
-        }
+        /* Section Layouts */
+        section { padding: 120px 5%; display: flex; flex-direction: column; align-items: center; }
 
-        .hero-img {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out;
-            z-index: 1;
-        }
-
-        .hero-img.active {
-            opacity: 1;
-        }
-
-        .film-still-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, rgba(10,10,12,0.4) 0%, transparent 40%, rgba(10,10,12,0.4) 100%);
-            z-index: 2;
-            pointer-events: none;
-        }
-
-        /* ── Reel ── */
-        .reel-section { padding: 80px 40px; }
-        .reel-wrap {
-            position: relative;
-            aspect-ratio: 16/9;
-            background: var(--bg2);
-            border-radius: 4px;
-            overflow: hidden;
-            display: flex;
-            align-items: center; justify-content: center;
-            cursor: pointer;
-            border: 1px solid var(--border);
-            transition: transform 0.4s ease;
-        }
-        .reel-wrap:hover { transform: scale(1.01); border-color: var(--accent); }
+        /* Hero Section */
+        .hero { height: 100vh; padding: 0; position: relative; justify-content: center; text-align: center; }
+        .video-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        video { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
+        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent 20%, var(--bg) 100%); z-index: 2; }
         
-        .play-btn {
-            width: 80px; height: 80px;
-            background: var(--accent);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 0 30px rgba(46, 91, 255, 0.4);
-        }
+        .hero-content { position: relative; z-index: 10; max-width: 900px; padding: 20px; }
+        .glass-card { background: var(--glass); backdrop-filter: blur(12px); border: 1px solid var(--border); border-radius: 24px; padding: 50px; }
 
-        /* ── Section Styles ── */
-        .section { padding: 100px 40px; }
-        .section-label { color: var(--accent); font-weight: 600; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; }
-        .section-title { font-family: 'Archivo Black', sans-serif; font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 0.9; text-transform: uppercase; margin-bottom: 30px; }
-        .section-title span { color: var(--accent); }
+        /* Services Grid */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; width: 100%; max-width: 1200px; }
+        .service-card { text-align: left; transition: 0.4s ease; }
+        .service-card:hover { transform: translateY(-10px); border-color: var(--accent); background: rgba(255,255,255,0.06); }
 
-        /* ── Services Grid ── */
-        .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 50px; }
-        .service-item { padding: 40px; background: var(--bg2); border: 1px solid var(--border); border-radius: 4px; transition: 0.3s; }
-        .service-item:hover { border-color: var(--accent); background: #16161b; }
-        .service-num { color: var(--accent); font-weight: 600; margin-bottom: 15px; display: block; }
-        .service-title { font-family: 'Archivo Black', sans-serif; text-transform: uppercase; margin-bottom: 10px; font-size: 1.2rem; }
-        .service-desc { color: var(--muted); font-size: 0.9rem; }
+        /* Buttons */
+        .btn { padding: 16px 35px; border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 0.9rem; transition: 0.3s; display: inline-block; }
+        .btn-primary { background: var(--accent); color: #000; margin-top: 20px; }
+        .btn-primary:hover { box-shadow: 0 0 25px rgba(0,212,255,0.4); transform: scale(1.05); }
 
-        /* ── Work Grid ── */
-        .work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 40px; }
-        .work-item { aspect-ratio: 1/1; background: var(--bg2); border: 1px solid var(--border); position: relative; overflow: hidden; }
-        .work-overlay { position: absolute; inset: 0; background: rgba(46, 91, 255, 0.85); display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transition: 0.4s; }
-        .work-item:hover .work-overlay { opacity: 1; }
-
-        /* ── Footer ── */
-        footer { padding: 60px 40px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-        .footer-logo { font-family: 'Archivo Black'; text-transform: uppercase; font-size: 0.9rem; }
-        .btn-contact { background: var(--accent); color: white; text-decoration: none; padding: 15px 30px; font-weight: 600; border-radius: 4px; text-transform: uppercase; font-size: 0.7rem; }
-
-        /* ── Mobile ── */
-        @media (max-width: 900px) {
-            nav { padding: 0 20px; }
-            .nav-tagline, .nav-links { display: none; }
-            .services-grid, .work-grid { grid-template-columns: 1fr; }
-            .section { padding: 60px 20px; }
-        }
+        /* Footer */
+        footer { padding: 80px 5% 40px; border-top: 1px solid var(--border); width: 100%; text-align: center; }
+        .footer-links { margin-top: 30px; display: flex; justify-content: center; gap: 30px; }
+        .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="nav-left">
-            <a href="/" class="nav-logo">BECKLLEN <span>CREATIVE</span></a>
-            <div class="nav-tagline"><span id="typewriter"></span></div>
+        <div class="logo">BECKLLEN <span style="color:var(--accent)">CREATIVE</span></div>
+        <div class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#philosophy">Strategy</a>
+            <a href="#blog">Briefs</a>
+            <a href="#contact" style="color:var(--accent)">Contact</a>
         </div>
-        <ul class="nav-links">
-            <li><a href="/work">Work</a></li>
-            <li><a href="/services">Services</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact</a></li>
-        </ul>
     </nav>
 
-    <div class="film-still">
-        <img src="cu.png" class="hero-img active" alt="Cinematic Portrait">
-        <img src="carl.png" class="hero-img" alt="Animation Still">
-        <img src="walking.png" class="hero-img" alt="Moody Atmosphere">
-        <img src="dragon.png" class="hero-img" alt="Action Animation">
-        <img src="stab.png" class="hero-img" alt="Horror Narrative">
-        <div class="film-still-overlay"></div>
-    </div>
-
-    <div class="reel-section">
-        <div class="reel-wrap">
-            <div class="play-btn">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+    <section class="hero">
+        <div class="video-wrapper">
+            <video autoplay muted loop playsinline>
+                <source src="CMBC.mp4" type="video/mp4">
+            </video>
+            <div class="overlay"></div>
+        </div>
+        <div class="hero-content">
+            <div class="glass-card">
+                <span class="eyebrow">Hospitality Brand Storytelling</span>
+                <h1>Cinematic visuals. <br><span style="color:var(--accent)">Strategic SEO.</span></h1>
+                <p style="color: var(--muted); margin-top: 20px;">We help luxury properties capture attention and convert direct bookings through high-end production.</p>
+                <a href="#contact" class="btn btn-primary">Start a Project</a>
             </div>
         </div>
-    </div>
+    </section>
 
-    <section class="section">
-        <p class="section-label">Capabilities</p>
-        <h2 class="section-title">We tell <span>stories</span><br>that move weight.</h2>
+    <section id="services">
+        <span class="eyebrow">Expertise</span>
+        <h2 style="font-size: 2.5rem; margin-bottom: 50px;">Elevating the Guest Experience</h2>
         <div class="services-grid">
-            <div class="service-item">
-                <span class="service-num">01</span>
-                <h3 class="service-title">Narrative Film</h3>
-                <p class="service-desc">Scripted excellence. We handle everything from pre-pro to final color grade.</p>
+            <div class="service-card glass-card">
+                <div style="font-size: 2rem; margin-bottom: 15px;">🎥</div>
+                <h3>Film Production</h3>
+                <p style="color: var(--muted);">High-bitrate cinematic brand films that tell the unique story of your property.</p>
             </div>
-            <div class="service-item">
-                <span class="service-num">02</span>
-                <h3 class="service-title">Documentary</h3>
-                <p class="service-desc">Unscripted truth. Finding the narrative in the noise.</p>
+            <div class="service-card glass-card">
+                <div style="font-size: 2rem; margin-bottom: 15px;">📈</div>
+                <h3>Search Strategy</h3>
+                <p style="color: var(--muted);">Data-driven SEO to ensure your visuals are seen by the right guests at the right time.</p>
             </div>
-            <div class="service-item">
-                <span class="service-num">03</span>
-                <h3 class="service-title">Marketing</h3>
-                <p class="service-desc">Performance-driven creative. Content that converts viewers into fans.</p>
-            </div>
-            <div class="service-item">
-                <span class="service-num">04</span>
-                <h3 class="service-title">Commercial</h3>
-                <p class="service-desc">High-end brand films designed for the big screen and the small screen.</p>
+            <div class="service-card glass-card">
+                <div style="font-size: 2rem; margin-bottom: 15px;">📱</div>
+                <h3>Social Narratives</h3>
+                <p style="color: var(--muted);">Vertical storytelling designed for engagement on Instagram, TikTok, and Beyond.</p>
             </div>
         </div>
     </section>
 
-    <section class="section">
-        <p class="section-label">Selected Work</p>
-        <h2 class="section-title">A glimpse into our <span>reel.</span></h2>
-        <div class="work-grid">
-            <div class="work-item">
-                <img src="cu.png" alt="Project 1" style="width:100%; height:100%; object-fit:cover;">
-                <div class="work-overlay">
-                    <h3>Project Title</h3>
-                    <p>Short description of the project.</p>
-                </div>
-            </div>
-            <div class="work-item">
-                <img src="carl.png" alt="Project 2" style="width:100%; height:100%; object-fit:cover;">
-                <div class="work-overlay">
-                    <h3>Project Title</h3>
-                    <p>Short description of the project.</p>
-                </div>
-            </div>
-            <div class="work-item">
-                <img src="walking.png" alt="Project 3" style="width:100%; height:100%; object-fit:cover;">
-                <div class="work-overlay">
-                    <h3>Project Title</h3>
-                    <p>Short description of the project.</p>
-                </div>
-            </div>
-            <!-- Add more work items as needed -->
+    <footer id="contact">
+        <h2 style="margin-bottom: 10px;">beckllencreative@gmail.com</h2>
+        <p style="color: var(--muted);">Based in the US | Serving Hospitality Worldwide</p>
+        <div class="footer-links">
+            <a href="#">Instagram</a>
+            <a href="#">LinkedIn</a>
+            <a href="#">The Virtual Queue</a>
         </div>
-    </section>
-    
-    <footer>
-        <div class="footer-logo">Beckllen <span>Creative</span></div>
-        <a href="mailto:hello@beckllen.com" class="btn-contact">Start a Project</a>
     </footer>
 
-    <script>
-        // Hero Slider Logic
-        const slides = document.querySelectorAll('.hero-img');
-        let currentSlide = 0;
-
-        function nextSlide() {
-            if(slides.length > 0) {
-                slides[currentSlide].classList.remove('active');
-                currentSlide = (currentSlide + 1) % slides.length;
-                slides[currentSlide].classList.add('active');
-            }
-        }
-        setInterval(nextSlide, 5000);
-
-        // Typewriter Animation Logic
-        const words = ["Film", "Animation", "Documentary", "Creative Marketing"];
-        let i = 0;
-        let j = 0;
-        let currentWord = "";
-        let isDeleting = false;
-
-        function type() {
-            currentWord = words[i];
-            if (isDeleting) {
-                document.getElementById("typewriter").textContent = currentWord.substring(0, j - 1);
-                j--;
-                if (j == 0) {
-                    isDeleting = false;
-                    i++;
-                    if (i == words.length) i = 0;
-                }
-            } else {
-                document.getElementById("typewriter").textContent = currentWord.substring(0, j + 1);
-                j++;
-                if (j == currentWord.length) {
-                    isDeleting = true;
-                    setTimeout(type, 2000);
-                    return;
-                }
-            }
-            setTimeout(type, isDeleting ? 50 : 100);
-        }
-        type();
-
-        // Scroll Reveal
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    e.target.style.opacity = '1';
-                    e.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.service-item, .work-item').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.6s ease-out';
-            observer.observe(el);
-        });
-    </script>
 </body>
 </html>
