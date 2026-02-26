@@ -32,7 +32,12 @@ nav {
     display: inline-block;
     background: linear-gradient(to right, #fff 20%, var(--accent) 40%, var(--accent) 60%, #fff 80%);
     background-size: 200% auto;
-    -webkit-background-clip: text;
+    .your-class-name {
+    background-image: linear-gradient(to right, var(--accent), #fff);
+    -webkit-background-clip: text; /* Keep the yellow line! */
+    background-clip: text;         /* Add this "official" line */
+    color: transparent;
+}
     -webkit-text-fill-color: transparent;
     animation: revealFromLeft 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards, shimmerToRight 4s linear infinite;
 }

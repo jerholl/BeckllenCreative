@@ -1,3 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beckllen Creative | Hospitality Brand Storytelling</title>
+    
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
 <body>
 
     <nav>
@@ -80,6 +93,26 @@
             <a href="#">The Virtual Queue</a>
         </div>
     </footer>
+<script src="https://cdn.jsdelivr.net/npm/@sanity/client@6.15.2/dist/index.browser.js"></script>
+    <script>
+        const client = window._sanityClient.createClient({
+            projectId: 'YOUR_PROJECT_ID', 
+            dataset: 'production',
+            useCdn: true,
+            apiVersion: '2024-01-01',
+        });
+
+        async function fetchBriefs() {
+            const query = `*[_type == "post"] | order(publishedAt desc)[0...2] {
+                title,
+                "imageUrl": mainImage.asset->url,
+                readTime
+            }`;
+            const briefs = await client.fetch(query);
+            console.log("Sanity Data:", briefs);
+        }
+        fetchBriefs();
+    </script>
 
     <script>
         const observerOptions = { threshold: 0.1 };
@@ -97,3 +130,4 @@
         });
     </script>
 </body>
+</html>
