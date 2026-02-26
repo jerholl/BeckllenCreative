@@ -82,7 +82,7 @@
     const client = sanityClient({
         projectId: '1bc130p1', // Your project ID
         dataset: 'production',
-        useCdn: false, // Use false for debugging fresh content
+        useCdn: false, // Fetch fresh content for debugging
         apiVersion: '2024-01-01',
     });
 
@@ -127,15 +127,25 @@
                         </a>
                     </div>
                 `).join('');
-
-                // Observe new cards
-                document.querySelectorAll('#blog .service-card').forEach(card => observer.observe(card));
             } else {
-                console.log("No briefs found. Check published posts in Sanity Studio.");
+                // Placeholder if no briefs exist
+                container.innerHTML = `
+                    <div class="service-card glass-card" style="text-align:center; padding:50px;">
+                        <h3 style="color: var(--muted);">No briefs yet. Check back soon!</h3>
+                    </div>
+                `;
             }
+
+            // Observe cards for reveal animation
+            document.querySelectorAll('#blog .service-card').forEach(card => observer.observe(card));
 
         } catch (error) {
             console.error("Sanity Error:", error);
+            container.innerHTML = `
+                <div class="service-card glass-card" style="text-align:center; padding:50px;">
+                    <h3 style="color: var(--muted);">Failed to load briefs. Try again later.</h3>
+                </div>
+            `;
         }
     }
 
