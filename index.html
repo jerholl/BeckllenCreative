@@ -1,149 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Beckllen Creative | Hospitality Brand Storytelling</title>
-<link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beckllen Creative | Hospitality Brand Storytelling</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<nav>
-  <div class="logo">BECKLLEN <span style="color:var(--accent)">CREATIVE</span></div>
-  <div class="nav-links">
+  <!-- NAV -->
+  <nav>
+    <div class="logo">BECKLLEN <span style="color:var(--accent)">CREATIVE</span></div>
+    <div class="nav-links">
       <a href="#services">Services</a>
       <a href="#blog">Briefs</a>
       <a href="#contact" style="color:var(--accent)">Contact</a>
-  </div>
-</nav>
+    </div>
+  </nav>
 
-<section class="hero">
-  <div class="video-wrapper">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="video-wrapper">
       <video autoplay muted loop playsinline id="hero-video">
-          <source src="Timeline 1.mp4" type="video/mp4">
+        <source src="Timeline 1.mp4" type="video/mp4">
       </video>
       <div class="overlay"></div>
-  </div>
-  <div class="hero-content">
+    </div>
+    <div class="hero-content">
       <div class="glass-card">
-          <span class="eyebrow">Hospitality Brand Storytelling</span>
-          <h1>Cinematic visuals. <br><span style="color:var(--accent)">Strategic SEO.</span></h1>
-          <p style="color: var(--muted); margin-top: 20px;">We help luxury properties capture attention and convert direct bookings through high-end production.</p>
-          <a href="#contact" class="btn btn-primary">Start a Project</a>
+        <span class="eyebrow">Hospitality Brand Storytelling</span>
+        <h1>Cinematic visuals. <br><span style="color:var(--accent)">Strategic SEO.</span></h1>
+        <p style="color: var(--muted); margin-top: 20px;">We help luxury properties capture attention and convert direct bookings through high-end production.</p>
+        <a href="#contact" class="btn btn-primary">Start a Project</a>
       </div>
-  </div>
-</section>
+    </div>
+  </section>
 
-<section id="services">
-  <span class="eyebrow">Expertise</span>
-  <h2 style="font-size: 2.5rem; margin-bottom: 50px;">Elevating the Guest Experience</h2>
-  <div class="services-grid">
+  <!-- SERVICES -->
+  <section id="services">
+    <span class="eyebrow">Expertise</span>
+    <h2 style="font-size: 2.5rem; margin-bottom: 50px;">Elevating the Guest Experience</h2>
+    <div class="services-grid">
       <div class="service-card glass-card">
-          <div style="font-size: 2rem; margin-bottom: 15px;">🎥</div>
-          <h3>Film Production</h3>
-          <p style="color: var(--muted);">High-bitrate cinematic brand films that tell the unique story of your property.</p>
-      </div>
-      <div class="service-card glass-card">
-          <div style="font-size: 2rem; margin-bottom: 15px;">📈</div>
-          <h3>Search Strategy</h3>
-          <p style="color: var(--muted);">Data-driven SEO to ensure your visuals are seen by the right guests at the right time.</p>
+        <div style="font-size: 2rem; margin-bottom: 15px;">🎥</div>
+        <h3>Film Production</h3>
+        <p style="color: var(--muted);">High-bitrate cinematic brand films that tell the unique story of your property.</p>
       </div>
       <div class="service-card glass-card">
-          <div style="font-size: 2rem; margin-bottom: 15px;">📱</div>
-          <h3>Social Narratives</h3>
-          <p style="color: var(--muted);">Vertical storytelling designed for engagement on Instagram, TikTok, and Beyond.</p>
+        <div style="font-size: 2rem; margin-bottom: 15px;">📈</div>
+        <h3>Search Strategy</h3>
+        <p style="color: var(--muted);">Data-driven SEO to ensure your visuals are seen by the right guests at the right time.</p>
       </div>
-  </div>
-</section>
+      <div class="service-card glass-card">
+        <div style="font-size: 2rem; margin-bottom: 15px;">📱</div>
+        <h3>Social Narratives</h3>
+        <p style="color: var(--muted);">Vertical storytelling designed for engagement on Instagram, TikTok, and Beyond.</p>
+      </div>
+    </div>
+  </section>
 
-<section id="blog">
-  <span class="eyebrow">The Briefs</span>
-  <h2>Hospitality Intelligence</h2>
-  <div class="services-grid"></div>
-</section>
+  <!-- BLOG -->
+  <section id="blog">
+    <span class="eyebrow">The Briefs</span>
+    <h2>Beckllen Blog</h2>
+    <div class="services-grid"></div>
+  </section>
 
-<footer id="contact">
-  <h2 style="margin-bottom: 10px;">jeremy.h@beckllencreative.com</h2>
-  <p style="color: var(--muted);">Based in the US | Serving Hospitality Worldwide</p>
-  <div class="footer-links">
+  <!-- FOOTER -->
+  <footer id="contact">
+    <h2 style="margin-bottom: 10px;">jeremy.h@beckllencreative.com</h2>
+    <p style="color: var(--muted);">Based in the US | Serving Hospitality Worldwide</p>
+    <div class="footer-links">
       <a href="#">Instagram</a>
       <a href="#">LinkedIn</a>
-      <a href="#">The Virtual Queue</a>
-  </div>
-</footer>
+    </div>
+  </footer>
 
-<!-- Sanity 5.8.1 CDN (browser compatible) -->
-<script src="https://cdn.jsdelivr.net/npm/@sanity/client@5.8.1/dist/index.min.js"></script>
+  <!-- SANITY FETCH -->
+  <script>
+    const projectId = '1bc130p1'; // your Sanity project ID
+    const dataset = 'production';
+    const query = encodeURIComponent(`*[_type=="post"] | order(publishedAt desc)[0...2]{
+      title,
+      "imageUrl": mainImage.asset->url,
+      readTime,
+      "slug": slug.current
+    }`);
+   
+    // Replace your URL line with this if you want the "Fast" version:
+const url = `https://${projectId}.apicdn.sanity.io/v2024-01-01/data/query/${dataset}?query=${query}`;
 
-<script>
-  // Initialize client (browser-safe)
-  const client = sanityClient({
-      projectId: '1bc130p1', // your actual project ID
-      dataset: 'production',
-      useCdn: false,
-      apiVersion: '2024-01-01'
-  });
-
-  // IntersectionObserver for reveal animations
-  const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-          if (entry.isIntersecting) {
-              entry.target.classList.add('reveal');
-              observer.unobserve(entry.target);
-          }
-      });
-  }, { threshold: 0.1 });
-
-  // Fetch the latest 2 posts
-  async function fetchBriefs() {
+    async function fetchBriefs() {
       const container = document.querySelector('#blog .services-grid');
       if (!container) return;
 
       try {
-          const briefs = await client.fetch(`*[_type == "post"] | order(publishedAt desc)[0...2]{
-              title,
-              "imageUrl": mainImage.asset->url,
-              readTime,
-              "slug": slug.current
-          }`);
+        const res = await fetch(url);
+        const data = await res.json();
+        const briefs = data.result;
 
-          if (!briefs || briefs.length === 0) {
-              // Placeholder if no posts
-              container.innerHTML = `
-                  <div class="service-card glass-card" style="text-align:center; padding:50px;">
-                      <h3 style="color: var(--muted);">No briefs yet. Check back soon!</h3>
-                  </div>`;
-          } else {
-              container.innerHTML = briefs.map(post => `
-                  <div class="service-card glass-card">
-                      <img src="${post.imageUrl || 'https://via.placeholder.com/400x200'}" 
-                           style="width:100%; height:200px; object-fit:cover; border-radius:12px; margin-bottom:20px;">
-                      <div style="color: var(--accent); font-size:0.8rem; margin-bottom:10px;">
-                          ${post.readTime || '5 MIN READ'}
-                      </div>
-                      <h3>${post.title}</h3>
-                      <a href="/posts/${post.slug || '#'}" 
-                         style="color: var(--accent); text-decoration:none; font-size:0.8rem; display:block; margin-top:20px; font-weight:700;">
-                         READ BRIEF →
-                      </a>
-                  </div>
-              `).join('');
-          }
+        if (!briefs || briefs.length === 0) {
+          container.innerHTML = `<div class="service-card glass-card" style="text-align:center; padding:50px;">
+            <h3 style="color: var(--muted);">No briefs yet. Check back soon!</h3>
+          </div>`;
+          return;
+        }
 
-          // Observe all cards for reveal
-          document.querySelectorAll('#blog .service-card').forEach(card => observer.observe(card));
+        container.innerHTML = briefs.map(post => {
+          const image = post.imageUrl || 'https://via.placeholder.com/400x200';
+          const readTime = post.readTime || '5 MIN READ';
+          const slug = post.slug || '#';
+
+          return `
+            <div class="service-card glass-card">
+              <img src="${image}" style="width:100%; height:200px; object-fit:cover; border-radius:12px; margin-bottom:20px;">
+              <div style="color: var(--accent); font-size:0.8rem; margin-bottom:10px;">${readTime}</div>
+              <h3>${post.title}</h3>
+              <a href="/posts/${slug}" style="color: var(--accent); text-decoration:none; font-size:0.8rem; display:block; margin-top:20px; font-weight:700;">
+                READ BRIEF →
+              </a>
+            </div>
+          `;
+        }).join('');
+
+        // Optional: reveal animation
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('reveal');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('#blog .service-card').forEach(card => observer.observe(card));
 
       } catch (err) {
-          console.error("Sanity fetch error:", err);
-          container.innerHTML = `
-              <div class="service-card glass-card" style="text-align:center; padding:50px;">
-                  <h3 style="color: var(--muted);">Failed to load briefs. Try again later.</h3>
-              </div>`;
+        console.error('Sanity fetch error:', err);
+        container.innerHTML = `<div class="service-card glass-card" style="text-align:center; padding:50px;">
+          <h3 style="color: var(--muted);">Failed to load briefs. Try again later.</h3>
+        </div>`;
       }
-  }
+    }
 
-  window.addEventListener('DOMContentLoaded', fetchBriefs);
+    window.addEventListener('DOMContentLoaded', fetchBriefs);
+  </script>
+  <script>
+  const observerOptions = {
+    threshold: 0.1
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('reveal');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.service-card').forEach(card => {
+    observer.observe(card);
+  });
 </script>
 
 </body>
