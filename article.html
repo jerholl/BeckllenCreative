@@ -318,6 +318,37 @@
 
         const fmt = d => d ? new Date(d).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : '';
 
+        const FALLBACK_POSTS = [
+            {
+                slug: 'story-first-branding',
+                title: 'Why Story-First Branding Converts Better Than Features',
+                body: [{ _type: 'block', children: [{ _type: 'span', text: 'People remember emotion first, details second. Here is how to structure your brand story so it drives real action. When you lead with features, you sound like a brochure. When you lead with story, you sound like a guide. This means putting your customers at the center of the narrative...' }] }],
+                category: 'Strategy',
+                date: '2026-02-01'
+            },
+            {
+                slug: 'hotel-video-mistakes',
+                title: '3 Video Mistakes Hotels Make (And How to Fix Them)',
+                body: [{ _type: 'block', children: [{ _type: 'span', text: 'Most hospitality videos look polished but feel generic. These quick shifts make your property memorable. Mistake 1 is showing the room instead of the feeling of waking up in it. Mistake 2 is relying only on drone shots without any human element...' }] }],
+                category: 'Hospitality',
+                date: '2026-01-24'
+            },
+            {
+                slug: 'small-business-brand-film',
+                title: 'Do Small Businesses Need a Brand Film?',
+                body: [{ _type: 'block', children: [{ _type: 'span', text: 'If you rely on trust and word of mouth, a short cinematic brand film can outperform endless promo posts. We have seen local coffee shops completely change their trajectory just by showing the care that goes into their morning routine...' }] }],
+                category: 'Creative',
+                date: '2026-01-16'
+            },
+            {
+                slug: 'social-cuts-from-one-shoot',
+                title: 'How to Get 30 Social Clips from One Shoot Day',
+                body: [{ _type: 'block', children: [{ _type: 'span', text: 'Plan one narrative shoot and repurpose it intelligently across reels, stories, and campaign content. Start by filming the core story, but always leave dedicated time for b-roll and abstract textures that can stand alone with a trending audio track...' }] }],
+                category: 'Production',
+                date: '2026-01-09'
+            }
+        ];
+
         // Get slug from URL ?slug=my-post-title
         const params = new URLSearchParams(window.location.search);
         const slug = params.get('slug');
@@ -325,6 +356,32 @@
         const loadingEl = document.getElementById('loading');
         const errorEl = document.getElementById('error');
         const articleEl = document.getElementById('article-content');
+
+        function renderPost(post) {
+            document.title = `${post.title} | Beckllen Creative`;
+            document.getElementById('post-title').textContent = post.title;
+            document.getElementById('post-category').textContent = post.category || 'Editorial';
+            document.getElementById('post-date').textContent = fmt(post.date);
+
+            if (post.author) {
+                document.getElementById('post-author').textContent = `By ${post.author}`;
+            }
+
+            if (post.image) {
+                const imgEl = document.getElementById('post-image');
+                imgEl.src = post.image;
+                imgEl.alt = post.title;
+                imgEl.classList.remove('hidden');
+            }
+
+            if (post.body) {
+                const htmlContent = toHTML(post.body);
+                document.getElementById('post-body').innerHTML = htmlContent;
+            }
+
+            loadingEl.classList.add('hidden');
+            articleEl.classList.remove('hidden');
+        }
 
         async function loadArticle() {
             if (!slug) {
@@ -345,41 +402,22 @@
                     }
                 `, { slug });
 
-                if (!post) {
-                    showError();
+                if (post) {
+                    renderPost(post);
                     return;
                 }
-
-                // Render Data
-                document.title = `${post.title} | Beckllen Creative`;
-                document.getElementById('post-title').textContent = post.title;
-                document.getElementById('post-category').textContent = post.category || 'Editorial';
-                document.getElementById('post-date').textContent = fmt(post.date);
-
-                if (post.author) {
-                    document.getElementById('post-author').textContent = `By ${post.author}`;
-                }
-
-                if (post.image) {
-                    const imgEl = document.getElementById('post-image');
-                    imgEl.src = post.image;
-                    imgEl.alt = post.title;
-                    imgEl.classList.remove('hidden');
-                }
-
-                if (post.body) {
-                    // Convert portable text blocks to HTML
-                    const htmlContent = toHTML(post.body);
-                    document.getElementById('post-body').innerHTML = htmlContent;
-                }
-
-                loadingEl.classList.add('hidden');
-                articleEl.classList.remove('hidden');
-
             } catch (e) {
-                console.error(e);
-                showError();
+                console.error('Sanity fetch failed:', e);
             }
+
+            // If post not found or Sanity failed, check FALLBACK_POSTS
+            const fallback = FALLBACK_POSTS.find(p => p.slug === slug);
+            if (fallback) {
+                renderPost(fallback);
+                return;
+            }
+
+            showError();
         }
 
         function showError() {
