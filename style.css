@@ -1068,13 +1068,16 @@ footer {
 .testimonial-row {
     display: grid;
     grid-template-columns: 0.8fr 1.2fr;
-    background: var(--white);
+    background: #ffffff;
     border: 1px solid var(--border);
-    transition: border-color 0.3s;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .testimonial-row:hover {
-    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
 }
 
 .testimonial-img {
@@ -1084,6 +1087,8 @@ footer {
     object-fit: cover;
     display: block;
     background: var(--ink);
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
 }
 
 /* Fallback placeholder style if no image is available */
@@ -1151,6 +1156,8 @@ footer {
     .testimonial-img-placeholder {
         min-height: 280px;
         height: 280px;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 12px;
     }
 
     .testimonial-content {
