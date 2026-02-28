@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Beckllen Creative — start a conversation about your cinematic brand story.">
+    <title>Contact Us | Beckllen Creative</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 0; max-width: 1280px; margin: 0 auto; padding: 72px 56px 120px; gap: 80px; align-items: start; }
+        .contact-info { display: flex; flex-direction: column; gap: 40px; }
+        .info-block { display: flex; flex-direction: column; gap: 6px; }
+        .info-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); }
+        .info-val { font-size: 0.95rem; font-weight: 400; color: var(--ink); }
+        .info-val a { color: var(--ink); text-decoration: none; transition: color 0.2s; }
+        .info-val a:hover { color: var(--accent); }
+        .form-card { background: var(--white); border: 1px solid var(--border); padding: 52px; position: relative; }
+        .form-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to right, var(--accent), transparent); }
+        .form-group { display: flex; flex-direction: column; gap: 7px; margin-bottom: 22px; }
+        .form-group label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
+        .form-group input, .form-group textarea, .form-group select {
+            background: var(--bg); border: 1px solid var(--border); color: var(--ink);
+            padding: 13px 15px; font-family: 'Outfit', sans-serif; font-size: 0.88rem; font-weight: 300;
+            transition: border-color 0.2s; width: 100%; outline: none; appearance: none; border-radius: 0;
+        }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--accent); }
+        .form-group textarea { resize: vertical; min-height: 130px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .submit-btn {
+            width: 100%; background: var(--accent); color: #fff; border: none;
+            padding: 16px; font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 800;
+            letter-spacing: -0.01em; cursor: pointer; transition: background 0.25s; margin-top: 8px;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+        .submit-btn:hover { background: var(--accent2); }
+        .submit-btn svg { transition: transform 0.25s; }
+        .submit-btn:hover svg { transform: translateX(3px); }
+        .success-msg { display: none; background: var(--ink); color: #fff; padding: 20px 24px; text-align: center; font-size: 0.88rem; margin-top: 16px; }
+        @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; gap: 56px; padding: 48px 24px 80px; } .form-card { padding: 36px 24px; } .form-row { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div id="loader">
+        <div class="aperture">
+            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle class="aperture-ring" cx="60" cy="60" r="55" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+                <circle class="aperture-ring" cx="60" cy="60" r="42" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+                <g class="blade" style="--rot:0deg"><path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/></g>
+                <g class="blade" style="--rot:60deg;transform:rotate(60deg);transform-origin:60px 60px"><path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/></g>
+                <g class="blade" style="--rot:120deg;transform:rotate(120deg);transform-origin:60px 60px"><path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/></g>
+                <g class="blade" style="--rot:180deg;transform:rotate(180deg);transform-origin:60px 60px"><path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/></g>
+                <g class="blade" style="--rot:240deg;transform:rotate(240deg);transform-origin:60px 60px"><path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/></g>
+                <g class="blade" style="--rot:300deg;transform:rotate(300deg);transform-origin:60px 60px"><path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/></g>
+                <circle cx="60" cy="60" r="4" fill="white" opacity="0.6" class="aperture-ring"/>
+            </svg>
+        </div>
+    </div>
+    <nav id="nav" class="solid">
+        <a href="/" class="nav-brand" id="nav-brand">
+            <span id="brand-beckllen"></span>
+            <span id="brand-creative"></span>
+        </a>
+        <div class="nav-links"><a href="/blog">Blog</a><a href="/about">About Us</a></div>
+        <a href="/contact" class="nav-links" style="color:var(--accent)">Contact Us</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </nav>
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="/blog">Blog</a>
+        <a href="/about">About Us</a>
+        <a href="/contact">Contact Us</a>
+    </div>
+    <div class="page-header">
+        <div class="page-eyebrow">Let's Talk</div>
+        <h1 class="page-title">Start the<br>conversation.</h1>
+        <p class="page-lead">Tell us about your business and your story. No pitch — just an honest conversation about whether we're the right fit for each other.</p>
+    </div>
+    <div class="page-divider"></div>
+    <div class="contact-grid">
+        <div class="contact-info">
+            <div class="info-block">
+                <span class="info-label">Email</span>
+                <span class="info-val"><a href="mailto:hello@beckllen.com">hello@beckllen.com</a></span>
+            </div>
+            <div class="info-block">
+                <span class="info-label">Based In</span>
+                <span class="info-val">Available Nationwide</span>
+            </div>
+            <div class="info-block">
+                <span class="info-label">Response Time</span>
+                <span class="info-val">Within 24–48 hours</span>
+            </div>
+            <div class="info-block">
+                <span class="info-label">What to Expect</span>
+                <span class="info-val" style="font-size:0.85rem;font-weight:300;color:var(--muted);line-height:1.75;">A short, relaxed call to hear your story, ask a few questions, and see if we're a good fit. No pressure, no pitch deck.</span>
+            </div>
+        </div>
+        <div class="form-card">
+            <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY_HERE">
+                <input type="hidden" name="subject" value="New Inquiry — Beckllen Creative">
+                <div class="form-row">
+                    <div class="form-group"><label>First Name</label><input type="text" name="first_name" placeholder="Jane" required></div>
+                    <div class="form-group"><label>Last Name</label><input type="text" name="last_name" placeholder="Smith"></div>
+                </div>
+                <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="jane@yourhotel.com" required></div>
+                <div class="form-group"><label>Business Name</label><input type="text" name="business" placeholder="The Grand Rooftop Hotel"></div>
+                <div class="form-group">
+                    <label>What are you looking for?</label>
+                    <select name="service">
+                        <option value="">Select a service...</option>
+                        <option>Cinematic Brand Film</option>
+                        <option>Social Media Content</option>
+                        <option>SEO &amp; Digital Marketing</option>
+                        <option>Paid Advertising</option>
+                        <option>Full Story Branding Package</option>
+                        <option>Not sure yet — let's talk</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>Tell Us Your Story</label><textarea name="message" placeholder="What's the story behind your business? What are you hoping to create?" required></textarea></div>
+                <button type="submit" class="submit-btn">
+                    Send the Message
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+            </form>
+            <div class="success-msg" id="success-msg">Thanks — we'll be in touch within 48 hours.</div>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="footer-name">Beckllen Creative</span>
+                <p>Cinematic storytelling for hospitality and standout local brands.</p>
+            </div>
+            <div class="footer-links">
+                <a href="/about">About Us</a>
+                <a href="/blog">Blog</a>
+                <a href="/contact">Contact</a>
+                <a href="/privacy">Privacy Policy</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2026 Beckllen Creative. All rights reserved.</span>
+            <span class="footer-tag">Cinematic Story Branding</span>
+        </div>
+    </footer>
+    <script>
+        window.addEventListener('load', () => { setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1800); });
+
+        // Inner page nav stays solid
+        const btn = document.getElementById('hamburger'), menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => { btn.classList.toggle('open'); menu.classList.toggle('open'); });
+        menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { btn.classList.remove('open'); menu.classList.remove('open'); }));
+
+        (function buildWordmark() {
+            const bEl = document.getElementById('brand-beckllen'), cEl = document.getElementById('brand-creative');
+            const LOADER = 1800, STAGGER = 48;
+            const inners = [];
+            'Beckllen'.split('').forEach((ch, i) => {
+                const wrap = document.createElement('span'); wrap.className = 'brand-letter';
+                const inner = document.createElement('span'); inner.className = 'brand-letter-inner'; inner.textContent = ch;
+                inner.style.animationDelay = (LOADER + i * STAGGER) + 'ms, ' + (LOADER + i * STAGGER + 600) + 'ms';
+                wrap.appendChild(inner); bEl.appendChild(wrap); inners.push(inner);
+            });
+            const c = document.createElement('span'); c.className = 'brand-creative-word'; c.textContent = 'Creative';
+            c.style.animationDelay = (LOADER + 8 * STAGGER + 100) + 'ms'; cEl.appendChild(c);
+            let waving = false;
+            document.getElementById('nav-brand').addEventListener('mouseenter', () => {
+                if (waving) return; waving = true;
+                inners.forEach((inn, i) => setTimeout(() => { inn.classList.remove('wave'); void inn.offsetWidth; inn.classList.add('wave'); }, i * 40));
+                setTimeout(() => { waving = false; }, 8 * 40 + 500);
+            });
+        })();
+    </script>
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('.submit-btn');
+            btn.textContent = 'Sending...';
+            try {
+                const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(this) });
+                const data = await res.json();
+                if (data.success) { this.style.display = 'none'; document.getElementById('success-msg').style.display = 'block'; }
+                else { btn.textContent = 'Something went wrong — try emailing us directly.'; }
+            } catch(err) { btn.textContent = 'Network error — please try again.'; }
+        });
+    </script>
+</body>
+</html>

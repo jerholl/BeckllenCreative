@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Insights on cinematic branding, hospitality marketing, and the stories behind great brands.">
+    <title>Blog | Beckllen Creative</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .blog-body { max-width: 1280px; margin: 0 auto; padding: 72px 56px 120px; }
+        /* Featured post */
+        .featured-post {
+            display: grid; grid-template-columns: 1.1fr 1fr; gap: 0;
+            text-decoration: none; color: var(--ink); margin-bottom: 1px;
+            border: 1px solid var(--border); transition: border-color 0.25s;
+        }
+        .featured-post:hover { border-color: var(--accent); }
+        .featured-img { width: 100%; height: 420px; object-fit: cover; display: block; background: var(--ink); }
+        .featured-img-placeholder { width: 100%; height: 420px; background: linear-gradient(135deg, #0d0d1c, #1a1a2e); display: flex; align-items: center; justify-content: center; }
+        .featured-img-placeholder span { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.15); }
+        .featured-body { background: var(--white); padding: 48px 44px; display: flex; flex-direction: column; justify-content: center; border-left: 1px solid var(--border); position: relative; }
+        .featured-body::before { content: ''; position: absolute; top: 0; left: -1px; bottom: 0; width: 2px; background: var(--accent); transform: scaleY(0); transform-origin: bottom; transition: transform 0.4s ease; }
+        .featured-post:hover .featured-body::before { transform: scaleY(1); }
+        .post-tag { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; display: block; }
+        .featured-title { font-family: 'Syne', sans-serif; font-size: 1.65rem; font-weight: 800; letter-spacing: -0.03em; color: var(--ink); line-height: 1.1; margin-bottom: 14px; }
+        .post-excerpt { font-size: 0.85rem; font-weight: 300; color: var(--muted); line-height: 1.8; flex: 1; margin-bottom: 28px; }
+        .post-meta { display: flex; align-items: center; justify-content: space-between; }
+        .post-date { font-size: 0.68rem; color: rgba(0,0,0,0.3); letter-spacing: 0.05em; }
+        .read-link { font-size: 0.78rem; font-weight: 600; color: var(--accent); display: flex; align-items: center; gap: 6px; transition: gap 0.25s; }
+        .featured-post:hover .read-link { gap: 10px; }
+        /* Grid posts */
+        .posts-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); margin-top: 1px; }
+        .post-card { background: var(--white); text-decoration: none; color: var(--ink); display: flex; flex-direction: column; transition: background 0.25s; }
+        .post-card:hover { background: #f0ede7; }
+        .post-card-img { width: 100%; height: 210px; object-fit: cover; display: block; background: var(--ink); }
+        .post-card-placeholder { width: 100%; height: 210px; background: linear-gradient(135deg, #0d0d1c, #1a1a2e); }
+        .post-card-body { padding: 28px; flex: 1; display: flex; flex-direction: column; }
+        .post-card-title { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); line-height: 1.25; margin-bottom: 10px; }
+        .post-card-excerpt { font-size: 0.8rem; font-weight: 300; color: var(--muted); line-height: 1.7; flex: 1; margin-bottom: 20px; }
+        .post-card-footer { display: flex; justify-content: space-between; align-items: center; }
+        .loading { text-align: center; padding: 80px 20px; color: var(--muted); font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase; }
+        .no-posts { text-align: center; padding: 80px 20px; color: var(--muted); font-size: 0.9rem; }
+        @media (max-width: 900px) {
+            .blog-body { padding: 48px 24px 80px; }
+            .featured-post { grid-template-columns: 1fr; }
+            .featured-img, .featured-img-placeholder { height: 260px; }
+            .featured-body { padding: 32px 24px; border-left: none; border-top: 1px solid var(--border); }
+            .posts-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div id="loader">
+        <div class="aperture">
+            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle class="aperture-ring" cx="60" cy="60" r="55" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+                <circle class="aperture-ring" cx="60" cy="60" r="42" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+                <g class="blade" style="--rot:0deg"><path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/></g>
+                <g class="blade" style="--rot:60deg;transform:rotate(60deg);transform-origin:60px 60px"><path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/></g>
+                <g class="blade" style="--rot:120deg;transform:rotate(120deg);transform-origin:60px 60px"><path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/></g>
+                <g class="blade" style="--rot:180deg;transform:rotate(180deg);transform-origin:60px 60px"><path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/></g>
+                <g class="blade" style="--rot:240deg;transform:rotate(240deg);transform-origin:60px 60px"><path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/></g>
+                <g class="blade" style="--rot:300deg;transform:rotate(300deg);transform-origin:60px 60px"><path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/></g>
+                <circle cx="60" cy="60" r="4" fill="white" opacity="0.6" class="aperture-ring"/>
+            </svg>
+        </div>
+    </div>
+    <nav id="nav" class="solid">
+        <a href="/" class="nav-brand" id="nav-brand">
+            <span id="brand-beckllen"></span>
+            <span id="brand-creative"></span>
+        </a>
+        <div class="nav-links"><a href="/blog"class="active">Blog</a><a href="/about">About Us</a></div>
+        <a href="/contact" class="nav-cta">Contact Us</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </nav>
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="/blog">Blog</a>
+        <a href="/about">About Us</a>
+        <a href="/contact">Contact Us</a>
+    </div>
+    <div class="page-header">
+        <div class="page-eyebrow">From the Studio</div>
+        <h1 class="page-title">Stories worth reading.</h1>
+        <p class="page-lead">Insights on cinematic branding, hospitality marketing, and the craft of telling business stories that actually land.</p>
+    </div>
+    <div class="page-divider"></div>
+    <div class="blog-body">
+        <div id="featured-container"></div>
+        <div id="posts-grid" class="posts-grid" style="display:none"></div>
+        <div id="loading" class="loading">Loading stories…</div>
+        <div id="no-posts" class="no-posts" style="display:none">No posts yet — check back soon.</div>
+    </div>
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="footer-name">Beckllen Creative</span>
+                <p>Cinematic storytelling for hospitality and standout local brands.</p>
+            </div>
+            <div class="footer-links">
+                <a href="/about">About Us</a>
+                <a href="/blog">Blog</a>
+                <a href="/contact">Contact</a>
+                <a href="/privacy">Privacy Policy</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2026 Beckllen Creative. All rights reserved.</span>
+            <span class="footer-tag">Cinematic Story Branding</span>
+        </div>
+    </footer>
+    <script>
+        window.addEventListener('load', () => { setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1800); });
+
+        // Inner page nav stays solid
+        const btn = document.getElementById('hamburger'), menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => { btn.classList.toggle('open'); menu.classList.toggle('open'); });
+        menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { btn.classList.remove('open'); menu.classList.remove('open'); }));
+
+        (function buildWordmark() {
+            const bEl = document.getElementById('brand-beckllen'), cEl = document.getElementById('brand-creative');
+            const LOADER = 1800, STAGGER = 48;
+            const inners = [];
+            'Beckllen'.split('').forEach((ch, i) => {
+                const wrap = document.createElement('span'); wrap.className = 'brand-letter';
+                const inner = document.createElement('span'); inner.className = 'brand-letter-inner'; inner.textContent = ch;
+                inner.style.animationDelay = (LOADER + i * STAGGER) + 'ms, ' + (LOADER + i * STAGGER + 600) + 'ms';
+                wrap.appendChild(inner); bEl.appendChild(wrap); inners.push(inner);
+            });
+            const c = document.createElement('span'); c.className = 'brand-creative-word'; c.textContent = 'Creative';
+            c.style.animationDelay = (LOADER + 8 * STAGGER + 100) + 'ms'; cEl.appendChild(c);
+            let waving = false;
+            document.getElementById('nav-brand').addEventListener('mouseenter', () => {
+                if (waving) return; waving = true;
+                inners.forEach((inn, i) => setTimeout(() => { inn.classList.remove('wave'); void inn.offsetWidth; inn.classList.add('wave'); }, i * 40));
+                setTimeout(() => { waving = false; }, 8 * 40 + 500);
+            });
+        })();
+    </script>
+    <script type="module">
+        import { createClient } from 'https://esm.sh/@sanity/client';
+        const client = createClient({ projectId: 'YOUR_PROJECT_ID', dataset: 'production', useCdn: true, apiVersion: '2024-02-24' });
+        const fmt = d => d ? new Date(d).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : '';
+
+        async function load() {
+            const loading = document.getElementById('loading');
+            const featEl  = document.getElementById('featured-container');
+            const gridEl  = document.getElementById('posts-grid');
+            try {
+                const posts = await client.fetch(`
+                    *[_type == "post"] | order(coalesce(publishedAt, _createdAt) desc) {
+                        "slug": slug.current, title,
+                        "excerpt": pt::text(body)[0..200],
+                        "image": mainImage.asset->url,
+                        "category": categories[0]->title,
+                        "date": coalesce(publishedAt, _createdAt)
+                    }`);
+                loading.style.display = 'none';
+                if (!posts?.length) { document.getElementById('no-posts').style.display = 'block'; return; }
+
+                const [first, ...rest] = posts;
+                featEl.innerHTML = `
+                    <a href="/blog/${first.slug}" class="featured-post">
+                        ${first.image
+                            ? `<img src="${first.image}" class="featured-img" alt="${first.title}">`
+                            : `<div class="featured-img-placeholder"><span>Featured Story</span></div>`}
+                        <div class="featured-body">
+                            <span class="post-tag">${first.category || 'Editorial'}</span>
+                            <h2 class="featured-title">${first.title}</h2>
+                            <p class="post-excerpt">${first.excerpt || ''}…</p>
+                            <div class="post-meta">
+                                <span class="post-date">${fmt(first.date)}</span>
+                                <span class="read-link">Read →</span>
+                            </div>
+                        </div>
+                    </a>`;
+
+                if (rest.length) {
+                    gridEl.style.display = 'grid';
+                    gridEl.innerHTML = rest.map(p => `
+                        <a href="/blog/${p.slug}" class="post-card">
+                            ${p.image
+                                ? `<img src="${p.image}" class="post-card-img" alt="${p.title}">`
+                                : `<div class="post-card-placeholder"></div>`}
+                            <div class="post-card-body">
+                                <span class="post-tag">${p.category || 'Editorial'}</span>
+                                <h3 class="post-card-title">${p.title}</h3>
+                                <p class="post-card-excerpt">${(p.excerpt || '').substring(0,120)}…</p>
+                                <div class="post-card-footer">
+                                    <span class="post-date">${fmt(p.date)}</span>
+                                    <span class="read-link" style="color:var(--accent);font-size:0.78rem;font-weight:600">→</span>
+                                </div>
+                            </div>
+                        </a>`).join('');
+                }
+            } catch(e) { console.error(e); loading.textContent = 'Could not load posts.'; }
+        }
+        load();
+    </script>
+</body>
+</html>
