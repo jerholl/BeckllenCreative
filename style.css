@@ -9,8 +9,6 @@
     --border: #dedad3;
     --accent: #2a5caa;
     --accent2: #1e4480;
-    --loader-bg: #f4f2ee;
-    --footer-bg: #2e2c28;
 }
 
 *,
@@ -47,7 +45,7 @@ h3 {
     position: fixed;
     inset: 0;
     z-index: 9999;
-    background: var(--loader-bg);
+    background: var(--bg);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -472,7 +470,7 @@ nav.scrolled .hamburger span {
 
 /* ── FOOTER ── */
 footer {
-    background: var(--footer-bg);
+    background: var(--ink2);
     padding: 64px 56px 36px;
 }
 
@@ -497,7 +495,7 @@ footer {
 .footer-brand p {
     font-size: 0.8rem;
     font-weight: 300;
-    color: rgba(255, 255, 255, 0.35);
+    color: rgba(117, 117, 117, 0.35);
     max-width: 240px;
     line-height: 1.7;
 }
