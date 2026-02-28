@@ -1,167 +1,550 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Beckllen Creative | Hospitality Brand Storytelling</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Beckllen Creative crafts cinematic story branding for hospitality and small businesses. We tell the story behind your brand.">
+    <title>Beckllen Creative | Cinematic Story Branding</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f4f2ee;
+            --white: #fafaf8;
+            --ink: #1a1916;
+            --ink2: #2e2c28;
+            --muted: #8a8780;
+            --border: #dedad3;
+            --accent: #2a5caa;
+            --accent2: #1e4480;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--ink); font-family: 'Outfit', sans-serif; overflow-x: hidden; }
+
+        /* ── PAGE LOADER / APERTURE ── */
+        #loader {
+            position: fixed; inset: 0; z-index: 9999;
+            background: var(--ink); display: flex; align-items: center; justify-content: center;
+            transition: opacity 0.6s ease 0.2s, visibility 0.6s ease 0.2s;
+        }
+        #loader.hidden { opacity: 0; visibility: hidden; }
+        .aperture {
+            width: 120px; height: 120px; position: relative;
+        }
+        .aperture svg { width: 100%; height: 100%; }
+        .blade {
+            transform-origin: 60px 60px;
+            animation: bladeOpen 1.2s cubic-bezier(0.4,0,0.2,1) 0.3s forwards;
+            opacity: 1;
+        }
+        .blade:nth-child(1) { animation-delay: 0.3s; }
+        .blade:nth-child(2) { animation-delay: 0.32s; }
+        .blade:nth-child(3) { animation-delay: 0.34s; }
+        .blade:nth-child(4) { animation-delay: 0.36s; }
+        .blade:nth-child(5) { animation-delay: 0.38s; }
+        .blade:nth-child(6) { animation-delay: 0.40s; }
+        @keyframes bladeOpen {
+            0% { opacity: 1; transform: rotate(0deg) scale(1); }
+            60% { opacity: 0.4; transform: rotate(var(--rot)) scale(0.5); }
+            100% { opacity: 0; transform: rotate(var(--rot)) scale(0); }
+        }
+        .blade:nth-child(1) { --rot: 0deg; }
+        .blade:nth-child(2) { --rot: 60deg; }
+        .blade:nth-child(3) { --rot: 120deg; }
+        .blade:nth-child(4) { --rot: 180deg; }
+        .blade:nth-child(5) { --rot: 240deg; }
+        .blade:nth-child(6) { --rot: 300deg; }
+        .aperture-ring {
+            animation: ringFade 1.6s ease 0.3s forwards;
+            opacity: 1;
+        }
+        @keyframes ringFade { 0%{opacity:1} 80%{opacity:0.6} 100%{opacity:0} }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 56px; height: 72px;
+            transition: background 0.5s, border-color 0.5s, box-shadow 0.5s;
+        }
+        nav.over-video { background: transparent; }
+        nav.scrolled {
+            background: rgba(244,242,238,0.96);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 1px 20px rgba(0,0,0,0.04);
+        }
+
+        /* ── LOGO ── */
+        .nav-brand {
+            text-decoration: none; display: flex; align-items: center; gap: 14px;
+        }
+        .logo-mark {
+            width: 38px; height: 38px; position: relative; flex-shrink: 0;
+        }
+        .logo-mark svg { display: block; width: 100%; height: 100%; overflow: visible; }
+
+        /* Aperture blades on the logo mark */
+        .logo-blade {
+            transform-origin: 19px 19px;
+            transition: transform 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.5s ease;
+        }
+        .nav-brand:hover .logo-blade { opacity: 0.3; }
+        .nav-brand:hover .logo-blade:nth-child(1) { transform: rotate(30deg) scale(0.5); }
+        .nav-brand:hover .logo-blade:nth-child(2) { transform: rotate(90deg) scale(0.5); }
+        .nav-brand:hover .logo-blade:nth-child(3) { transform: rotate(150deg) scale(0.5); }
+        .nav-brand:hover .logo-blade:nth-child(4) { transform: rotate(210deg) scale(0.5); }
+        .nav-brand:hover .logo-blade:nth-child(5) { transform: rotate(270deg) scale(0.5); }
+        .nav-brand:hover .logo-blade:nth-child(6) { transform: rotate(330deg) scale(0.5); }
+        /* The B mark inside */
+        .logo-letter {
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .nav-brand:hover .logo-letter { transform: scale(1.1); opacity: 1; }
+
+        .logo-text { display: flex; flex-direction: column; line-height: 1; gap: 2px; }
+        .logo-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.25rem; font-weight: 400; letter-spacing: 0.06em;
+            color: var(--white); transition: color 0.5s;
+        }
+        nav.scrolled .logo-name { color: var(--ink); }
+        .logo-sub {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.55rem; font-weight: 500; letter-spacing: 0.35em;
+            text-transform: uppercase; color: rgba(255,255,255,0.4);
+            transition: color 0.5s;
+        }
+        nav.scrolled .logo-sub { color: var(--muted); }
+
+        .nav-links { display: flex; align-items: center; gap: 40px; }
+        .nav-links a {
+            text-decoration: none; color: rgba(255,255,255,0.6); font-size: 0.8rem;
+            font-weight: 400; letter-spacing: 0.03em; transition: color 0.3s;
+        }
+        nav.scrolled .nav-links a { color: var(--muted); }
+        .nav-links a:hover { color: #fff; }
+        nav.scrolled .nav-links a:hover { color: var(--ink); }
+        .nav-cta {
+            background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.85);
+            border: 1px solid rgba(255,255,255,0.2);
+            text-decoration: none; font-size: 0.75rem; font-weight: 500;
+            padding: 9px 22px; letter-spacing: 0.04em;
+            transition: all 0.3s; backdrop-filter: blur(8px);
+        }
+        nav.scrolled .nav-cta { background: var(--ink); color: var(--white); border-color: var(--ink); }
+        .nav-cta:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+        .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; }
+        .hamburger span { display: block; width: 22px; height: 1.5px; background: rgba(255,255,255,0.7); transition: all 0.3s ease; }
+        nav.scrolled .hamburger span { background: var(--ink); }
+        .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+        .mobile-menu { position: fixed; top: 72px; left: 0; right: 0; background: var(--white); border-bottom: 1px solid var(--border); z-index: 99; max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+        .mobile-menu.open { max-height: 220px; }
+        .mobile-menu a { display: block; padding: 16px 24px; color: var(--muted); text-decoration: none; font-size: 0.9rem; border-bottom: 1px solid var(--border); transition: color 0.2s; }
+        .mobile-menu a:hover { color: var(--ink); }
+        @media (max-width: 768px) { nav { padding: 0 24px; } .nav-links, .nav-cta { display: none; } .hamburger { display: flex; } }
+
+        /* ── HERO ── */
+        .hero {
+            position: relative; width: 100vw; height: 100vh; min-height: 640px;
+            display: flex; align-items: center; justify-content: center; overflow: hidden;
+        }
+        .hero-media { position: absolute; inset: 0; }
+        .hero-media video { width: 100%; height: 100%; object-fit: cover; }
+        .hero-placeholder {
+            position: absolute; inset: 0;
+            background: linear-gradient(160deg, #131420 0%, #0d1525 55%, #191410 100%);
+        }
+        /* Subtle grid lines — cinematic feel */
+        .hero-placeholder::after {
+            content: '';
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+        .hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(0,0,0,0.3) 0%,
+                rgba(0,0,0,0) 30%,
+                rgba(0,0,0,0) 50%,
+                rgba(0,0,0,0.7) 100%
+            );
+        }
+        .hero-content {
+            position: relative; z-index: 2;
+            padding: 0 24px; max-width: 860px; text-align: center;
+            opacity: 0; animation: contentIn 1s ease 1.4s forwards;
+        }
+        @keyframes contentIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+        .hero-label {
+            font-size: 0.65rem; font-weight: 500; letter-spacing: 0.35em;
+            text-transform: uppercase; color: rgba(255,255,255,0.4);
+            margin-bottom: 20px; display: flex; align-items: center; gap: 14px;
+        }
+        .hero-label::before { content: ''; display: block; width: 28px; height: 1px; background: var(--accent); }
+        .hero-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(3rem, 6.5vw, 6.5rem);
+            font-weight: 700; line-height: 0.95; letter-spacing: -0.03em;
+            color: #fff; margin-bottom: 24px;
+        }
+        .hero-title em { font-style: italic; color: rgba(255,255,255,0.55); }
+        .hero-sub {
+            font-size: 0.95rem; font-weight: 300; color: rgba(255,255,255,0.45);
+            max-width: 480px; margin: 0 auto 44px; line-height: 1.85;
+        }
+        .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+        .btn-primary {
+            background: var(--accent); color: #fff; text-decoration: none;
+            font-size: 0.78rem; font-weight: 500; letter-spacing: 0.06em;
+            padding: 14px 32px; display: inline-flex; align-items: center; gap: 10px;
+            transition: background 0.25s, transform 0.25s;
+        }
+        .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+        .btn-primary svg { transition: transform 0.25s; }
+        .btn-primary:hover svg { transform: translateX(3px); }
+        .btn-ghost {
+            border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.55);
+            text-decoration: none; font-size: 0.78rem; font-weight: 400; letter-spacing: 0.06em;
+            padding: 14px 32px; transition: all 0.25s;
+        }
+        .btn-ghost:hover { border-color: rgba(255,255,255,0.4); color: rgba(255,255,255,0.85); }
+
+        /* Scroll hint */
+        .hero-scroll {
+            position: absolute; right: 56px; bottom: 56px; z-index: 2;
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
+            opacity: 0; animation: fadeIn 1s 2.2s ease forwards;
+        }
+        @keyframes fadeIn { to{opacity:1} }
+        .hero-scroll span { font-size: 0.55rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.25); writing-mode: vertical-rl; }
+        .scroll-bar { width: 1px; height: 48px; background: linear-gradient(to bottom, rgba(255,255,255,0.25), transparent); animation: scrollPulse 2.2s ease-in-out infinite; }
+        @keyframes scrollPulse { 0%{transform:scaleY(0);transform-origin:top} 50%{transform:scaleY(1);transform-origin:top} 51%{transform-origin:bottom} 100%{transform:scaleY(0);transform-origin:bottom} }
+
+        /* ── STATS ── */
+        .stats-section { padding: 100px 56px; max-width: 1280px; margin: 0 auto; }
+        .section-label { font-size: 0.65rem; font-weight: 500; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
+        .section-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--accent); }
+        .section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 700; color: var(--ink); margin-bottom: 64px; line-height: 1.1; max-width: 560px; }
+        .section-title em { font-style: italic; color: var(--muted); }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); }
+        .stat-card {
+            background: var(--white); padding: 44px 36px;
+            transition: background 0.3s;
+        }
+        .stat-card:hover { background: var(--ink); }
+        .stat-card:hover .stat-num,
+        .stat-card:hover h3 { color: #fff; }
+        .stat-card:hover .stat-num em { color: var(--accent); }
+        .stat-card:hover p { color: rgba(255,255,255,0.4); }
+        .stat-num { font-family: 'Syne', sans-serif; font-size: 4rem; font-weight: 700; line-height: 1; margin-bottom: 14px; display: block; color: var(--ink); transition: color 0.3s; }
+        .stat-num em { color: var(--accent); font-style: normal; transition: color 0.3s; font-size: 2.5rem; }
+        .stat-card h3 { font-size: 0.82rem; font-weight: 500; color: var(--ink); margin-bottom: 10px; letter-spacing: 0.02em; transition: color 0.3s; }
+        .stat-card p { font-size: 0.78rem; font-weight: 300; color: var(--muted); line-height: 1.75; transition: color 0.3s; }
+
+        /* ── CTA ── */
+        .cta-section { padding: 0 56px 120px; max-width: 1280px; margin: 0 auto; }
+        .cta-block { display: grid; grid-template-columns: 1fr auto; gap: 80px; align-items: center; border-top: 1px solid var(--border); padding-top: 64px; }
+        .cta-block h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 3vw, 3rem); font-weight: 700; color: var(--ink); line-height: 1.1; margin-bottom: 12px; }
+        .cta-block h2 em { font-style: italic; color: var(--muted); }
+        .cta-block p { font-size: 0.88rem; font-weight: 300; color: var(--muted); line-height: 1.8; max-width: 440px; }
+        .cta-right { flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 16px; }
+        .btn-cta {
+            background: var(--ink); color: #fff; text-decoration: none;
+            font-size: 0.78rem; font-weight: 500; letter-spacing: 0.06em;
+            padding: 16px 40px; white-space: nowrap;
+            display: inline-flex; align-items: center; gap: 12px;
+            transition: background 0.25s;
+        }
+        .btn-cta:hover { background: var(--accent); }
+        .btn-cta svg { transition: transform 0.25s; }
+        .btn-cta:hover svg { transform: translateX(3px); }
+        .cta-note { font-size: 0.7rem; color: var(--muted); }
+
+        /* ── FOOTER ── */
+        footer { background: var(--ink2); padding: 64px 56px 36px; }
+        .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; margin-bottom: 48px; }
+        .footer-name { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 400; color: #fff; letter-spacing: 0.06em; display: block; margin-bottom: 8px; }
+        .footer-brand p { font-size: 0.8rem; font-weight: 300; color: rgba(255,255,255,0.35); max-width: 240px; line-height: 1.7; }
+        .footer-links { display: flex; flex-direction: column; gap: 12px; text-align: right; }
+        .footer-links a { color: rgba(255,255,255,0.3); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.03em; transition: color 0.2s; }
+        .footer-links a:hover { color: rgba(255,255,255,0.8); }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 0.7rem; color: rgba(255,255,255,0.2); }
+        .footer-tag { color: var(--accent); opacity: 0.7; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; }
+
+        @media (max-width: 960px) { .stats-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 768px) {
+            .stats-section, .cta-section { padding-left: 24px; padding-right: 24px; }
+            .hero-content { padding: 0 24px 60px; }
+            .hero-scroll { right: 24px; bottom: 24px; }
+            .cta-block { grid-template-columns: 1fr; gap: 40px; }
+            .cta-right { align-items: flex-start; }
+            footer { padding: 48px 24px 28px; }
+            .footer-inner { flex-direction: column; }
+            .footer-links { text-align: left; }
+            .footer-bottom { flex-direction: column; gap: 8px; }
+        }
+        @media (max-width: 480px) { .stats-grid { grid-template-columns: 1fr; } }
+    </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <div class="logo">BECKLLEN <span style="color:var(--accent)">CREATIVE</span></div>
-    <div class="nav-links">
-      <a href="#services">Services</a>
-      <a href="#blog">Briefs</a>
-      <a href="#contact" style="color:var(--accent)">Contact</a>
+    <!-- PAGE LOADER — aperture opens -->
+    <div id="loader">
+        <div class="aperture">
+            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Outer ring -->
+                <circle class="aperture-ring" cx="60" cy="60" r="55" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+                <circle class="aperture-ring" cx="60" cy="60" r="42" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+                <!-- 6 blades, each a rounded wedge shape -->
+                <g class="blade" style="--rot:0deg">
+                    <path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
+                </g>
+                <g class="blade" style="--rot:60deg; transform:rotate(60deg); transform-origin:60px 60px">
+                    <path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
+                </g>
+                <g class="blade" style="--rot:120deg; transform:rotate(120deg); transform-origin:60px 60px">
+                    <path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
+                </g>
+                <g class="blade" style="--rot:180deg; transform:rotate(180deg); transform-origin:60px 60px">
+                    <path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
+                </g>
+                <g class="blade" style="--rot:240deg; transform:rotate(240deg); transform-origin:60px 60px">
+                    <path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
+                </g>
+                <g class="blade" style="--rot:300deg; transform:rotate(300deg); transform-origin:60px 60px">
+                    <path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
+                </g>
+                <!-- Center dot -->
+                <circle cx="60" cy="60" r="4" fill="white" opacity="0.6" class="aperture-ring"/>
+            </svg>
+        </div>
     </div>
-  </nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="video-wrapper">
-      <video autoplay muted loop playsinline id="hero-video">
-        <source src="Timeline 1.mp4" type="video/mp4">
-      </video>
-      <div class="overlay"></div>
-    </div>
-    <div class="hero-content">
-      <div class="glass-card">
-        <span class="eyebrow">Hospitality Brand Storytelling</span>
-        <h1>Cinematic visuals. <br><span style="color:var(--accent)">Strategic SEO.</span></h1>
-        <p style="color: var(--muted); margin-top: 20px;">We help luxury properties capture attention and convert direct bookings through high-end production.</p>
-        <a href="#contact" class="btn btn-primary">Start a Project</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- SERVICES -->
-  <section id="services">
-    <span class="eyebrow">Expertise</span>
-    <h2 style="font-size: 2.5rem; margin-bottom: 50px;">Elevating the Guest Experience</h2>
-    <div class="services-grid">
-      <div class="service-card glass-card">
-        <div style="font-size: 2rem; margin-bottom: 15px;">🎥</div>
-        <h3>Film Production</h3>
-        <p style="color: var(--muted);">High-bitrate cinematic brand films that tell the unique story of your property.</p>
-      </div>
-      <div class="service-card glass-card">
-        <div style="font-size: 2rem; margin-bottom: 15px;">📈</div>
-        <h3>Search Strategy</h3>
-        <p style="color: var(--muted);">Data-driven SEO to ensure your visuals are seen by the right guests at the right time.</p>
-      </div>
-      <div class="service-card glass-card">
-        <div style="font-size: 2rem; margin-bottom: 15px;">📱</div>
-        <h3>Social Narratives</h3>
-        <p style="color: var(--muted);">Vertical storytelling designed for engagement on Instagram, TikTok, and Beyond.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- BLOG -->
-  <section id="blog">
-    <span class="eyebrow">The Briefs</span>
-    <h2>Beckllen Blog</h2>
-    <div class="services-grid"></div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer id="contact">
-    <h2 style="margin-bottom: 10px;">jeremy.h@beckllencreative.com</h2>
-    <p style="color: var(--muted);">Based in the US | Serving Hospitality Worldwide</p>
-    <div class="footer-links">
-      <a href="#">Instagram</a>
-      <a href="#">LinkedIn</a>
-    </div>
-  </footer>
-
-  <!-- SANITY FETCH -->
-  <script>
-    const projectId = '1bc130p1'; // your Sanity project ID
-    const dataset = 'production';
-    const query = encodeURIComponent(`*[_type=="post"] | order(publishedAt desc)[0...2]{
-      title,
-      "imageUrl": mainImage.asset->url,
-      readTime,
-      "slug": slug.current
-    }`);
-   
-    // Replace your URL line with this if you want the "Fast" version:
-const url = `https://${projectId}.apicdn.sanity.io/v2024-01-01/data/query/${dataset}?query=${query}`;
-
-    async function fetchBriefs() {
-      const container = document.querySelector('#blog .services-grid');
-      if (!container) return;
-
-      try {
-        const res = await fetch(url);
-        const data = await res.json();
-        const briefs = data.result;
-
-        if (!briefs || briefs.length === 0) {
-          container.innerHTML = `<div class="service-card glass-card" style="text-align:center; padding:50px;">
-            <h3 style="color: var(--muted);">No briefs yet. Check back soon!</h3>
-          </div>`;
-          return;
-        }
-
-        container.innerHTML = briefs.map(post => {
-          const image = post.imageUrl || 'https://via.placeholder.com/400x200';
-          const readTime = post.readTime || '5 MIN READ';
-          const slug = post.slug || '#';
-
-          return `
-            <div class="service-card glass-card">
-              <img src="${image}" style="width:100%; height:200px; object-fit:cover; border-radius:12px; margin-bottom:20px;">
-              <div style="color: var(--accent); font-size:0.8rem; margin-bottom:10px;">${readTime}</div>
-              <h3>${post.title}</h3>
-              <a href="/posts/${slug}" style="color: var(--accent); text-decoration:none; font-size:0.8rem; display:block; margin-top:20px; font-weight:700;">
-                READ BRIEF →
-              </a>
+    <!-- NAV -->
+    <nav id="nav" class="over-video">
+        <a href="/" class="nav-brand">
+            <!-- Miniature aperture logo mark -->
+            <div class="logo-mark">
+                <svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="19" cy="19" r="18" stroke="rgba(255,255,255,0.25)" stroke-width="1" class="logo-ring" style="transition:stroke 0.5s"/>
+                    <!-- 6 mini blades -->
+                    <g class="logo-blade" style="transform-origin:19px 19px; transform:rotate(0deg)">
+                        <path d="M19 19 L19 3 A16 16 0 0 1 33 11 Z" fill="rgba(255,255,255,0.18)"/>
+                    </g>
+                    <g class="logo-blade" style="transform-origin:19px 19px; transform:rotate(60deg)">
+                        <path d="M19 19 L19 3 A16 16 0 0 1 33 11 Z" fill="rgba(255,255,255,0.18)"/>
+                    </g>
+                    <g class="logo-blade" style="transform-origin:19px 19px; transform:rotate(120deg)">
+                        <path d="M19 19 L19 3 A16 16 0 0 1 33 11 Z" fill="rgba(255,255,255,0.18)"/>
+                    </g>
+                    <g class="logo-blade" style="transform-origin:19px 19px; transform:rotate(180deg)">
+                        <path d="M19 19 L19 3 A16 16 0 0 1 33 11 Z" fill="rgba(255,255,255,0.18)"/>
+                    </g>
+                    <g class="logo-blade" style="transform-origin:19px 19px; transform:rotate(240deg)">
+                        <path d="M19 19 L19 3 A16 16 0 0 1 33 11 Z" fill="rgba(255,255,255,0.18)"/>
+                    </g>
+                    <g class="logo-blade" style="transform-origin:19px 19px; transform:rotate(300deg)">
+                        <path d="M19 19 L19 3 A16 16 0 0 1 33 11 Z" fill="rgba(255,255,255,0.18)"/>
+                    </g>
+                    <!-- Center B -->
+                    <text x="19" y="24" text-anchor="middle" font-family="Cormorant, serif" font-size="16" font-weight="400" fill="white" class="logo-letter">B</text>
+                </svg>
             </div>
-          `;
-        }).join('');
+            <div class="logo-text">
+                <span class="logo-name">Beckllen</span>
+                <span class="logo-sub">Creative</span>
+            </div>
+        </a>
+        <div class="nav-links">
+            <a href="/blog">Blog</a>
+            <a href="/about">About Us</a>
+        </div>
+        <a href="/contact" class="nav-cta">Contact Us</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </nav>
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="/blog">Blog</a>
+        <a href="/about">About Us</a>
+        <a href="/contact">Contact Us</a>
+    </div>
 
-        // Optional: reveal animation
-        const observer = new IntersectionObserver(entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('reveal');
-              observer.unobserve(entry.target);
+    <!-- HERO — full bleed -->
+    <section class="hero">
+        <div class="hero-media">
+            <!--
+                ══════════════════════════════════════════
+                TO ADD YOUR CINEMATIC SHOT:
+
+                Option 1 — Video:
+                <video autoplay muted loop playsinline src="./hero.mp4"></video>
+
+                Option 2 — Photo:
+                <img src="./hero.jpg" style="width:100%;height:100%;object-fit:cover;">
+
+                Then delete the <div class="hero-placeholder"></div> below it.
+                ══════════════════════════════════════════
+            -->
+            <video autoplay muted loop playsinline src="./CMBC.mp4"></video>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-label">Cinematic Story Branding</div>
+            <h1 class="hero-title">
+                Your brand<br>
+                has a story<br>
+                worth telling.
+            </h1>
+            <p class="hero-sub">We craft cinematic stories for local businesses, hospitality & destination brands.  Because the brands that move people — win.</p>
+            <div class="hero-btns">
+                <a href="/contact" class="btn-primary">
+                    Tell Us Your Story
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+                <a href="/about" class="btn-ghost">Our Approach</a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <div class="scroll-bar"></div>
+            <span>Scroll</span>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats-section">
+        <div class="section-label">The Evidence</div>
+        <h2 class="section-title">Why Video Changes Everything for Your Business</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <strong class="stat-num">73<em>%</em></strong>
+                <h3>Higher Booking Conversion</h3>
+                <p>Hotels with cinematic video see up to 73% more direct bookings than those relying on photography alone.</p>
+            </div>
+            <div class="stat-card">
+                <strong class="stat-num">88<em>%</em></strong>
+                <h3>Longer Time on Site</h3>
+                <p>Visitors spend 88% more time on sites featuring video — giving your story the time it needs to land.</p>
+            </div>
+            <div class="stat-card">
+                <strong class="stat-num">4<em>×</em></strong>
+                <h3>More Likely to Share</h3>
+                <p>Consumers are 4× more likely to watch a video about an experience than read about it.</p>
+            </div>
+            <div class="stat-card">
+                <strong class="stat-num">80<em>%</em></strong>
+                <h3>Increase in Brand Recall</h3>
+                <p>Viewers retain 80% of what they watch vs. 20% of what they read. Your brand stays in the room.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="cta-block">
+            <div>
+                <h2>Every Great Brand Has a Story Waiting to Be Told</h2>
+                <p>Whether you run a boutique hotel, a family restaurant, or a business with roots worth honoring — we're here to bring it to life on screen.</p>
+            </div>
+            <div class="cta-right">
+                <a href="/contact" class="btn-cta">
+                    Start the Conversation
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+                <span class="cta-note">No commitment. Just a conversation.</span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="footer-name">Beckllen Creative</span>
+                <p>Cinematic story branding for hospitality and the businesses worth knowing about.</p>
+            </div>
+            <div class="footer-links">
+                <a href="/about">About Us</a>
+                <a href="/blog">Blog</a>
+                <a href="/contact">Contact</a>
+                <a href="/privacy">Privacy Policy</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2026 Beckllen Creative. All rights reserved.</span>
+            <span class="footer-tag">Cinematic Story Branding</span>
+        </div>
+    </footer>
+
+    <script>
+        // Dismiss loader after aperture animation
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 1800);
+        });
+
+        // Nav scroll state
+        const nav = document.getElementById('nav');
+        const onScroll = () => {
+            if (window.scrollY > 50) {
+                nav.classList.remove('over-video');
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.add('over-video');
+                nav.classList.remove('scrolled');
             }
-          });
+        };
+        window.addEventListener('scroll', onScroll);
+
+        // Hamburger
+        const btn = document.getElementById('hamburger');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => { btn.classList.toggle('open'); menu.classList.toggle('open'); });
+        menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { btn.classList.remove('open'); menu.classList.remove('open'); }));
+
+        // Logo blades hover: rotate slowly on hover
+        const logoBrand = document.querySelector('.nav-brand');
+        const logoBlades = document.querySelectorAll('.logo-blade');
+        let bladeAngle = 0, rafId;
+        logoBrand.addEventListener('mouseenter', () => {
+            const spin = () => {
+                bladeAngle += 0.8;
+                logoBlades.forEach((b, i) => {
+                    b.style.transform = `rotate(${i * 60 + bladeAngle}deg)`;
+                });
+                rafId = requestAnimationFrame(spin);
+            };
+            spin();
+        });
+        logoBrand.addEventListener('mouseleave', () => {
+            cancelAnimationFrame(rafId);
+            logoBlades.forEach((b, i) => {
+                b.style.transform = `rotate(${i * 60}deg)`;
+                b.style.transition = 'transform 0.5s ease';
+            });
+        });
+
+        // Stat card entrance
+        const cards = document.querySelectorAll('.stat-card');
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach((e, i) => {
+                if (e.isIntersecting) {
+                    setTimeout(() => { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }, i * 80);
+                    obs.unobserve(e.target);
+                }
+            });
         }, { threshold: 0.1 });
-        document.querySelectorAll('#blog .service-card').forEach(card => observer.observe(card));
-
-      } catch (err) {
-        console.error('Sanity fetch error:', err);
-        container.innerHTML = `<div class="service-card glass-card" style="text-align:center; padding:50px;">
-          <h3 style="color: var(--muted);">Failed to load briefs. Try again later.</h3>
-        </div>`;
-      }
-    }
-
-    window.addEventListener('DOMContentLoaded', fetchBriefs);
-  </script>
-  <script>
-  const observerOptions = {
-    threshold: 0.1
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('reveal');
-      }
-    });
-  }, observerOptions);
-
-  document.querySelectorAll('.service-card').forEach(card => {
-    observer.observe(card);
-  });
-</script>
-
+        cards.forEach(c => {
+            c.style.opacity = '0'; c.style.transform = 'translateY(16px)';
+            c.style.transition = 'opacity 0.6s ease, transform 0.6s ease, background 0.3s';
+            obs.observe(c);
+        });
+    </script>
 </body>
 </html>
