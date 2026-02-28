@@ -139,13 +139,118 @@
     </script>
     <script type="module">
         import { createClient } from 'https://esm.sh/@sanity/client';
-        const client = createClient({ projectId: 'YOUR_PROJECT_ID', dataset: 'production', useCdn: true, apiVersion: '2024-02-24' });
+
+        // Fill these in with your Sanity project values.
+        const SANITY_CONFIG = {
+            projectId: 'YOUR_SANITY_PROJECT_ID',
+            dataset: 'production',
+            apiVersion: '2024-02-24',
+            useCdn: true
+        };
+
+        // Optional: set this to your public post URL base if posts live elsewhere.
+        // Example: 'https://yourdomain.com/blog'
+        const BLOG_POST_BASE_URL = '';
+
+        const FALLBACK_POSTS = [
+            {
+                slug: 'story-first-branding',
+                title: 'Why Story-First Branding Converts Better Than Features',
+                excerpt: 'People remember emotion first, details second. Here is how to structure your brand story so it drives real action.',
+                category: 'Strategy',
+                date: '2026-02-01'
+            },
+            {
+                slug: 'hotel-video-mistakes',
+                title: '3 Video Mistakes Hotels Make (And How to Fix Them)',
+                excerpt: 'Most hospitality videos look polished but feel generic. These quick shifts make your property memorable.',
+                category: 'Hospitality',
+                date: '2026-01-24'
+            },
+            {
+                slug: 'small-business-brand-film',
+                title: 'Do Small Businesses Need a Brand Film?',
+                excerpt: 'If you rely on trust and word of mouth, a short cinematic brand film can outperform endless promo posts.',
+                category: 'Creative',
+                date: '2026-01-16'
+            },
+            {
+                slug: 'social-cuts-from-one-shoot',
+                title: 'How to Get 30 Social Clips from One Shoot Day',
+                excerpt: 'Plan one narrative shoot and repurpose it intelligently across reels, stories, and campaign content.',
+                category: 'Production',
+                date: '2026-01-09'
+            }
+        ];
+
+        const hasSanityConfig = SANITY_CONFIG.projectId && SANITY_CONFIG.projectId !== 'YOUR_SANITY_PROJECT_ID';
+        const client = hasSanityConfig ? createClient(SANITY_CONFIG) : null;
+
         const fmt = d => d ? new Date(d).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : '';
+        const getPostUrl = slug =>
+            BLOG_POST_BASE_URL
+                ? `${BLOG_POST_BASE_URL.replace(/\/$/, '')}/${slug}`
+                : `#`;
+
+        function render(posts) {
+            const featEl = document.getElementById('featured-container');
+            const gridEl = document.getElementById('posts-grid');
+            const loading = document.getElementById('loading');
+            const empty = document.getElementById('no-posts');
+
+            loading.style.display = 'none';
+            empty.style.display = 'none';
+
+            if (!posts?.length) {
+                empty.style.display = 'block';
+                return;
+            }
+
+            const [first, ...rest] = posts;
+            featEl.innerHTML = `
+                <a href="${getPostUrl(first.slug)}" class="featured-post">
+                    ${first.image
+                        ? `<img src="${first.image}" class="featured-img" alt="${first.title}">`
+                        : `<div class="featured-img-placeholder"><span>Featured Story</span></div>`}
+                    <div class="featured-body">
+                        <span class="post-tag">${first.category || 'Editorial'}</span>
+                        <h2 class="featured-title">${first.title}</h2>
+                        <p class="post-excerpt">${first.excerpt || ''}</p>
+                        <div class="post-meta">
+                            <span class="post-date">${fmt(first.date)}</span>
+                            <span class="read-link">Read →</span>
+                        </div>
+                    </div>
+                </a>`;
+
+            if (rest.length) {
+                gridEl.style.display = 'grid';
+                gridEl.innerHTML = rest.map(p => `
+                    <a href="${getPostUrl(p.slug)}" class="post-card">
+                        ${p.image
+                            ? `<img src="${p.image}" class="post-card-img" alt="${p.title}">`
+                            : `<div class="post-card-placeholder"></div>`}
+                        <div class="post-card-body">
+                            <span class="post-tag">${p.category || 'Editorial'}</span>
+                            <h3 class="post-card-title">${p.title}</h3>
+                            <p class="post-card-excerpt">${(p.excerpt || '').substring(0, 140)}</p>
+                            <div class="post-card-footer">
+                                <span class="post-date">${fmt(p.date)}</span>
+                                <span class="read-link" style="color:var(--accent);font-size:0.78rem;font-weight:600">→</span>
+                            </div>
+                        </div>
+                    </a>`).join('');
+            } else {
+                gridEl.style.display = 'none';
+            }
+        }
 
         async function load() {
-            const loading = document.getElementById('loading');
-            const featEl  = document.getElementById('featured-container');
-            const gridEl  = document.getElementById('posts-grid');
+            if (!client) {
+                render(FALLBACK_POSTS);
+                return;
+            }
+
             try {
                 const posts = await client.fetch(`
                     *[_type == "post"] | order(coalesce(publishedAt, _createdAt) desc) {
@@ -155,45 +260,15 @@
                         "category": categories[0]->title,
                         "date": coalesce(publishedAt, _createdAt)
                     }`);
-                loading.style.display = 'none';
-                if (!posts?.length) { document.getElementById('no-posts').style.display = 'block'; return; }
-
-                const [first, ...rest] = posts;
-                featEl.innerHTML = `
-                    <a href="/blog/${first.slug}" class="featured-post">
-                        ${first.image
-                            ? `<img src="${first.image}" class="featured-img" alt="${first.title}">`
-                            : `<div class="featured-img-placeholder"><span>Featured Story</span></div>`}
-                        <div class="featured-body">
-                            <span class="post-tag">${first.category || 'Editorial'}</span>
-                            <h2 class="featured-title">${first.title}</h2>
-                            <p class="post-excerpt">${first.excerpt || ''}…</p>
-                            <div class="post-meta">
-                                <span class="post-date">${fmt(first.date)}</span>
-                                <span class="read-link">Read →</span>
-                            </div>
-                        </div>
-                    </a>`;
-
-                if (rest.length) {
-                    gridEl.style.display = 'grid';
-                    gridEl.innerHTML = rest.map(p => `
-                        <a href="/blog/${p.slug}" class="post-card">
-                            ${p.image
-                                ? `<img src="${p.image}" class="post-card-img" alt="${p.title}">`
-                                : `<div class="post-card-placeholder"></div>`}
-                            <div class="post-card-body">
-                                <span class="post-tag">${p.category || 'Editorial'}</span>
-                                <h3 class="post-card-title">${p.title}</h3>
-                                <p class="post-card-excerpt">${(p.excerpt || '').substring(0,120)}…</p>
-                                <div class="post-card-footer">
-                                    <span class="post-date">${fmt(p.date)}</span>
-                                    <span class="read-link" style="color:var(--accent);font-size:0.78rem;font-weight:600">→</span>
-                                </div>
-                            </div>
-                        </a>`).join('');
+                if (!posts?.length) {
+                    render(FALLBACK_POSTS);
+                    return;
                 }
-            } catch(e) { console.error(e); loading.textContent = 'Could not load posts.'; }
+                render(posts);
+            } catch (e) {
+                console.error(e);
+                render(FALLBACK_POSTS);
+            }
         }
         load();
     </script>
