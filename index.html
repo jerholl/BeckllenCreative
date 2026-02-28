@@ -28,36 +28,25 @@
             transition: opacity 0.6s ease 0.2s, visibility 0.6s ease 0.2s;
         }
         #loader.hidden { opacity: 0; visibility: hidden; }
-        .aperture {
-            width: 120px; height: 120px; position: relative;
-        }
+        .aperture { width: 120px; height: 120px; }
         .aperture svg { width: 100%; height: 100%; }
         .blade {
             transform-origin: 60px 60px;
-            animation: bladeOpen 1.2s cubic-bezier(0.4,0,0.2,1) 0.3s forwards;
+            animation: bladeOpen 1.2s cubic-bezier(0.4,0,0.2,1) forwards;
             opacity: 1;
         }
-        .blade:nth-child(1) { animation-delay: 0.3s; }
-        .blade:nth-child(2) { animation-delay: 0.32s; }
-        .blade:nth-child(3) { animation-delay: 0.34s; }
-        .blade:nth-child(4) { animation-delay: 0.36s; }
-        .blade:nth-child(5) { animation-delay: 0.38s; }
-        .blade:nth-child(6) { animation-delay: 0.40s; }
+        .blade:nth-child(1) { animation-delay: 0.30s; --rot: 0deg; }
+        .blade:nth-child(2) { animation-delay: 0.32s; --rot: 60deg; }
+        .blade:nth-child(3) { animation-delay: 0.34s; --rot: 120deg; }
+        .blade:nth-child(4) { animation-delay: 0.36s; --rot: 180deg; }
+        .blade:nth-child(5) { animation-delay: 0.38s; --rot: 240deg; }
+        .blade:nth-child(6) { animation-delay: 0.40s; --rot: 300deg; }
         @keyframes bladeOpen {
-            0% { opacity: 1; transform: rotate(0deg) scale(1); }
-            60% { opacity: 0.4; transform: rotate(var(--rot)) scale(0.5); }
+            0%   { opacity: 1; transform: rotate(0deg) scale(1); }
+            60%  { opacity: 0.4; transform: rotate(var(--rot)) scale(0.5); }
             100% { opacity: 0; transform: rotate(var(--rot)) scale(0); }
         }
-        .blade:nth-child(1) { --rot: 0deg; }
-        .blade:nth-child(2) { --rot: 60deg; }
-        .blade:nth-child(3) { --rot: 120deg; }
-        .blade:nth-child(4) { --rot: 180deg; }
-        .blade:nth-child(5) { --rot: 240deg; }
-        .blade:nth-child(6) { --rot: 300deg; }
-        .aperture-ring {
-            animation: ringFade 1.6s ease 0.3s forwards;
-            opacity: 1;
-        }
+        .aperture-ring { animation: ringFade 1.6s ease 0.3s forwards; opacity: 1; }
         @keyframes ringFade { 0%{opacity:1} 80%{opacity:0.6} 100%{opacity:0} }
 
         /* ── NAV ── */
@@ -75,48 +64,126 @@
             box-shadow: 0 1px 20px rgba(0,0,0,0.04);
         }
 
-        /* ── LOGO ── */
+        /* ── ANIMATED WORDMARK ── */
         .nav-brand {
-            text-decoration: none; display: flex; align-items: center; gap: 14px;
+            text-decoration: none;
+            display: flex; align-items: baseline; gap: 0;
+            position: relative;
         }
-        .logo-mark {
-            width: 38px; height: 38px; position: relative; flex-shrink: 0;
-        }
-        .logo-mark svg { display: block; width: 100%; height: 100%; overflow: visible; }
 
-        /* Aperture blades on the logo mark */
-        .logo-blade {
-            transform-origin: 19px 19px;
-            transition: transform 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.5s ease;
+        /* Sweeping underline on hover */
+        .nav-brand::after {
+            content: '';
+            position: absolute; bottom: -3px; left: 0;
+            height: 1px; width: 0;
+            background: var(--accent);
+            transition: width 0.45s cubic-bezier(0.16,1,0.3,1);
         }
-        .nav-brand:hover .logo-blade { opacity: 0.3; }
-        .nav-brand:hover .logo-blade:nth-child(1) { transform: rotate(30deg) scale(0.5); }
-        .nav-brand:hover .logo-blade:nth-child(2) { transform: rotate(90deg) scale(0.5); }
-        .nav-brand:hover .logo-blade:nth-child(3) { transform: rotate(150deg) scale(0.5); }
-        .nav-brand:hover .logo-blade:nth-child(4) { transform: rotate(210deg) scale(0.5); }
-        .nav-brand:hover .logo-blade:nth-child(5) { transform: rotate(270deg) scale(0.5); }
-        .nav-brand:hover .logo-blade:nth-child(6) { transform: rotate(330deg) scale(0.5); }
-        /* The B mark inside */
-        .logo-letter {
-            transition: opacity 0.4s ease, transform 0.4s ease;
-        }
-        .nav-brand:hover .logo-letter { transform: scale(1.1); opacity: 1; }
+        .nav-brand:hover::after { width: 100%; }
 
-        .logo-text { display: flex; flex-direction: column; line-height: 1; gap: 2px; }
-        .logo-name {
+        /* ── WORDMARK LETTERS ── */
+        .brand-letter {
+            display: inline-block;
+            overflow: hidden;
+            vertical-align: top;
+            height: 1.2em;
+        }
+
+        /* The visible character — clips in from below on load */
+        .brand-letter-inner {
+            display: block;
             font-family: 'Syne', sans-serif;
-            font-size: 1.25rem; font-weight: 400; letter-spacing: 0.06em;
-            color: var(--white); transition: color 0.5s;
+            font-size: 1.2rem;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            /* Shimmer gradient — always sweeping */
+            background: linear-gradient(
+                100deg,
+                rgba(255,255,255,0.85) 0%,
+                rgba(255,255,255,0.85) 30%,
+                rgba(255,255,255,1)    45%,
+                var(--accent)          50%,
+                rgba(255,255,255,1)    55%,
+                rgba(255,255,255,0.85) 70%,
+                rgba(255,255,255,0.85) 100%
+            );
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0;
+            transform: translateY(110%);
+            /* Load animation first, then shimmer loops forever */
+            animation:
+                letterRise   0.55s cubic-bezier(0.16,1,0.3,1) forwards,
+                shimmerSweep 4s   linear                       3s infinite;
+            transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
         }
-        nav.scrolled .logo-name { color: var(--ink); }
-        .logo-sub {
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.55rem; font-weight: 500; letter-spacing: 0.35em;
-            text-transform: uppercase; color: rgba(255,255,255,0.4);
-            transition: color 0.5s;
-        }
-        nav.scrolled .logo-sub { color: var(--muted); }
 
+        /* On scroll — dark mode shimmer */
+        nav.scrolled .brand-letter-inner {
+            background: linear-gradient(
+                100deg,
+                var(--ink) 0%,
+                var(--ink) 30%,
+                var(--accent) 50%,
+                var(--ink) 70%,
+                var(--ink) 100%
+            );
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @keyframes letterRise {
+            from { transform: translateY(110%); opacity: 0; }
+            to   { transform: translateY(0);    opacity: 1; }
+        }
+        @keyframes shimmerSweep {
+            0%   { background-position: 200% center; }
+            100% { background-position: -100% center; }
+        }
+
+        /* Hover: each letter gets a wave lift via JS-assigned delay */
+        .brand-letter-inner.wave {
+            animation:
+                shimmerSweep 4s linear 0s infinite,
+                letterWave   0.5s cubic-bezier(0.16,1,0.3,1) forwards;
+        }
+        @keyframes letterWave {
+            0%   { transform: translateY(0); }
+            40%  { transform: translateY(-6px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* "Creative" label */
+        .brand-creative-word {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.58rem;
+            font-weight: 500;
+            letter-spacing: 0.38em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
+            align-self: center;
+            margin-left: 12px;
+            padding-left: 12px;
+            border-left: 1px solid rgba(255,255,255,0.2);
+            opacity: 0;
+            transform: translateX(-8px);
+            animation: creativeSlide 0.55s cubic-bezier(0.16,1,0.3,1) forwards;
+            transition: color 0.5s, border-color 0.5s;
+        }
+        nav.scrolled .brand-creative-word {
+            color: var(--muted);
+            border-left-color: rgba(0,0,0,0.12);
+        }
+        @keyframes creativeSlide {
+            from { opacity: 0; transform: translateX(-8px); }
+            to   { opacity: 1; transform: translateX(0); }
+        }
+
+        /* ── NAV LINKS ── */
         .nav-links { display: flex; align-items: center; gap: 40px; }
         .nav-links a {
             text-decoration: none; color: rgba(255,255,255,0.6); font-size: 0.8rem;
@@ -125,6 +192,7 @@
         nav.scrolled .nav-links a { color: var(--muted); }
         .nav-links a:hover { color: #fff; }
         nav.scrolled .nav-links a:hover { color: var(--ink); }
+
         .nav-cta {
             background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.85);
             border: 1px solid rgba(255,255,255,0.2);
@@ -141,6 +209,7 @@
         .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
         .hamburger.open span:nth-child(2) { opacity: 0; }
         .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
         .mobile-menu { position: fixed; top: 72px; left: 0; right: 0; background: var(--white); border-bottom: 1px solid var(--border); z-index: 99; max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
         .mobile-menu.open { max-height: 220px; }
         .mobile-menu a { display: block; padding: 16px 24px; color: var(--muted); text-decoration: none; font-size: 0.9rem; border-bottom: 1px solid var(--border); transition: color 0.2s; }
@@ -158,10 +227,8 @@
             position: absolute; inset: 0;
             background: linear-gradient(160deg, #131420 0%, #0d1525 55%, #191410 100%);
         }
-        /* Subtle grid lines — cinematic feel */
         .hero-placeholder::after {
-            content: '';
-            position: absolute; inset: 0;
+            content: ''; position: absolute; inset: 0;
             background-image:
                 linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
@@ -169,13 +236,7 @@
         }
         .hero-overlay {
             position: absolute; inset: 0;
-            background: linear-gradient(
-                to bottom,
-                rgba(0,0,0,0.3) 0%,
-                rgba(0,0,0,0) 30%,
-                rgba(0,0,0,0) 50%,
-                rgba(0,0,0,0.7) 100%
-            );
+            background: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.65) 100%);
         }
         .hero-content {
             position: relative; z-index: 2;
@@ -183,22 +244,26 @@
             opacity: 0; animation: contentIn 1s ease 1.4s forwards;
         }
         @keyframes contentIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
         .hero-label {
             font-size: 0.65rem; font-weight: 500; letter-spacing: 0.35em;
             text-transform: uppercase; color: rgba(255,255,255,0.4);
-            margin-bottom: 20px; display: flex; align-items: center; gap: 14px;
+            margin-bottom: 20px;
+            display: flex; align-items: center; justify-content: center; gap: 14px;
         }
-        .hero-label::before { content: ''; display: block; width: 28px; height: 1px; background: var(--accent); }
+        .hero-label::before, .hero-label::after {
+            content: ''; display: block; width: 28px; height: 1px; background: var(--accent);
+        }
+
         .hero-title {
             font-family: 'Syne', sans-serif;
             font-size: clamp(3rem, 6.5vw, 6.5rem);
             font-weight: 700; line-height: 0.95; letter-spacing: -0.03em;
             color: #fff; margin-bottom: 24px;
         }
-        .hero-title em { font-style: italic; color: rgba(255,255,255,0.55); }
         .hero-sub {
             font-size: 0.95rem; font-weight: 300; color: rgba(255,255,255,0.45);
-            max-width: 480px; margin: 0 auto 44px; line-height: 1.85;
+            max-width: 480px; margin: 0 auto 40px; line-height: 1.85;
         }
         .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
         .btn-primary {
@@ -217,7 +282,6 @@
         }
         .btn-ghost:hover { border-color: rgba(255,255,255,0.4); color: rgba(255,255,255,0.85); }
 
-        /* Scroll hint */
         .hero-scroll {
             position: absolute; right: 56px; bottom: 56px; z-index: 2;
             display: flex; flex-direction: column; align-items: center; gap: 10px;
@@ -225,7 +289,7 @@
         }
         @keyframes fadeIn { to{opacity:1} }
         .hero-scroll span { font-size: 0.55rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.25); writing-mode: vertical-rl; }
-        .scroll-bar { width: 1px; height: 48px; background: linear-gradient(to bottom, rgba(255,255,255,0.25), transparent); animation: scrollPulse 2.2s ease-in-out infinite; }
+        .scroll-bar { width: 1px; height: 48px; background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent); animation: scrollPulse 2.2s ease-in-out infinite; }
         @keyframes scrollPulse { 0%{transform:scaleY(0);transform-origin:top} 50%{transform:scaleY(1);transform-origin:top} 51%{transform-origin:bottom} 100%{transform:scaleY(0);transform-origin:bottom} }
 
         /* ── STATS ── */
@@ -233,27 +297,21 @@
         .section-label { font-size: 0.65rem; font-weight: 500; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
         .section-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--accent); }
         .section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 700; color: var(--ink); margin-bottom: 64px; line-height: 1.1; max-width: 560px; }
-        .section-title em { font-style: italic; color: var(--muted); }
         .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); }
-        .stat-card {
-            background: var(--white); padding: 44px 36px;
-            transition: background 0.3s;
-        }
+        .stat-card { background: var(--white); padding: 44px 36px; transition: background 0.3s; }
         .stat-card:hover { background: var(--ink); }
-        .stat-card:hover .stat-num,
-        .stat-card:hover h3 { color: #fff; }
+        .stat-card:hover .stat-num, .stat-card:hover h3 { color: #fff; }
         .stat-card:hover .stat-num em { color: var(--accent); }
         .stat-card:hover p { color: rgba(255,255,255,0.4); }
-        .stat-num { font-family: 'Syne', sans-serif; font-size: 4rem; font-weight: 700; line-height: 1; margin-bottom: 14px; display: block; color: var(--ink); transition: color 0.3s; }
-        .stat-num em { color: var(--accent); font-style: normal; transition: color 0.3s; font-size: 2.5rem; }
-        .stat-card h3 { font-size: 0.82rem; font-weight: 500; color: var(--ink); margin-bottom: 10px; letter-spacing: 0.02em; transition: color 0.3s; }
-        .stat-card p { font-size: 0.78rem; font-weight: 300; color: var(--muted); line-height: 1.75; transition: color 0.3s; }
+        .stat-num { font-family: 'Syne', sans-serif; font-size: 3.5rem; font-weight: 700; line-height: 1; margin-bottom: 14px; display: block; color: var(--ink); transition: color 0.3s; }
+        .stat-num em { color: var(--accent); font-style: normal; transition: color 0.3s; font-size: 2rem; }
+        .stat-card h3 { font-size: 0.82rem; font-weight: 500; color: var(--ink); margin-bottom: 10px; transition: color 0.3s; }
+        .stat-card p { font-size: 0.72rem; font-weight: 300; color: var(--muted); line-height: 1.75; transition: color 0.3s; }
 
         /* ── CTA ── */
         .cta-section { padding: 0 56px 120px; max-width: 1280px; margin: 0 auto; }
         .cta-block { display: grid; grid-template-columns: 1fr auto; gap: 80px; align-items: center; border-top: 1px solid var(--border); padding-top: 64px; }
         .cta-block h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 3vw, 3rem); font-weight: 700; color: var(--ink); line-height: 1.1; margin-bottom: 12px; }
-        .cta-block h2 em { font-style: italic; color: var(--muted); }
         .cta-block p { font-size: 0.88rem; font-weight: 300; color: var(--muted); line-height: 1.8; max-width: 440px; }
         .cta-right { flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 16px; }
         .btn-cta {
@@ -271,7 +329,7 @@
         /* ── FOOTER ── */
         footer { background: var(--ink2); padding: 64px 56px 36px; }
         .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; margin-bottom: 48px; }
-        .footer-name { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 400; color: #fff; letter-spacing: 0.06em; display: block; margin-bottom: 8px; }
+        .footer-name { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 800; color: #fff; letter-spacing: -0.02em; display: block; margin-bottom: 8px; }
         .footer-brand p { font-size: 0.8rem; font-weight: 300; color: rgba(255,255,255,0.35); max-width: 240px; line-height: 1.7; }
         .footer-links { display: flex; flex-direction: column; gap: 12px; text-align: right; }
         .footer-links a { color: rgba(255,255,255,0.3); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.03em; transition: color 0.2s; }
@@ -282,7 +340,6 @@
         @media (max-width: 960px) { .stats-grid { grid-template-columns: 1fr 1fr; } }
         @media (max-width: 768px) {
             .stats-section, .cta-section { padding-left: 24px; padding-right: 24px; }
-            .hero-content { padding: 0 24px 60px; }
             .hero-scroll { right: 24px; bottom: 24px; }
             .cta-block { grid-template-columns: 1fr; gap: 40px; }
             .cta-right { align-items: flex-start; }
@@ -300,10 +357,8 @@
     <div id="loader">
         <div class="aperture">
             <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Outer ring -->
                 <circle class="aperture-ring" cx="60" cy="60" r="55" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
                 <circle class="aperture-ring" cx="60" cy="60" r="42" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-                <!-- 6 blades, each a rounded wedge shape -->
                 <g class="blade" style="--rot:0deg">
                     <path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
                 </g>
@@ -322,7 +377,6 @@
                 <g class="blade" style="--rot:300deg; transform:rotate(300deg); transform-origin:60px 60px">
                     <path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
                 </g>
-                <!-- Center dot -->
                 <circle cx="60" cy="60" r="4" fill="white" opacity="0.6" class="aperture-ring"/>
             </svg>
         </div>
@@ -330,38 +384,9 @@
 
     <!-- NAV -->
     <nav id="nav" class="over-video">
-        <a href="/" class="nav-brand">
-            <!-- Miniature aperture logo mark -->
-            <div class="logo-mark">
-                <svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="19" cy="19" r="18" stroke="rgba(255,255,255,0.25)" stroke-width="1" class="logo-ring" style="transition:stroke 0.5s"/>
-                    <!-- 6 mini blades -->
-                    <g class="logo-blade" style="transform-origin:19px 19px; transform:rotate(0deg)">
-                        <path d="M19 19 L19 3 A16 16 0 0 1 33 11 Z" fill="rgba(255,255,255,0.18)"/>
-                    </g>
-                    <g class="logo-blade" style="transform-origin:19px 19px; transform:rotate(60deg)">
-                        <path d="M19 19 L19 3 A16 16 0 0 1 33 11 Z" fill="rgba(255,255,255,0.18)"/>
-                    </g>
-                    <g class="logo-blade" style="transform-origin:19px 19px; transform:rotate(120deg)">
-                        <path d="M19 19 L19 3 A16 16 0 0 1 33 11 Z" fill="rgba(255,255,255,0.18)"/>
-                    </g>
-                    <g class="logo-blade" style="transform-origin:19px 19px; transform:rotate(180deg)">
-                        <path d="M19 19 L19 3 A16 16 0 0 1 33 11 Z" fill="rgba(255,255,255,0.18)"/>
-                    </g>
-                    <g class="logo-blade" style="transform-origin:19px 19px; transform:rotate(240deg)">
-                        <path d="M19 19 L19 3 A16 16 0 0 1 33 11 Z" fill="rgba(255,255,255,0.18)"/>
-                    </g>
-                    <g class="logo-blade" style="transform-origin:19px 19px; transform:rotate(300deg)">
-                        <path d="M19 19 L19 3 A16 16 0 0 1 33 11 Z" fill="rgba(255,255,255,0.18)"/>
-                    </g>
-                    <!-- Center B -->
-                    <text x="19" y="24" text-anchor="middle" font-family="Cormorant, serif" font-size="16" font-weight="400" fill="white" class="logo-letter">B</text>
-                </svg>
-            </div>
-            <div class="logo-text">
-                <span class="logo-name">Beckllen</span>
-                <span class="logo-sub">Creative</span>
-            </div>
+        <a href="/" class="nav-brand" id="nav-brand">
+            <span id="brand-beckllen"></span>
+            <span id="brand-creative"></span>
         </a>
         <div class="nav-links">
             <a href="/blog">Blog</a>
@@ -379,20 +404,7 @@
     <!-- HERO — full bleed -->
     <section class="hero">
         <div class="hero-media">
-            <!--
-                ══════════════════════════════════════════
-                TO ADD YOUR CINEMATIC SHOT:
-
-                Option 1 — Video:
-                <video autoplay muted loop playsinline src="./hero.mp4"></video>
-
-                Option 2 — Photo:
-                <img src="./hero.jpg" style="width:100%;height:100%;object-fit:cover;">
-
-                Then delete the <div class="hero-placeholder"></div> below it.
-                ══════════════════════════════════════════
-            -->
-            <video autoplay muted loop playsinline src="./CMBC.mp4"></video>
+            <video autoplay muted loop playsinline src="./Timeline 1.mp4"></video>
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
@@ -402,7 +414,7 @@
                 has a story<br>
                 worth telling.
             </h1>
-            <p class="hero-sub">We craft cinematic stories for local businesses, hospitality & destination brands.  Because the brands that move people — win.</p>
+            <p class="hero-sub">We craft cinematic brand stories for hospitality, destinations, and standout local brands. Because the brands that move people — win.</p>
             <div class="hero-btns">
                 <a href="/contact" class="btn-primary">
                     Tell Us Your Story
@@ -423,24 +435,24 @@
         <h2 class="section-title">Why Video Changes Everything for Your Business</h2>
         <div class="stats-grid">
             <div class="stat-card">
-                <strong class="stat-num">73<em>%</em></strong>
-                <h3>Higher Booking Conversion</h3>
-                <p>Hotels with cinematic video see up to 73% more direct bookings than those relying on photography alone.</p>
+                <strong class="stat-num">2.6<em>×</em></strong>
+                <h3>Longer time visitors spend on pages with video</h3>
+                <p>Wistia</p>
             </div>
             <div class="stat-card">
-                <strong class="stat-num">88<em>%</em></strong>
-                <h3>Longer Time on Site</h3>
-                <p>Visitors spend 88% more time on sites featuring video — giving your story the time it needs to land.</p>
+                <strong class="stat-num">84<em>%</em></strong>
+                <h3>Say video convinced them to buy</h3>
+                <p>Wyzowl</p>
             </div>
             <div class="stat-card">
-                <strong class="stat-num">4<em>×</em></strong>
-                <h3>More Likely to Share</h3>
-                <p>Consumers are 4× more likely to watch a video about an experience than read about it.</p>
+                <strong class="stat-num">95<em>%</em></strong>
+                <h3>Of people retain video content vs ~10% from text</h3>
+                <p>Insivia</p>
             </div>
             <div class="stat-card">
-                <strong class="stat-num">80<em>%</em></strong>
-                <h3>Increase in Brand Recall</h3>
-                <p>Viewers retain 80% of what they watch vs. 20% of what they read. Your brand stays in the room.</p>
+                <strong class="stat-num">1200<em>%</em></strong>
+                <h3>More shares than text and images combined</h3>
+                <p>Wordstream</p>
             </div>
         </div>
     </section>
@@ -450,7 +462,7 @@
         <div class="cta-block">
             <div>
                 <h2>Every Great Brand Has a Story Waiting to Be Told</h2>
-                <p>Whether you run a boutique hotel, a family restaurant, or a business with roots worth honoring — we're here to bring it to life on screen.</p>
+                <p>From boutique hotels to family restaurants to brands with roots worth honoring — we bring your story to life cinematically.</p>
             </div>
             <div class="cta-right">
                 <a href="/contact" class="btn-cta">
@@ -466,7 +478,7 @@
         <div class="footer-inner">
             <div class="footer-brand">
                 <span class="footer-name">Beckllen Creative</span>
-                <p>Cinematic story branding for hospitality and the businesses worth knowing about.</p>
+                <p>Cinematic storytelling for hospitality and standout local brands.</p>
             </div>
             <div class="footer-links">
                 <a href="/about">About Us</a>
@@ -482,16 +494,14 @@
     </footer>
 
     <script>
-        // Dismiss loader after aperture animation
+        // ── LOADER ──
         window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loader').classList.add('hidden');
-            }, 1800);
+            setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1800);
         });
 
-        // Nav scroll state
+        // ── NAV SCROLL ──
         const nav = document.getElementById('nav');
-        const onScroll = () => {
+        window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
                 nav.classList.remove('over-video');
                 nav.classList.add('scrolled');
@@ -499,38 +509,65 @@
                 nav.classList.add('over-video');
                 nav.classList.remove('scrolled');
             }
-        };
-        window.addEventListener('scroll', onScroll);
+        });
 
-        // Hamburger
+        // ── HAMBURGER ──
         const btn = document.getElementById('hamburger');
         const menu = document.getElementById('mobile-menu');
         btn.addEventListener('click', () => { btn.classList.toggle('open'); menu.classList.toggle('open'); });
         menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { btn.classList.remove('open'); menu.classList.remove('open'); }));
 
-        // Logo blades hover: rotate slowly on hover
-        const logoBrand = document.querySelector('.nav-brand');
-        const logoBlades = document.querySelectorAll('.logo-blade');
-        let bladeAngle = 0, rafId;
-        logoBrand.addEventListener('mouseenter', () => {
-            const spin = () => {
-                bladeAngle += 0.8;
-                logoBlades.forEach((b, i) => {
-                    b.style.transform = `rotate(${i * 60 + bladeAngle}deg)`;
-                });
-                rafId = requestAnimationFrame(spin);
-            };
-            spin();
-        });
-        logoBrand.addEventListener('mouseleave', () => {
-            cancelAnimationFrame(rafId);
-            logoBlades.forEach((b, i) => {
-                b.style.transform = `rotate(${i * 60}deg)`;
-                b.style.transition = 'transform 0.5s ease';
-            });
-        });
+        // ── ANIMATED WORDMARK ──
+        (function buildWordmark() {
+            const beckllenEl = document.getElementById('brand-beckllen');
+            const creativeEl = document.getElementById('brand-creative');
+            const LOADER_MS  = 1800;
+            const STAGGER_MS = 48;
+            const inners = [];
 
-        // Stat card entrance
+            // Build letter spans — each rises up on load, then shimmers forever
+            'Beckllen'.split('').forEach((ch, i) => {
+                const wrap  = document.createElement('span');
+                wrap.className = 'brand-letter';
+
+                const inner = document.createElement('span');
+                inner.className = 'brand-letter-inner';
+                inner.textContent = ch;
+                // Load rise staggered after loader, shimmer starts after rise settles
+                const riseDelay    = LOADER_MS + i * STAGGER_MS;
+                const shimmerDelay = riseDelay + 600; // after rise completes
+                inner.style.animationDelay = riseDelay + 'ms, ' + shimmerDelay + 'ms';
+
+                wrap.appendChild(inner);
+                beckllenEl.appendChild(wrap);
+                inners.push(inner);
+            });
+
+            // "Creative" fades in after all letters land
+            const creative = document.createElement('span');
+            creative.className = 'brand-creative-word';
+            creative.textContent = 'Creative';
+            creative.style.animationDelay = (LOADER_MS + 'Beckllen'.length * STAGGER_MS + 100) + 'ms';
+            creativeEl.appendChild(creative);
+
+            // Hover: wave each letter up with a stagger
+            const brand = document.getElementById('nav-brand');
+            let waving = false;
+            brand.addEventListener('mouseenter', () => {
+                if (waving) return;
+                waving = true;
+                inners.forEach((inner, i) => {
+                    setTimeout(() => {
+                        inner.classList.remove('wave');
+                        void inner.offsetWidth; // force reflow to restart animation
+                        inner.classList.add('wave');
+                    }, i * 40);
+                });
+                setTimeout(() => { waving = false; }, inners.length * 40 + 500);
+            });
+        })();
+
+        // ── STAT CARD ENTRANCE ──
         const cards = document.querySelectorAll('.stat-card');
         const obs = new IntersectionObserver(entries => {
             entries.forEach((e, i) => {
@@ -541,7 +578,8 @@
             });
         }, { threshold: 0.1 });
         cards.forEach(c => {
-            c.style.opacity = '0'; c.style.transform = 'translateY(16px)';
+            c.style.opacity = '0';
+            c.style.transform = 'translateY(16px)';
             c.style.transition = 'opacity 0.6s ease, transform 0.6s ease, background 0.3s';
             obs.observe(c);
         });
