@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Read our latest insights on Beckllen Creative.">
+    <title>Article | Beckllen Creative</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X8LZM6GJ22"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-X8LZM6GJ22');
+    </script>
+
+    <style>
+        .article-wrap {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 140px 56px 120px;
+        }
+
+        .article-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .article-category {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+
+        .article-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--ink);
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .article-meta {
+            font-size: 0.85rem;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .article-meta span {
+            display: block;
+        }
+
+        .article-featured-img {
+            width: 100%;
+            height: auto;
+            max-height: 560px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 56px;
+            background: var(--ink);
+        }
+
+        .article-body {
+            font-size: 1.05rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: var(--ink);
+        }
+
+        .article-body h2,
+        .article-body h3 {
+            font-family: 'Syne', sans-serif;
+            color: var(--ink);
+            margin-top: 48px;
+            margin-bottom: 24px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .article-body h2 {
+            font-size: 2rem;
+        }
+
+        .article-body h3 {
+            font-size: 1.5rem;
+        }
+
+        .article-body p {
+            margin-bottom: 24px;
+        }
+
+        .article-body ul,
+        .article-body ol {
+            margin-bottom: 24px;
+            padding-left: 24px;
+        }
+
+        .article-body li {
+            margin-bottom: 12px;
+        }
+
+        .article-body blockquote {
+            border-left: 3px solid var(--accent);
+            padding-left: 24px;
+            margin: 40px 0;
+            font-style: italic;
+            font-size: 1.25rem;
+            color: var(--muted);
+        }
+
+        .article-body img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 40px 0;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 64px;
+            border-top: 1px solid var(--border);
+            padding-top: 40px;
+            width: 100%;
+        }
+
+        .back-link:hover {
+            color: var(--ink);
+        }
+
+        .loading-state,
+        .error-state {
+            text-align: center;
+            padding: 120px 24px;
+            color: var(--muted);
+        }
+
+        .error-state h2 {
+            font-family: 'Syne', sans-serif;
+            color: var(--ink);
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 768px) {
+            .article-wrap {
+                padding: 120px 24px 80px;
+            }
+        }
+    </style>
+    <meta name="theme-color" content="#f4f2ee">
+</head>
+
+<body>
+    <div id="loader">
+        <div class="aperture">
+            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle class="aperture-ring" cx="60" cy="60" r="55" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
+                <circle class="aperture-ring" cx="60" cy="60" r="42" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+                <g class="blade" style="--rot:0deg">
+                    <path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)"
+                        stroke="rgba(255,255,255,0.2)" stroke-width="0.5" />
+                </g>
+                <g class="blade" style="--rot:60deg;transform:rotate(60deg);transform-origin:60px 60px">
+                    <path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)"
+                        stroke="rgba(255,255,255,0.2)" stroke-width="0.5" />
+                </g>
+                <g class="blade" style="--rot:120deg;transform:rotate(120deg);transform-origin:60px 60px">
+                    <path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)"
+                        stroke="rgba(255,255,255,0.2)" stroke-width="0.5" />
+                </g>
+                <g class="blade" style="--rot:180deg;transform:rotate(180deg);transform-origin:60px 60px">
+                    <path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)"
+                        stroke="rgba(255,255,255,0.2)" stroke-width="0.5" />
+                </g>
+                <g class="blade" style="--rot:240deg;transform:rotate(240deg);transform-origin:60px 60px">
+                    <path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)"
+                        stroke="rgba(255,255,255,0.2)" stroke-width="0.5" />
+                </g>
+                <g class="blade" style="--rot:300deg;transform:rotate(300deg);transform-origin:60px 60px">
+                    <path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)"
+                        stroke="rgba(255,255,255,0.2)" stroke-width="0.5" />
+                </g>
+                <circle cx="60" cy="60" r="4" fill="white" opacity="0.6" class="aperture-ring" />
+            </svg>
+        </div>
+    </div>
+    <nav id="nav" class="solid">
+        <a href="index.html" class="nav-brand" id="nav-brand">
+            <span id="brand-beckllen"></span>
+            <span id="brand-creative"></span>
+        </a>
+        <div class="nav-links"><a href="blog.html" class="active">Blog</a><a href="about.html">About Us</a></div>
+        <a href="contactus.html" class="nav-cta">Contact Us</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </nav>
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="blog.html">Blog</a>
+        <a href="about.html">About Us</a>
+        <a href="contactus.html">Contact Us</a>
+    </div>
+
+    <!-- Article Content -->
+    <main class="article-wrap">
+        <div id="loading" class="loading-state">Loading story...</div>
+
+        <div id="error" class="error-state hidden">
+            <h2>Story Not Found</h2>
+            <p>We couldn't find the article you were looking for.</p>
+            <a href="blog.html" class="back-link" style="justify-content: center; border:none; margin-top:24px;">← Back
+                to Journal</a>
+        </div>
+
+        <article id="article-content" class="hidden">
+            <header class="article-header">
+                <span id="post-category" class="article-category"></span>
+                <h1 id="post-title" class="article-title"></h1>
+                <div class="article-meta">
+                    <span id="post-author">By Beckllen Creative</span>
+                    <span>&bull;</span>
+                    <span id="post-date"></span>
+                </div>
+            </header>
+
+            <img id="post-image" src="" alt="" class="article-featured-img hidden">
+
+            <div id="post-body" class="article-body"></div>
+
+            <a href="blog.html" class="back-link">← Back to Insights</a>
+        </article>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="footer-name">Beckllen Creative</span>
+                <p>Cinematic storytelling for hospitality and standout local brands.</p>
+            </div>
+            <div class="footer-links">
+                <a href="about.html">About Us</a>
+                <a href="blog.html">Blog</a>
+                <a href="contactus.html">Contact</a>
+                <a href="privacypolicy.html">Privacy Policy</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2026 Beckllen Creative. All rights reserved.</span>
+            <span class="footer-tag">Cinematic Story Branding</span>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('load', () => { setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1800); });
+
+        // Nav and Hamburger
+        const btn = document.getElementById('hamburger'), menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => { btn.classList.toggle('open'); menu.classList.toggle('open'); });
+        menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { btn.classList.remove('open'); menu.classList.remove('open'); }));
+
+        (function buildWordmark() {
+            const bEl = document.getElementById('brand-beckllen'), cEl = document.getElementById('brand-creative');
+            const LOADER = 1800, STAGGER = 48;
+            const inners = [];
+            'Beckllen'.split('').forEach((ch, i) => {
+                const wrap = document.createElement('span'); wrap.className = 'brand-letter';
+                const inner = document.createElement('span'); inner.className = 'brand-letter-inner'; inner.textContent = ch;
+                inner.style.animationDelay = (LOADER + i * STAGGER) + 'ms, ' + (LOADER + i * STAGGER + 600) + 'ms';
+                wrap.appendChild(inner); bEl.appendChild(wrap); inners.push(inner);
+            });
+            const c = document.createElement('span'); c.className = 'brand-creative-word'; c.textContent = 'Creative';
+            c.style.animationDelay = (LOADER + 8 * STAGGER + 100) + 'ms'; cEl.appendChild(c);
+            let waving = false;
+            document.getElementById('nav-brand').addEventListener('mouseenter', () => {
+                if (waving) return; waving = true;
+                inners.forEach((inn, i) => setTimeout(() => { inn.classList.remove('wave'); void inn.offsetWidth; inn.classList.add('wave'); }, i * 40));
+                setTimeout(() => { waving = false; }, 8 * 40 + 500);
+            });
+        })();
+    </script>
+
+    <script type="module">
+        import { createClient } from 'https://esm.sh/@sanity/client';
+        import { toHTML } from 'https://esm.sh/@portabletext/to-html';
+
+        const SANITY_CONFIG = {
+            projectId: '1bc130p1', // Same ID from blog.html
+            dataset: 'production',
+            apiVersion: '2024-02-24',
+            useCdn: true
+        };
+
+        const client = createClient(SANITY_CONFIG);
+
+        const fmt = d => d ? new Date(d).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : '';
+
+        // Get slug from URL ?slug=my-post-title
+        const params = new URLSearchParams(window.location.search);
+        const slug = params.get('slug');
+
+        const loadingEl = document.getElementById('loading');
+        const errorEl = document.getElementById('error');
+        const articleEl = document.getElementById('article-content');
+
+        async function loadArticle() {
+            if (!slug) {
+                showError();
+                return;
+            }
+
+            try {
+                // Fetch the single document matching the slug
+                const post = await client.fetch(`
+                    *[_type == "post" && slug.current == $slug][0] {
+                        title,
+                        body,
+                        "image": mainImage.asset->url,
+                        "category": categories[0]->title,
+                        "author": author->name,
+                        "date": coalesce(publishedAt, _createdAt)
+                    }
+                `, { slug });
+
+                if (!post) {
+                    showError();
+                    return;
+                }
+
+                // Render Data
+                document.title = `${post.title} | Beckllen Creative`;
+                document.getElementById('post-title').textContent = post.title;
+                document.getElementById('post-category').textContent = post.category || 'Editorial';
+                document.getElementById('post-date').textContent = fmt(post.date);
+
+                if (post.author) {
+                    document.getElementById('post-author').textContent = `By ${post.author}`;
+                }
+
+                if (post.image) {
+                    const imgEl = document.getElementById('post-image');
+                    imgEl.src = post.image;
+                    imgEl.alt = post.title;
+                    imgEl.classList.remove('hidden');
+                }
+
+                if (post.body) {
+                    // Convert portable text blocks to HTML
+                    const htmlContent = toHTML(post.body);
+                    document.getElementById('post-body').innerHTML = htmlContent;
+                }
+
+                loadingEl.classList.add('hidden');
+                articleEl.classList.remove('hidden');
+
+            } catch (e) {
+                console.error(e);
+                showError();
+            }
+        }
+
+        function showError() {
+            loadingEl.classList.add('hidden');
+            errorEl.classList.remove('hidden');
+        }
+
+        loadArticle();
+    </script>
+</body>
+
+</html>
