@@ -470,9 +470,8 @@ nav.scrolled .hamburger span {
 
 /* ── FOOTER ── */
 footer {
-    background: var(--bg);
+    background: var(--ink2);
     padding: 64px 56px 36px;
-    border-top: 1px solid var(--border);
 }
 
 .footer-inner {
@@ -488,7 +487,7 @@ footer {
     font-size: 1.2rem;
     font-weight: 800;
     letter-spacing: -0.02em;
-    color: var(--ink);
+    color: #fff;
     display: block;
     margin-bottom: 8px;
 }
@@ -496,7 +495,7 @@ footer {
 .footer-brand p {
     font-size: 0.8rem;
     font-weight: 300;
-    color: var(--muted);
+    color: rgba(255, 255, 255, 0.35);
     max-width: 240px;
     line-height: 1.7;
 }
@@ -509,14 +508,14 @@ footer {
 }
 
 .footer-links a {
-    color: var(--muted);
+    color: rgba(255, 255, 255, 0.3);
     text-decoration: none;
     font-size: 0.75rem;
     transition: color 0.2s;
 }
 
 .footer-links a:hover {
-    color: var(--ink);
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .footer-bottom {
@@ -524,9 +523,9 @@ footer {
     justify-content: space-between;
     align-items: center;
     padding-top: 28px;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
     font-size: 0.7rem;
-    color: var(--muted);
+    color: rgba(255, 255, 255, 0.2);
 }
 
 .footer-tag {
