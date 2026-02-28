@@ -166,13 +166,13 @@ nav.scrolled .hamburger span { background: var(--ink); }
 @media (max-width: 768px) {
     nav {
         padding: 0 24px;
-        background: var(--bg);
+        background: #ffffff;
         border-bottom: 1px solid var(--border);
         backdrop-filter: none;
     }
     nav.over-video,
     nav.scrolled,
-    nav.solid { background: var(--bg); }
+    nav.solid { background: #ffffff; }
     .nav-links, .nav-cta { display: none; }
     .hamburger { display: flex; }
     .brand-letter-inner { font-size: 1rem; }
