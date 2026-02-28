@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Read our latest insights on Beckllen Creative.">
+    <meta name="robots" content="index,follow">
     <title>Article | Beckllen Creative</title>
+    <link rel="canonical" id="canonical-link" href="https://beckllencreative.com/article">
     <link
         href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@300;400;500;600&display=swap"
         rel="stylesheet">
@@ -362,6 +364,10 @@
             document.getElementById('post-title').textContent = post.title;
             document.getElementById('post-category').textContent = post.category || 'Editorial';
             document.getElementById('post-date').textContent = fmt(post.date);
+            const canonicalLink = document.getElementById('canonical-link');
+            if (canonicalLink && slug) {
+                canonicalLink.href = `https://beckllencreative.com/article?slug=${encodeURIComponent(slug)}`;
+            }
 
             if (post.author) {
                 document.getElementById('post-author').textContent = `By ${post.author}`;
