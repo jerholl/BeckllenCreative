@@ -143,7 +143,7 @@
     </footer>
 
     <script>
-        window.addEventListener('load', () => { setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1800); });
+        window.addEventListener('load', () => { setTimeout(() => document.getElementById('loader').classList.add('hidden'), 500); });
 
         const btn = document.getElementById('hamburger');
         const menu = document.getElementById('mobile-menu');
@@ -152,7 +152,7 @@
 
         (function buildWordmark() {
             const bEl = document.getElementById('brand-beckllen'), cEl = document.getElementById('brand-creative');
-            const LOADER = 1800, STAGGER = 48;
+            const LOADER = 500, STAGGER = 48;
             const inners = [];
             'Beckllen'.split('').forEach((ch, i) => {
                 const wrap = document.createElement('span'); wrap.className = 'brand-letter';

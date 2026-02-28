@@ -343,7 +343,7 @@
         </div>
     </footer>
     <script>
-        window.addEventListener('load', () => { setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1800); });
+        window.addEventListener('load', () => { setTimeout(() => document.getElementById('loader').classList.add('hidden'), 500); });
 
         // Inner page nav stays solid
         const btn = document.getElementById('hamburger'), menu = document.getElementById('mobile-menu');
@@ -352,7 +352,7 @@
 
         (function buildWordmark() {
             const bEl = document.getElementById('brand-beckllen'), cEl = document.getElementById('brand-creative');
-            const LOADER = 1800, STAGGER = 48;
+            const LOADER = 500, STAGGER = 48;
             const inners = [];
             'Beckllen'.split('').forEach((ch, i) => {
                 const wrap = document.createElement('span'); wrap.className = 'brand-letter';
@@ -422,7 +422,7 @@
         const fmt = d => d ? new Date(d).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : '';
         const getPostUrl = slug =>
             BLOG_POST_BASE_URL
-                ? `${BLOG_POST_BASE_URL.replace(/\/$/, '')}/${slug}`
+                ? `${BLOG_POST_BASE_URL}${slug}`
                 : `#`;
 
         function render(posts) {
