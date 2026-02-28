@@ -570,13 +570,14 @@
             brand.addEventListener('mouseenter', () => {
                 if (waving) return;
                 waving = true;
-                inners.forEach((inner, i) => {
-                    setTimeout(() => {
+                for (let i = 0; i < inners.length; i += 1) {
+                    const inner = inners[i];
+                    window.setTimeout(() => {
                         inner.classList.remove('wave');
                         void inner.offsetWidth; // force reflow to restart animation
                         inner.classList.add('wave');
                     }, i * 40);
-                });
+                }
                 setTimeout(() => { waving = false; }, inners.length * 40 + 500);
             });
         })();
