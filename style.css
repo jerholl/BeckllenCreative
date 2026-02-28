@@ -9,6 +9,8 @@
     --border: #dedad3;
     --accent: #2a5caa;
     --accent2: #1e4480;
+    --loader-bg: #f4f2ee;
+    --footer-bg: #2e2c28;
 }
 
 *,
@@ -45,7 +47,7 @@ h3 {
     position: fixed;
     inset: 0;
     z-index: 9999;
-    background: var(--bg);
+    background: var(--loader-bg);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -470,7 +472,7 @@ nav.scrolled .hamburger span {
 
 /* ── FOOTER ── */
 footer {
-    background: var(--ink2);
+    background: var(--footer-bg);
     padding: 64px 56px 36px;
 }
 
