@@ -1,0 +1,7 @@
+# Netlify config for Beckllen Creative
+# RSS feed: /feed.xml is served by the function (dynamic) or static feed.xml
+[[redirects]]
+  from = "/feed.xml"
+  to = "/.netlify/functions/rss"
+  status = 200
+  force = true

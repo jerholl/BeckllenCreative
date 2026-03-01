@@ -1,0 +1,7 @@
+{
+  "name": "beckllencreative-site",
+  "private": true,
+  "scripts": {
+    "generate-feed": "node scripts/generate-feed.js"
+  }
+}

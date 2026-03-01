@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Beckllen Creative Blog</title>
+    <link>https://beckllencreative.com/blog</link>
+    <description>Insights on cinematic branding, hospitality marketing, and the stories behind great brands.</description>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 01 Mar 2026 16:01:15 GMT</lastBuildDate>
+    <atom:link href="https://beckllencreative.com/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Hotels and Marketing</title>
+    <link>https://beckllencreative.com/article?slug=hotels-and-marketing</link>
+    <guid isPermaLink="true">https://beckllencreative.com/article?slug=hotels-and-marketing</guid>
+    <description>Hotels and Marketing</description>
+    <pubDate>Sat, 28 Feb 2026 21:07:00 GMT</pubDate>
+    <enclosure url="https://cdn.sanity.io/images/1bc130p1/production/571d5793ec3b4e6bed548da0572ef9442cc3c19a-3784x5676.jpg" type="image/jpeg"/>
+  </item>
+  <item>
+    <title>Is marketing in Hospitality Important?</title>
+    <link>https://beckllencreative.com/article?slug=is-marketing-in-hospitality-important</link>
+    <guid isPermaLink="true">https://beckllencreative.com/article?slug=is-marketing-in-hospitality-important</guid>
+    <description>Is marketing in Hospitality Important?</description>
+    <pubDate>Thu, 26 Feb 2026 22:52:00 GMT</pubDate>
+    <enclosure url="https://cdn.sanity.io/images/1bc130p1/production/70941a8a4c5767e860658a20ddf1d1edd91df720-1519x1013.png" type="image/jpeg"/>
+  </item>
+  <item>
+    <title>What is Hospitality Storytelling?</title>
+    <link>https://beckllencreative.com/article?slug=what-is-brand-storytelling</link>
+    <guid isPermaLink="true">https://beckllencreative.com/article?slug=what-is-brand-storytelling</guid>
+    <description>What is Hospitality Storytelling?</description>
+    <pubDate>Thu, 26 Feb 2026 22:49:00 GMT</pubDate>
+    <enclosure url="https://cdn.sanity.io/images/1bc130p1/production/7aa36850c227f0557d6953b6f1a114468e58321f-1519x1013.png" type="image/jpeg"/>
+  </item>
+  </channel>
+</rss>
