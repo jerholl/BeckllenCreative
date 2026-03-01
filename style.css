@@ -993,13 +993,13 @@ footer {
 
 /* Blog preview on homepage */
 .blog-preview-section {
-    padding: 100px 56px;
+    padding: 64px 56px;
     max-width: 1280px;
     margin: 0 auto;
 }
 
 .blog-preview-section .section-title {
-    margin-bottom: 48px;
+    margin-bottom: 28px;
 }
 
 .blog-posts-grid {
@@ -1024,7 +1024,7 @@ footer {
 
 .blog-post-card-img {
     width: 100%;
-    height: 130px;
+    height: 72px;
     object-fit: cover;
     display: block;
     background: var(--ink);
@@ -1032,44 +1032,44 @@ footer {
 
 .blog-post-card-placeholder {
     width: 100%;
-    height: 130px;
+    height: 72px;
     background: linear-gradient(135deg, #0d0d1c, #1a1a2e);
 }
 
 .blog-post-card-body {
-    padding: 18px 20px;
+    padding: 12px 14px;
     flex: 1;
     display: flex;
     flex-direction: column;
 }
 
 .blog-post-tag {
-    font-size: 0.58rem;
+    font-size: 0.52rem;
     font-weight: 700;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--accent);
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     display: block;
 }
 
 .blog-post-card-title {
     font-family: 'Outfit', sans-serif;
-    font-size: 0.88rem;
+    font-size: 0.75rem;
     font-weight: 800;
     letter-spacing: -0.02em;
     color: var(--ink);
-    line-height: 1.25;
-    margin-bottom: 6px;
+    line-height: 1.2;
+    margin-bottom: 4px;
 }
 
 .blog-post-card-excerpt {
-    font-size: 0.72rem;
+    font-size: 0.65rem;
     font-weight: 300;
     color: var(--muted);
-    line-height: 1.6;
+    line-height: 1.5;
     flex: 1;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
 }
 
 .blog-post-card-footer {
@@ -1079,7 +1079,7 @@ footer {
 }
 
 .blog-post-date {
-    font-size: 0.62rem;
+    font-size: 0.6rem;
     color: rgba(0, 0, 0, 0.3);
     letter-spacing: 0.05em;
 }
