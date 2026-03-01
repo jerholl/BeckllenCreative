@@ -142,6 +142,16 @@
         </div>
     </section>
 
+    <!-- BLOG PREVIEW -->
+    <section class="blog-preview-section">
+        <div class="section-label">From the Studio</div>
+        <h2 class="section-title">Stories worth reading.</h2>
+        <div id="blog-posts-grid" class="blog-posts-grid"></div>
+        <div id="blog-loading" style="text-align:center;padding:48px;color:var(--muted);font-size:0.78rem;letter-spacing:0.2em;text-transform:uppercase;">Loading stories…</div>
+        <div id="blog-empty" style="display:none;text-align:center;padding:48px;color:var(--muted);font-size:0.9rem;">No posts yet — check back soon.</div>
+        <a href="/blog" class="blog-view-all">View all insights <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg></a>
+    </section>
+
     <!-- CTA -->
     <section class="cta-section">
         <div class="cta-block">
@@ -301,6 +311,56 @@
             c.style.transition = 'opacity 0.6s ease, transform 0.6s ease, background 0.3s';
             obs.observe(c);
         });
+    </script>
+    <script type="module">
+        import { createClient } from 'https://esm.sh/@sanity/client';
+        const SANITY_CONFIG = { projectId: '1bc130p1', dataset: 'production', apiVersion: '2024-02-24', useCdn: true };
+        const BLOG_POST_BASE_URL = '/article?slug=';
+        const FALLBACK_POSTS = [
+            { slug: 'story-first-branding', title: 'Why Story-First Branding Converts Better Than Features', excerpt: 'People remember emotion first, details second. Here is how to structure your brand story so it drives real action.', category: 'Strategy', date: '2026-02-01' },
+            { slug: 'hotel-video-mistakes', title: '3 Video Mistakes Hotels Make (And How to Fix Them)', excerpt: 'Most hospitality videos look polished but feel generic. These quick shifts make your property memorable.', category: 'Hospitality', date: '2026-01-24' },
+            { slug: 'small-business-brand-film', title: 'Do Small Businesses Need a Brand Film?', excerpt: 'If you rely on trust and word of mouth, a short cinematic brand film can outperform endless promo posts.', category: 'Creative', date: '2026-01-16' }
+        ];
+        const hasSanityConfig = SANITY_CONFIG.projectId && SANITY_CONFIG.projectId !== 'YOUR_SANITY_PROJECT_ID';
+        const client = hasSanityConfig ? createClient(SANITY_CONFIG) : null;
+        const fmt = d => d ? new Date(d).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : '';
+        const getPostUrl = slug => BLOG_POST_BASE_URL ? `${BLOG_POST_BASE_URL}${slug}` : '#';
+        function render(posts) {
+            const gridEl = document.getElementById('blog-posts-grid');
+            const loading = document.getElementById('blog-loading');
+            const empty = document.getElementById('blog-empty');
+            loading.style.display = 'none';
+            empty.style.display = 'none';
+            const toShow = (posts || []).slice(0, 3);
+            if (!toShow.length) {
+                empty.style.display = 'block';
+                return;
+            }
+            gridEl.innerHTML = toShow.map(p => `
+                <a href="${getPostUrl(p.slug)}" class="blog-post-card">
+                    ${p.image ? `<img src="${p.image}" class="blog-post-card-img" alt="${p.title}">` : `<div class="blog-post-card-placeholder"></div>`}
+                    <div class="blog-post-card-body">
+                        <span class="blog-post-tag">${p.category || 'Editorial'}</span>
+                        <h3 class="blog-post-card-title">${p.title}</h3>
+                        <p class="blog-post-card-excerpt">${(p.excerpt || '').substring(0, 140)}</p>
+                        <div class="blog-post-card-footer">
+                            <span class="blog-post-date">${fmt(p.date)}</span>
+                            <span style="color:var(--accent);font-size:0.78rem;font-weight:600">→</span>
+                        </div>
+                    </div>
+                </a>`).join('');
+        }
+        async function load() {
+            if (!client) { render(FALLBACK_POSTS); return; }
+            try {
+                const posts = await client.fetch(`*[_type == "post"] | order(coalesce(publishedAt, _createdAt) desc) { "slug": slug.current, title, "excerpt": pt::text(body)[0..200], "image": mainImage.asset->url, "category": categories[0]->title, "date": coalesce(publishedAt, _createdAt) }`);
+                render(posts?.length ? posts : FALLBACK_POSTS);
+            } catch (e) {
+                console.error(e);
+                render(FALLBACK_POSTS);
+            }
+        }
+        load();
     </script>
 </body>
 

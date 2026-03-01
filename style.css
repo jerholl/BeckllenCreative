@@ -991,6 +991,125 @@ footer {
     transition: color 0.3s;
 }
 
+/* Blog preview on homepage */
+.blog-preview-section {
+    padding: 100px 56px;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.blog-preview-section .section-title {
+    margin-bottom: 48px;
+}
+
+.blog-posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+}
+
+.blog-post-card {
+    background: var(--white);
+    text-decoration: none;
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+    transition: background 0.25s;
+}
+
+.blog-post-card:hover {
+    background: #f0ede7;
+}
+
+.blog-post-card-img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    display: block;
+    background: var(--ink);
+}
+
+.blog-post-card-placeholder {
+    width: 100%;
+    height: 210px;
+    background: linear-gradient(135deg, #0d0d1c, #1a1a2e);
+}
+
+.blog-post-card-body {
+    padding: 28px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-post-tag {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: block;
+}
+
+.blog-post-card-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    line-height: 1.25;
+    margin-bottom: 10px;
+}
+
+.blog-post-card-excerpt {
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.7;
+    flex: 1;
+    margin-bottom: 20px;
+}
+
+.blog-post-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.blog-post-date {
+    font-size: 0.68rem;
+    color: rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.05em;
+}
+
+.blog-view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 32px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    transition: gap 0.25s;
+}
+
+.blog-view-all:hover {
+    gap: 12px;
+}
+
+@media (max-width: 900px) {
+    .blog-posts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .blog-preview-section {
+        padding: 64px 24px;
+    }
+}
+
 .cta-section {
     padding: 0 56px 120px;
     max-width: 1280px;
