@@ -1,14 +1,16 @@
 /* ── BECKLLEN CREATIVE — SHARED STYLESHEET ── */
 
 :root {
-    --bg: #f4f2ee;
-    --white: #fafaf8;
-    --ink: #1a1916;
-    --ink2: #2e2c28;
-    --muted: #8a8780;
-    --border: #dedad3;
-    --accent: #2a5caa;
-    --accent2: #1e4480;
+    --bg: #0a0a0c;        /* Deep charcoal/black */
+    --white: #f4f4f7;     /* High-end clean white */
+    --ink: #f4f4f7;       /* Inverse ink for dark mode */
+    --ink-bg: #0a0a0c;    /* Background ink */
+    --muted: #666670;     /* Cinematic grey */
+    --border: rgba(255, 255, 255, 0.08); /* Sophisticated subtle border */
+    --accent: #00d2ff;    /* Glowing cyan */
+    --accent-dim: rgba(0, 210, 255, 0.3);
+    --noir-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    --cyan-glow: 0 0 15px var(--accent-dim);
 }
 
 *,
@@ -26,10 +28,10 @@ html {
 
 body {
     background: var(--bg);
-    background-color: var(--bg);
     color: var(--ink);
     font-family: 'Outfit', sans-serif;
     overflow-x: hidden;
+    line-height: 1.6;
 }
 
 h1,
@@ -159,10 +161,10 @@ nav.over-video {
 }
 
 nav.solid {
-    background: var(--bg);
+    background: rgba(10, 10, 12, 0.85);
     border-bottom: 1px solid var(--border);
-    backdrop-filter: none;
-    box-shadow: 0 1px 20px rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(12px);
+    box-shadow: var(--noir-shadow);
 }
 
 nav.scrolled {
@@ -226,7 +228,7 @@ nav.scrolled {
 
 nav.solid .brand-letter-inner,
 nav.scrolled .brand-letter-inner {
-    background: linear-gradient(100deg, var(--ink) 0%, var(--ink) 30%, var(--accent) 50%, var(--ink) 70%, var(--ink) 100%);
+    background: linear-gradient(100deg, var(--white) 0%, var(--white) 30%, var(--accent) 50%, var(--white) 70%, var(--white) 100%);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;

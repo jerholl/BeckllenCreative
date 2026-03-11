@@ -32,7 +32,7 @@
 
         .last-updated {
             font-size: 0.72rem;
-            color: rgba(0, 0, 0, 0.3);
+            color: var(--muted);
             margin-bottom: 52px;
             display: block;
             padding-bottom: 36px;
@@ -47,7 +47,7 @@
             font-family: 'Outfit', sans-serif;
             font-size: 0.95rem;
             font-weight: 800;
-            color: var(--ink);
+            color: var(--white);
             margin-bottom: 12px;
             padding-left: 14px;
             border-left: 2px solid var(--accent);
@@ -96,12 +96,12 @@
         }
 
         strong {
-            color: var(--ink);
+            color: var(--white);
             font-weight: 600;
         }
 
         .notice {
-            background: var(--white);
+            background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--border);
             border-left: 3px solid var(--accent);
             padding: 20px 24px;
@@ -117,7 +117,7 @@
             }
         }
     </style>
-    <meta name="theme-color" content="#f4f2ee">
+    <meta name="theme-color" content="#0a0a0c">
 </head>
 
 <body>
@@ -150,7 +150,7 @@
                     <path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)"
                         stroke="rgba(255,255,255,0.2)" stroke-width="0.5" />
                 </g>
-                <circle cx="60" cy="60" r="4" fill="white" opacity="0.6" class="aperture-ring" />
+                <circle cx="60" cy="60" r="4" fill="#00d2ff" opacity="0.6" class="aperture-ring" />
             </svg>
         </div>
     </div>
@@ -159,14 +159,17 @@
             <span id="brand-beckllen"></span>
             <span id="brand-creative"></span>
         </a>
-        <div class="nav-links"><a href="/blog">Blog</a><a href="/about">About Us</a></div>
-        <a href="/contactus" class="nav-cta">Contact Us</a>
+        <div class="nav-links">
+            <a href="/vault">The Vault</a>
+            <a href="/blog">Tech & Tools</a>
+        </div>
+        <a href="/contactus" class="nav-cta">Contact</a>
         <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
     </nav>
     <div class="mobile-menu" id="mobile-menu">
-        <a href="/blog">Blog</a>
-        <a href="/about">About Us</a>
-        <a href="/contactus">Contact Us</a>
+        <a href="/vault">The Vault</a>
+        <a href="/blog">Tech & Tools</a>
+        <a href="/contactus">Contact</a>
     </div>
     <div class="page-header">
         <div class="page-eyebrow">Legal</div>
