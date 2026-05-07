@@ -9,8 +9,7 @@
     <meta name="robots" content="index,follow">
     <title>Results | Beckllen Creative</title>
     <link rel="canonical" href="https://beckllencreative.com/testimonials">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@300;400;500;600&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css?v=20260228">
     <meta name="theme-color" content="#0a0a0c">
@@ -127,44 +126,10 @@
 </head>
 
 <body>
-    <div id="loader">
-        <div class="aperture">
-            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle class="aperture-ring" cx="60" cy="60" r="55" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
-                <circle class="aperture-ring" cx="60" cy="60" r="42" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
-                <g class="blade" style="--rot:0deg">
-                    <path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)"
-                        stroke="rgba(255,255,255,0.2)" stroke-width="0.5" />
-                </g>
-                <g class="blade" style="--rot:60deg;transform:rotate(60deg);transform-origin:60px 60px">
-                    <path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)"
-                        stroke="rgba(255,255,255,0.2)" stroke-width="0.5" />
-                </g>
-                <g class="blade" style="--rot:120deg;transform:rotate(120deg);transform-origin:60px 60px">
-                    <path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)"
-                        stroke="rgba(255,255,255,0.2)" stroke-width="0.5" />
-                </g>
-                <g class="blade" style="--rot:180deg;transform:rotate(180deg);transform-origin:60px 60px">
-                    <path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)"
-                        stroke="rgba(255,255,255,0.2)" stroke-width="0.5" />
-                </g>
-                <g class="blade" style="--rot:240deg;transform:rotate(240deg);transform-origin:60px 60px">
-                    <path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)"
-                        stroke="rgba(255,255,255,0.2)" stroke-width="0.5" />
-                </g>
-                <g class="blade" style="--rot:300deg;transform:rotate(300deg);transform-origin:60px 60px">
-                    <path d="M60 60 L60 8 A52 52 0 0 1 105 35 Z" fill="rgba(255,255,255,0.12)"
-                        stroke="rgba(255,255,255,0.2)" stroke-width="0.5" />
-                </g>
-                <circle cx="60" cy="60" r="4" fill="#00d2ff" opacity="0.6" class="aperture-ring" />
-            </svg>
-        </div>
-    </div>
-
     <nav id="nav" class="solid">
-        <a href="/" class="nav-brand" id="nav-brand">
-            <span id="brand-beckllen"></span>
-            <span id="brand-creative"></span>
+        <a href="/" class="nav-brand" aria-label="Beckllen Creative home">
+            <span style="font-family:'Sora',system-ui;font-weight:800;letter-spacing:-0.02em;">Beckllen</span>
+            <span style="font-family:'Sora',system-ui;font-weight:700;letter-spacing:-0.02em;opacity:0.7;">Creative</span>
         </a>
         <div class="nav-links">
             <a href="/story">Work</a>
@@ -381,32 +346,10 @@
     </footer>
 
     <script>
-        window.addEventListener('load', () => { setTimeout(() => document.getElementById('loader').classList.add('hidden'), 500); });
-
         const btn = document.getElementById('hamburger');
         const menu = document.getElementById('mobile-menu');
         btn.addEventListener('click', () => { btn.classList.toggle('open'); menu.classList.toggle('open'); });
         menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { btn.classList.remove('open'); menu.classList.remove('open'); }));
-
-        (function buildWordmark() {
-            const bEl = document.getElementById('brand-beckllen'), cEl = document.getElementById('brand-creative');
-            const LOADER = 500, STAGGER = 48;
-            const inners = [];
-            'Beckllen'.split('').forEach((ch, i) => {
-                const wrap = document.createElement('span'); wrap.className = 'brand-letter';
-                const inner = document.createElement('span'); inner.className = 'brand-letter-inner'; inner.textContent = ch;
-                inner.style.animationDelay = (LOADER + i * STAGGER) + 'ms, ' + (LOADER + i * STAGGER + 600) + 'ms';
-                wrap.appendChild(inner); bEl.appendChild(wrap); inners.push(inner);
-            });
-            const c = document.createElement('span'); c.className = 'brand-creative-word'; c.textContent = 'Creative';
-            c.style.animationDelay = (LOADER + 8 * STAGGER + 100) + 'ms'; cEl.appendChild(c);
-            let waving = false;
-            document.getElementById('nav-brand').addEventListener('mouseenter', () => {
-                if (waving) return; waving = true;
-                inners.forEach((inn, i) => setTimeout(() => { inn.classList.remove('wave'); void inn.offsetWidth; inn.classList.add('wave'); }, i * 40));
-                setTimeout(() => { waving = false; }, 8 * 40 + 500);
-            });
-        })();
     </script>
 </body>
 
