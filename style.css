@@ -1,28 +1,25 @@
 /* ── BECKLLEN CREATIVE — SHARED STYLESHEET ── */
 
 :root {
-    --bg: #0a0a0c;
-    /* Deep charcoal/black */
-    --white: #f4f4f7;
-    /* High-end clean white */
-    --ink: #f4f4f7;
-    /* Inverse ink for dark mode */
-    --ink-bg: #0a0a0c;
-    /* Background ink */
-    --muted: #666670;
-    /* Cinematic grey */
-    --border: rgba(255, 255, 255, 0.08);
-    /* Sophisticated subtle border */
-    --accent: #00d2ff;
-    /* Glowing cyan */
-    --accent2: #33e0ff;
-    /* Hover cyan */
-    --accent-dim: rgba(0, 210, 255, 0.3);
-    --noir-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-    --cyan-glow: 0 0 15px var(--accent-dim);
-    --surface: rgba(255, 255, 255, 0.02);
-    --surface-2: rgba(255, 255, 255, 0.04);
-    --radius: 14px;
+    --bg: #f6f7fb;
+    --white: #ffffff;
+    --ink: #0b1220;
+    --ink-bg: #0b1220;
+    --muted: #5b6476;
+    --border: rgba(11, 18, 32, 0.12);
+
+    --accent: #6d28d9;
+    --accent2: #ff4d6d;
+    --accent-dim: rgba(109, 40, 217, 0.22);
+
+    --shadow: 0 18px 55px rgba(11, 18, 32, 0.12);
+    --soft-glow: 0 0 0 8px rgba(109, 40, 217, 0.10);
+    /* Backwards-compatible aliases (older page CSS) */
+    --noir-shadow: var(--shadow);
+    --cyan-glow: var(--soft-glow);
+    --surface: rgba(255, 255, 255, 0.78);
+    --surface-2: #ffffff;
+    --radius: 16px;
 }
 
 *,
@@ -39,7 +36,11 @@ html {
 }
 
 body {
-    background: var(--bg);
+    background:
+        radial-gradient(900px 500px at 10% 10%, rgba(109, 40, 217, 0.10) 0%, rgba(109, 40, 217, 0) 60%),
+        radial-gradient(700px 480px at 90% 10%, rgba(255, 77, 109, 0.10) 0%, rgba(255, 77, 109, 0) 55%),
+        radial-gradient(900px 600px at 55% 90%, rgba(11, 18, 32, 0.06) 0%, rgba(11, 18, 32, 0) 60%),
+        var(--bg);
     color: var(--ink);
     font-family: 'Outfit', sans-serif;
     overflow-x: hidden;
@@ -528,7 +529,7 @@ nav {
     justify-content: space-between;
     padding: 0 56px;
     height: 72px;
-    transition: background 0.5s, border-color 0.5s, box-shadow 0.5s;
+    transition: background 0.35s, border-color 0.35s, box-shadow 0.35s;
 }
 
 nav.over-video {
@@ -536,17 +537,17 @@ nav.over-video {
 }
 
 nav.solid {
-    background: rgba(10, 10, 12, 0.85);
+    background: rgba(246, 247, 251, 0.78);
     border-bottom: 1px solid var(--border);
-    backdrop-filter: blur(12px);
-    box-shadow: var(--noir-shadow);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 10px 40px rgba(11, 18, 32, 0.08);
 }
 
 nav.scrolled {
-    background: var(--bg);
+    background: rgba(246, 247, 251, 0.96);
     border-bottom: 1px solid var(--border);
-    backdrop-filter: none;
-    box-shadow: 0 1px 20px rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 10px 40px rgba(11, 18, 32, 0.08);
 }
 
 /* ── WORDMARK ── */
@@ -587,10 +588,10 @@ nav.scrolled {
     font-weight: 800;
     letter-spacing: -0.01em;
     background: linear-gradient(100deg,
-            rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.85) 30%,
-            rgba(255, 255, 255, 1) 45%, var(--accent) 50%,
-            rgba(255, 255, 255, 1) 55%, rgba(255, 255, 255, 0.85) 70%,
-            rgba(255, 255, 255, 0.85) 100%);
+            rgba(11, 18, 32, 0.78) 0%, rgba(11, 18, 32, 0.78) 30%,
+            rgba(11, 18, 32, 1) 45%, var(--accent) 50%,
+            rgba(11, 18, 32, 1) 55%, rgba(11, 18, 32, 0.78) 70%,
+            rgba(11, 18, 32, 0.78) 100%);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -603,7 +604,7 @@ nav.scrolled {
 
 nav.solid .brand-letter-inner,
 nav.scrolled .brand-letter-inner {
-    background: linear-gradient(100deg, var(--white) 0%, var(--white) 30%, var(--accent) 50%, var(--white) 70%, var(--white) 100%);
+    background: linear-gradient(100deg, var(--ink) 0%, var(--ink) 30%, var(--accent) 50%, var(--ink) 70%, var(--ink) 100%);
     background-size: 300% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -658,11 +659,11 @@ nav.scrolled .brand-letter-inner {
     font-weight: 500;
     letter-spacing: 0.38em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(11, 18, 32, 0.55);
     align-self: center;
     margin-left: 12px;
     padding-left: 12px;
-    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: 1px solid rgba(11, 18, 32, 0.18);
     opacity: 0;
     transform: translateX(-8px);
     animation: creativeSlide 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -671,8 +672,8 @@ nav.scrolled .brand-letter-inner {
 
 nav.solid .brand-creative-word,
 nav.scrolled .brand-creative-word {
-    color: var(--muted);
-    border-left-color: rgba(0, 0, 0, 0.12);
+    color: rgba(11, 18, 32, 0.55);
+    border-left-color: rgba(11, 18, 32, 0.18);
 }
 
 @keyframes creativeSlide {
@@ -696,7 +697,7 @@ nav.scrolled .brand-creative-word {
 
 .nav-links a {
     text-decoration: none;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(11, 18, 32, 0.72);
     font-size: 0.8rem;
     font-weight: 400;
     letter-spacing: 0.03em;
@@ -709,7 +710,7 @@ nav.scrolled .nav-links a {
 }
 
 .nav-links a:hover {
-    color: #fff;
+    color: var(--ink);
 }
 
 nav.solid .nav-links a:hover,
@@ -722,29 +723,29 @@ nav.scrolled .nav-links a:hover {
 }
 
 .nav-cta {
-    background: rgba(255, 255, 255, 0.12);
-    color: rgba(255, 255, 255, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(11, 18, 32, 0.92);
+    color: #fff;
+    border: 1px solid rgba(11, 18, 32, 0.92);
     text-decoration: none;
     font-size: 0.75rem;
     font-weight: 500;
     padding: 9px 22px;
     letter-spacing: 0.04em;
     transition: all 0.3s;
-    backdrop-filter: blur(8px);
+    box-shadow: 0 12px 30px rgba(11, 18, 32, 0.14);
 }
 
 nav.solid .nav-cta,
 nav.scrolled .nav-cta {
-    background: var(--ink);
-    color: var(--white);
-    border-color: var(--ink);
+    background: rgba(11, 18, 32, 0.92);
+    color: #fff;
+    border-color: rgba(11, 18, 32, 0.92);
 }
 
 .nav-cta:hover {
-    background: var(--accent);
-    color: #fff;
-    border-color: var(--accent);
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-color: transparent;
+    transform: translateY(-1px);
 }
 
 .hamburger {
@@ -761,7 +762,7 @@ nav.scrolled .nav-cta {
     display: block;
     width: 22px;
     height: 1.5px;
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(11, 18, 32, 0.7);
     transition: all 0.3s ease;
 }
 
@@ -787,7 +788,7 @@ nav.scrolled .hamburger span {
     top: 72px;
     left: 0;
     right: 0;
-    background: var(--white);
+    background: rgba(246, 247, 251, 0.96);
     border-bottom: 1px solid var(--border);
     z-index: 99;
     max-height: 0;
@@ -802,7 +803,7 @@ nav.scrolled .hamburger span {
 .mobile-menu a {
     display: block;
     padding: 16px 24px;
-    color: var(--muted);
+    color: rgba(11, 18, 32, 0.72);
     text-decoration: none;
     font-size: 0.9rem;
     border-bottom: 1px solid var(--border);
@@ -816,7 +817,7 @@ nav.scrolled .hamburger span {
 @media (max-width: 768px) {
     nav {
         padding: 0 24px;
-        background: #ffffff;
+        background: rgba(246, 247, 251, 0.96);
         border-bottom: 1px solid var(--border);
         backdrop-filter: none;
     }
@@ -847,7 +848,10 @@ nav.scrolled .hamburger span {
 
 /* ── FOOTER ── */
 footer {
-    background: var(--accent);
+    background:
+        radial-gradient(700px 420px at 15% 0%, rgba(109, 40, 217, 0.45) 0%, rgba(109, 40, 217, 0) 60%),
+        radial-gradient(650px 420px at 85% 0%, rgba(255, 77, 109, 0.40) 0%, rgba(255, 77, 109, 0) 60%),
+        #0b1220;
     padding: 64px 56px 36px;
 }
 
@@ -879,7 +883,7 @@ footer {
 .footer-brand p {
     font-size: 0.8rem;
     font-weight: 300;
-    color: rgba(255, 255, 255, 0.78);
+    color: rgba(255, 255, 255, 0.72);
     max-width: 240px;
     line-height: 1.7;
 }
@@ -893,7 +897,7 @@ footer {
 }
 
 .footer-links a {
-    color: rgba(255, 255, 255, 0.82);
+    color: rgba(255, 255, 255, 0.74);
     text-decoration: none;
     font-size: 0.75rem;
     transition: color 0.2s;
@@ -915,8 +919,8 @@ footer {
 .footer-social a {
     width: 34px;
     height: 34px;
-    border: 1px solid rgba(255, 255, 255, 0.65);
-    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.06);
     color: #ffffff;
     display: inline-flex;
     align-items: center;
@@ -1019,7 +1023,7 @@ footer {
 .page-lead {
     font-size: 1rem;
     font-weight: 300;
-    color: var(--muted);
+    color: rgba(11, 18, 32, 0.66);
     max-width: 520px;
     line-height: 1.8;
 }
@@ -1080,7 +1084,7 @@ footer {
 .hero-placeholder {
     position: absolute;
     inset: 0;
-    background: linear-gradient(160deg, #131420 0%, #0d1525 55%, #191410 100%);
+    background: linear-gradient(160deg, #eef0ff 0%, #f6f7fb 55%, #fff1f4 100%);
 }
 
 .hero-placeholder::after {
@@ -1096,7 +1100,7 @@ footer {
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.65) 100%);
+    background: linear-gradient(to bottom, rgba(11, 18, 32, 0.55) 0%, rgba(11, 18, 32, 0.10) 35%, rgba(11, 18, 32, 0.10) 55%, rgba(11, 18, 32, 0.78) 100%);
 }
 
 .hero-content {
@@ -1126,7 +1130,7 @@ footer {
     font-weight: 500;
     letter-spacing: 0.35em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.75);
     margin-bottom: 20px;
     display: flex;
     align-items: center;
@@ -1156,7 +1160,7 @@ footer {
 .hero-sub {
     font-size: 0.95rem;
     font-weight: 300;
-    color: rgba(255, 255, 255, 0.45);
+    color: rgba(255, 255, 255, 0.78);
     max-width: 480px;
     margin: 0 auto 40px;
     line-height: 1.85;
@@ -1170,7 +1174,7 @@ footer {
 }
 
 .btn-primary {
-    background: var(--accent);
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
     color: #fff;
     text-decoration: none;
     font-size: 0.78rem;
@@ -1180,11 +1184,13 @@ footer {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    transition: background 0.25s, transform 0.25s;
+    border-radius: 999px;
+    box-shadow: 0 14px 34px rgba(11, 18, 32, 0.25);
+    transition: filter 0.25s, transform 0.25s;
 }
 
 .btn-primary:hover {
-    background: var(--accent2);
+    filter: brightness(1.02) saturate(1.05);
     transform: translateY(-1px);
 }
 
@@ -1197,14 +1203,16 @@ footer {
 }
 
 .btn-ghost {
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    color: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    color: rgba(255, 255, 255, 0.88);
     text-decoration: none;
     font-size: 0.78rem;
     font-weight: 400;
     letter-spacing: 0.06em;
     padding: 14px 32px;
     transition: all 0.25s;
+    border-radius: 999px;
+    backdrop-filter: blur(10px);
 }
 
 .btn-ghost:hover {
@@ -1308,17 +1316,17 @@ footer {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1px;
-    background: var(--border);
+    background: rgba(11, 18, 32, 0.10);
 }
 
 .stat-card {
-    background: var(--white);
+    background: rgba(255, 255, 255, 0.85);
     padding: 44px 36px;
     transition: background 0.3s;
 }
 
 .stat-card:hover {
-    background: var(--ink);
+    background: #0b1220;
 }
 
 .stat-card:hover .stat-num,
@@ -1386,20 +1394,20 @@ footer {
 }
 
 .blog-post-card {
-    background: var(--white);
+    background: rgba(255, 255, 255, 0.88);
     text-decoration: none;
     color: var(--ink);
     display: flex;
     flex-direction: column;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    box-shadow: var(--shadow);
     transition: background 0.25s, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .blog-post-card:hover {
-    background: #f0ede7;
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    box-shadow: 0 22px 70px rgba(11, 18, 32, 0.16);
     transform: translateY(-2px);
 }
 
@@ -1532,7 +1540,7 @@ footer {
 }
 
 .btn-cta {
-    background: var(--ink);
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
     color: #fff;
     text-decoration: none;
     font-size: 0.78rem;
@@ -1543,11 +1551,14 @@ footer {
     display: inline-flex;
     align-items: center;
     gap: 12px;
-    transition: background 0.25s;
+    border-radius: 999px;
+    box-shadow: 0 18px 44px rgba(11, 18, 32, 0.18);
+    transition: filter 0.25s, transform 0.25s;
 }
 
 .btn-cta:hover {
-    background: var(--accent);
+    filter: brightness(1.02) saturate(1.05);
+    transform: translateY(-1px);
 }
 
 .btn-cta svg {

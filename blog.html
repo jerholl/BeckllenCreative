@@ -38,11 +38,14 @@
             grid-template-columns: 1.1fr 1fr;
             gap: 0;
             text-decoration: none;
-            color: var(--white);
+            color: var(--ink);
             margin-bottom: 1px;
             border: 1px solid var(--border);
             transition: all 0.25s;
-            background: rgba(255, 255, 255, 0.02);
+            background: var(--surface);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
         }
 
         .featured-post:hover {
@@ -61,7 +64,7 @@
         .featured-img-placeholder {
             width: 100%;
             height: 420px;
-            background: linear-gradient(135deg, #0a0a0c, #1a1a2e);
+            background: linear-gradient(135deg, #eef0ff, #fff1f4);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -71,7 +74,7 @@
             font-size: 0.62rem;
             letter-spacing: 0.3em;
             text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.15);
+            color: rgba(11, 18, 32, 0.35);
         }
 
         .featured-body {
@@ -116,7 +119,7 @@
             font-size: 1.65rem;
             font-weight: 800;
             letter-spacing: -0.03em;
-            color: var(--white);
+            color: var(--ink);
             line-height: 1.1;
             margin-bottom: 14px;
         }
@@ -138,7 +141,7 @@
 
         .post-date {
             font-size: 0.68rem;
-            color: rgba(255, 255, 255, 0.3);
+            color: rgba(11, 18, 32, 0.45);
             letter-spacing: 0.05em;
         }
 
@@ -161,22 +164,22 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1px;
-            background: var(--border);
+            background: rgba(11, 18, 32, 0.10);
             margin-top: 1px;
         }
 
         .post-card {
-            background: rgba(255, 255, 255, 0.01);
+            background: rgba(255, 255, 255, 0.82);
             text-decoration: none;
-            color: var(--white);
+            color: var(--ink);
             display: flex;
             flex-direction: column;
             transition: all 0.25s;
         }
 
         .post-card:hover {
-            background: rgba(255, 255, 255, 0.03);
-            box-shadow: inset 0 0 20px rgba(0, 210, 255, 0.05);
+            background: #ffffff;
+            box-shadow: inset 0 0 0 1px rgba(109, 40, 217, 0.10);
         }
 
         .post-card-img {
@@ -190,7 +193,7 @@
         .post-card-placeholder {
             width: 100%;
             height: 210px;
-            background: linear-gradient(135deg, #0a0a0c, #1a1a2e);
+            background: linear-gradient(135deg, #eef0ff, #fff1f4);
         }
 
         .post-card-body {
@@ -205,7 +208,7 @@
             font-size: 1rem;
             font-weight: 800;
             letter-spacing: -0.02em;
-            color: var(--white);
+            color: var(--ink);
             line-height: 1.25;
             margin-bottom: 10px;
         }
